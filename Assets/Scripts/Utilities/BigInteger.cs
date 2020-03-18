@@ -7,6 +7,7 @@ using DType = System.UInt32; // This could be UInt32, UInt16 or Byte; not UInt64
 
 #region DigitsArray
 
+[Serializable]
 internal class DigitsArray {
 
     internal DigitsArray(int size) {
@@ -259,7 +260,7 @@ internal class DigitsArray {
 ///		}
 ///	</code>
 /// </example>
-public class BigInteger {
+[Serializable]public class BigInteger {
     private DigitsArray m_digits;
 
     #region Constructors
