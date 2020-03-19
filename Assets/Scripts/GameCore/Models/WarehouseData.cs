@@ -1,10 +1,14 @@
 ﻿using System;
 using IdleTransport.Utilities;
+using static IdleTransport.Utilities.Enums;
 
-namespace IdleTransport.GameCore.Models
-{
+namespace IdleTransport.GameCore.Models {
     [Serializable]
     public class WarehouseData {
+        public Action<BuildingWorkingState> OnBuildingWorkingStateChanged;
+        public Action<BigInteger, BigInteger> OnProductionCompleted;
+        public Action<double> OnProgressUpdated;
+
         public BigInteger Capacity { get; private set; }
         public double CargoPackageProducingSpeed { get; private set; }
         public BigInteger TotalCargoAmountInPackage { get; private set; }
@@ -13,25 +17,39 @@ namespace IdleTransport.GameCore.Models
 
         public BigInteger CurrentCargoAmount { get; private set; }
 
-        private Enums.BuildingWorkingState _currentWorkingState;
+        private BuildingWorkingState _currentWorkingState;
+
+        public BuildingWorkingState CurrentWorkingState {
+            get => _currentWorkingState;
+            private set {
+                if (_currentWorkingState != value) {
+                    _currentWorkingState = value;
+                    OnBuildingWorkingStateChanged?.Invoke(_currentWorkingState);
+                }
+            }
+        }
+
+        public double CurrentProductionProgress => _currentProductionCycle / CargoPackageProducingSpeed;
         private double _currentProductionCycle;
 
         public WarehouseData() {
             Capacity = Constants.WAREHOUSE_BASE_CAPACITY;
             CargoPackageProducingSpeed = Constants.WAREHOUSE_BASE_CARGO_PACKAGE_PRODUCING_SPEED;
             TotalCargoAmountInPackage = Constants.WAREHOUSE_BASE_CARGO_AMOUNT_IN_PACKAGE;
+            CurrentCargoAmount = 0;
             _currentProductionCycle = 0;
             StartProduction();
         }
 
         private void StartProduction() {
             _currentProductionCycle = 0;
-            _currentWorkingState = Enums.BuildingWorkingState.Working;
+            CurrentWorkingState = BuildingWorkingState.Working;
         }
 
         public void UpdateWarehouse(float deltaTime) {
             if (IsWorking()) {
                 _currentProductionCycle += deltaTime;
+                OnProgressUpdated?.Invoke(CurrentProductionProgress);
                 if (_currentProductionCycle >= CargoPackageProducingSpeed) {
                     FinishCargoPackageProduction();
                 }
@@ -39,7 +57,7 @@ namespace IdleTransport.GameCore.Models
         }
 
         private bool IsWorking() {
-            return _currentWorkingState == Enums.BuildingWorkingState.Working;
+            return CurrentWorkingState == BuildingWorkingState.Working;
         }
 
         private void FinishCargoPackageProduction() {
@@ -49,6 +67,7 @@ namespace IdleTransport.GameCore.Models
                 CurrentCargoAmount = Capacity;
                 StopProduction();
             }
+            OnProductionCompleted?.Invoke(CurrentCargoAmount, Capacity);
         }
 
         private bool IsFull() {
@@ -56,7 +75,7 @@ namespace IdleTransport.GameCore.Models
         }
 
         private void StopProduction() {
-            _currentWorkingState = Enums.BuildingWorkingState.Full;
+            CurrentWorkingState = BuildingWorkingState.Full;
         }
     }
 }

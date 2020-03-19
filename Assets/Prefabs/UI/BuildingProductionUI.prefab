@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3850354930065745695}
   - component: {fileID: 1851602685645870404}
   - component: {fileID: 4604279154640523237}
+  - component: {fileID: 8347625868406304637}
   m_Layer: 5
   m_Name: BuildingProductionUI
   m_TagString: Untagged
@@ -100,6 +101,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 311
+--- !u!114 &8347625868406304637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4539674071537472929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c17c7d3fc1e4b7f810c55be7f65a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _capacityMeterText: {fileID: 6101953910074498471}
+  _productionMeterUISlider: {fileID: 8504348417942102338}
 --- !u!1 &5755837853636621539
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,3 +400,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4851954210183363519}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8504348417942102338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3841598458455169789, guid: fe30ce1b7e40b48ffa84501e011fac50,
+    type: 3}
+  m_PrefabInstance: {fileID: 4851954210183363519}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
