@@ -1,3 +1,4 @@
-﻿public class PlayerJSON {
-
+﻿namespace IdleTransport.Utilities {
+    public class PlayerJSON {
+    }
 }

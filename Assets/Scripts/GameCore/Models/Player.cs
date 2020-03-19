@@ -1,16 +1,20 @@
 ﻿using System;
+using IdleTransport.Utilities;
 
-[Serializable]
-public class Player
+namespace IdleTransport.GameCore.Models
 {
+    [Serializable]
+    public class Player
+    {
 
-    public WarehouseData WarehouseData { get; }
+        public WarehouseData WarehouseData { get; }
 
-    public Player() {
-        WarehouseData = new WarehouseData();
-    }
+        public Player() {
+            WarehouseData = new WarehouseData();
+        }
 
-    public Player(PlayerJSON playerJson) {
+        public Player(PlayerJSON playerJson) {
 
+        }
     }
 }
