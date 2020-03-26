@@ -5,5 +5,13 @@
             Working,
             Full
         }
+
+        public enum TrolleyWorkingState {
+            Waiting,
+            Loading,
+            TransportingToElevator,
+            LoadingElevator,
+            ReturningToWarehouse
+        }
     }
 }

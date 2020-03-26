@@ -37,7 +37,6 @@ namespace IdleTransport.GameCore.Models {
             CargoPackageProducingSpeed = Constants.WAREHOUSE_BASE_CARGO_PACKAGE_PRODUCING_SPEED;
             TotalCargoAmountInPackage = Constants.WAREHOUSE_BASE_CARGO_AMOUNT_IN_PACKAGE;
             CurrentCargoAmount = 0;
-            _currentProductionCycle = 0;
             StartProduction();
         }
 
@@ -67,6 +66,7 @@ namespace IdleTransport.GameCore.Models {
                 CurrentCargoAmount = Capacity;
                 StopProduction();
             }
+
             OnProductionCompleted?.Invoke(CurrentCargoAmount, Capacity);
         }
 
@@ -76,6 +76,21 @@ namespace IdleTransport.GameCore.Models {
 
         private void StopProduction() {
             CurrentWorkingState = BuildingWorkingState.Full;
+        }
+
+        public BigInteger DistributeCargo(BigInteger availableTrolleyCapacity) {
+            var cargoToDistribute = BigInteger.Min(CurrentCargoAmount, availableTrolleyCapacity);
+            CurrentCargoAmount -= cargoToDistribute;
+            OnProductionCompleted?.Invoke(CurrentCargoAmount, Capacity);
+            if (IsProductionStopped()) {
+                StartProduction();
+            }
+
+            return cargoToDistribute;
+        }
+
+        private bool IsProductionStopped() {
+            return CurrentWorkingState == BuildingWorkingState.Full;
         }
     }
 }
