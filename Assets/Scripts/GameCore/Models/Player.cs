@@ -1,16 +1,15 @@
-﻿using System;
-using GameCore.Models;
+﻿using GameCore.Models;
 using IdleTransport.Utilities;
+using Sirenix.OdinInspector;
 
 namespace IdleTransport.GameCore.Models {
-    [Serializable]
     public class Player {
-        public WarehouseData WarehouseData { get; }
-        public TrolleyData TrolleyData { get; }
+        [ShowInInspector] public WarehouseData WarehouseData { get; }
+        [ShowInInspector] public TrolleyData TrolleyData { get; }
 
         public Player() {
             WarehouseData = new WarehouseData();
-            TrolleyData = new TrolleyData();
+            TrolleyData = new TrolleyData(WarehouseData);
         }
 
         public Player(PlayerJSON playerJson) {

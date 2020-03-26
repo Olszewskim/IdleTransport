@@ -1,23 +1,23 @@
 ﻿using System;
 using IdleTransport.Utilities;
+using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
-    [Serializable]
     public class WarehouseData {
-        public Action<BuildingWorkingState> OnBuildingWorkingStateChanged;
-        public Action<BigInteger, BigInteger> OnProductionCompleted;
-        public Action<double> OnProgressUpdated;
+        public event Action<BuildingWorkingState> OnBuildingWorkingStateChanged;
+        public event Action<BigInteger, BigInteger> OnProductionCompleted;
+        public event Action<double> OnProgressUpdated;
 
-        public BigInteger Capacity { get; private set; }
-        public double CargoPackageProducingSpeed { get; private set; }
-        public BigInteger TotalCargoAmountInPackage { get; private set; }
+        [ShowInInspector, DisplayAsString] public BigInteger Capacity { get; private set; }
+        [ShowInInspector] public double CargoPackageProducingSpeed { get; private set; }
+        [ShowInInspector, DisplayAsString] public BigInteger TotalCargoAmountInPackage { get; private set; }
 
         public BigInteger AverageCargoProducedPerSecond { get; private set; }
 
-        public BigInteger CurrentCargoAmount { get; private set; }
+        [ShowInInspector, DisplayAsString] public BigInteger CurrentCargoAmount { get; private set; }
 
-        private BuildingWorkingState _currentWorkingState;
+        [ShowInInspector] private BuildingWorkingState _currentWorkingState;
 
         public BuildingWorkingState CurrentWorkingState {
             get => _currentWorkingState;
@@ -30,7 +30,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         public double CurrentProductionProgress => _currentProductionCycle / CargoPackageProducingSpeed;
-        private double _currentProductionCycle;
+        [ShowInInspector] private double _currentProductionCycle;
 
         public WarehouseData() {
             Capacity = Constants.WAREHOUSE_BASE_CAPACITY;

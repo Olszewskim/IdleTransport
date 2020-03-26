@@ -6,7 +6,6 @@ using DType = System.UInt32; // This could be UInt32, UInt16 or Byte; not UInt64
 namespace IdleTransport.Utilities {
     #region DigitsArray
 
-    [Serializable]
     internal class DigitsArray {
         internal DigitsArray(int size) {
             Allocate(size, 0);
@@ -263,7 +262,6 @@ namespace IdleTransport.Utilities {
     ///		}
     ///	</code>
     /// </example>
-    [Serializable]
     public class BigInteger {
         private DigitsArray m_digits;
 
@@ -1332,6 +1330,10 @@ namespace IdleTransport.Utilities {
 
         public static BigInteger Min(BigInteger n1, BigInteger n2) {
             return n1 < n2 ? n1 : n2;
+        }
+
+        public static BigInteger Max(BigInteger n1, BigInteger n2) {
+            return n1 > n2 ? n1 : n2;
         }
 
         #endregion Object Overrides

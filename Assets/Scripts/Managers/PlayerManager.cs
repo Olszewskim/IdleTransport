@@ -1,6 +1,7 @@
 ﻿using IdleTransport.GameCore.Models;
 using IdleTransport.Utilities;
 using Newtonsoft.Json;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace IdleTransport.Managers {
@@ -8,7 +9,7 @@ namespace IdleTransport.Managers {
         private readonly string _strPassword = "6yw>BuTD5p]zLhR{";
         private readonly string _strSalt = "zb]W!ep($7EAwcJ#";
 
-        private Player _player;
+       [ShowInInspector] private Player _player;
 
         public Player Player {
             get {
