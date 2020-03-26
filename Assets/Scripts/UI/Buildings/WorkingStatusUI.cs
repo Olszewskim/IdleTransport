@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using BigInteger = IdleTransport.Utilities.BigInteger;
 
 namespace IdleTransport.UI.Buildings {
-    public class BuildingProductionUI : MonoBehaviour {
+    public class WorkingStatusUI : MonoBehaviour {
         [SerializeField] private TextMeshProUGUI _capacityMeterText;
         [SerializeField] private Slider _productionMeterUISlider;
 

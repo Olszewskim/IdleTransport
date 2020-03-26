@@ -390,10 +390,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 401359567115063581, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401359567115063581, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401359567115063581, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401359567115063581, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5257876096423371467, guid: 5e74a2898612e4069ae5bca1851e0592,
         type: 3}
       propertyPath: m_Name
       value: Trolley
+      objectReference: {fileID: 0}
+    - target: {fileID: 9189200709208526296, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e74a2898612e4069ae5bca1851e0592, type: 3}
@@ -429,6 +454,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3357805702847581084, guid: 365c2c4eabe64428780ac8668e5337d8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4397345288597426281, guid: 365c2c4eabe64428780ac8668e5337d8,
         type: 3}
       propertyPath: m_Name
@@ -437,6 +467,26 @@ PrefabInstance:
     - target: {fileID: 4397345288597426281, guid: 365c2c4eabe64428780ac8668e5337d8,
         type: 3}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092843915851831129, guid: 365c2c4eabe64428780ac8668e5337d8,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092843915851831129, guid: 365c2c4eabe64428780ac8668e5337d8,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092843915851831129, guid: 365c2c4eabe64428780ac8668e5337d8,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092843915851831129, guid: 365c2c4eabe64428780ac8668e5337d8,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6597919883868025534, guid: 365c2c4eabe64428780ac8668e5337d8,

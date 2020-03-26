@@ -1,20 +1,11 @@
-﻿using IdleTransport.GameCore.Models;
+﻿using GameCore.Views;
 using IdleTransport.Managers;
-using IdleTransport.UI.Buildings;
-using UnityEngine;
 
 namespace IdleTransport.GameCore.Views {
-    public class WarehouseView : MonoBehaviour {
-        [SerializeField] private BuildingProductionUI _buildingProductionUI;
-        private WarehouseData _warehouseData;
-
-        private void Start() {
-            _warehouseData = PlayerManager.Instance.Player.WarehouseData;
-            _buildingProductionUI.Init(_warehouseData);
-        }
-
-        private void Update() {
-            _warehouseData.UpdateUnit(Time.deltaTime);
+    public class WarehouseView : WorkingUnitView {
+        protected override void Init() {
+            workingUnitData = PlayerManager.Instance.Player.WarehouseData;
+            base.Init();
         }
     }
 }

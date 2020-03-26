@@ -1,19 +1,10 @@
-﻿using GameCore.Models;
-using IdleTransport.Managers;
-using UnityEngine;
+﻿using IdleTransport.Managers;
 
-namespace GameCore.Views
-{
-    public class TrolleyView : MonoBehaviour
-    {
-        private TrolleyData _trolleyData;
-
-        private void Start() {
-            _trolleyData = PlayerManager.Instance.Player.TrolleyData;
-        }
-
-        private void Update() {
-            _trolleyData.UpdateUnit(Time.deltaTime);
+namespace GameCore.Views {
+    public class TrolleyView : WorkingUnitView {
+        protected override void Init() {
+            workingUnitData = PlayerManager.Instance.Player.TrolleyData;
+            base.Init();
         }
     }
 }
