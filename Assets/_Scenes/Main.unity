@@ -158,7 +158,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.34943536, g: 0.6132076, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -174,8 +174,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -328,6 +328,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &3362058668414074585
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 61247004744484833, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 61247004744484833, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.259
+      objectReference: {fileID: 0}
+    - target: {fileID: 61247004744484833, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61247004744484833, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61247004744484833, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61247004744484833, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61247004744484833, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61247004744484833, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 61247004744484833, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61247004744484833, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61247004744484833, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257876096423371467, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: m_Name
+      value: Trolley
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5e74a2898612e4069ae5bca1851e0592, type: 3}
 --- !u!1001 &4600631634413828817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -378,12 +447,12 @@ PrefabInstance:
     - target: {fileID: 7172162227623637182, guid: 365c2c4eabe64428780ac8668e5337d8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.74
+      value: 2.28
       objectReference: {fileID: 0}
     - target: {fileID: 7172162227623637182, guid: 365c2c4eabe64428780ac8668e5337d8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.03
+      value: 6.12
       objectReference: {fileID: 0}
     - target: {fileID: 7172162227623637182, guid: 365c2c4eabe64428780ac8668e5337d8,
         type: 3}
