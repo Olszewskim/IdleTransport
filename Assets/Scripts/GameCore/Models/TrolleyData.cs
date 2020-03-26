@@ -1,70 +1,53 @@
-﻿using System;
-using IdleTransport.GameCore.Models;
+﻿using IdleTransport.GameCore.Models;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
 namespace GameCore.Models {
-    public class TrolleyData {
-        [ShowInInspector, DisplayAsString] public BigInteger Capacity { get; private set; }
-        [ShowInInspector] public double CargoLoadingTime { get; private set; }
+    public class TrolleyData : WorkingUnitData {
         [ShowInInspector] public double WalkingSpeed { get; private set; }
 
-        [ShowInInspector, DisplayAsString] public BigInteger CurrentCargoAmount { get; private set; }
+        private readonly WarehouseData _warehouseData;
 
-        private WarehouseData _warehouseData;
         [ShowInInspector] private TrolleyWorkingState _currentWorkingState;
-        [ShowInInspector] private double _currentProductionCycle;
 
-        public TrolleyData(WarehouseData warehouseData) {
-            Capacity = Constants.TROLLEY_BASE_CAPACITY;
-            CargoLoadingTime = Constants.TROLLEY_CARGO_LOADING_TIME;
-            WalkingSpeed = Constants.TROLLEY_WALKING_SPEED;
-            _warehouseData = warehouseData;
-            CurrentCargoAmount = 0;
-            StartLoading();
-        }
-
-        private void StartLoading() {
-            _currentProductionCycle = 0;
-            _currentWorkingState = TrolleyWorkingState.Loading;
-        }
-
-        public void UpdateTrolley(float deltaTime) {
-            if (IsLoading())
-                Load(deltaTime);
-        }
-
-        private bool IsLoading() {
-            return _currentWorkingState == TrolleyWorkingState.Loading;
-        }
-
-        private void Load(float deltaTime) {
-            _currentProductionCycle += deltaTime;
-            if (IsLoadingFinished()) {
-                _currentProductionCycle = 0;
-                var availableTrolleyCapacity = Capacity - CurrentCargoAmount;
-                var cargoLoadedFromWarehouse = _warehouseData.DistributeCargo(availableTrolleyCapacity);
-                if (cargoLoadedFromWarehouse > 0) {
-                    CurrentCargoAmount += cargoLoadedFromWarehouse;
-                    if (IsFull()) {
-                        CurrentCargoAmount = Capacity;
-                        StopLoading();
-                    }
+        private TrolleyWorkingState CurrentWorkingState {
+            get => _currentWorkingState;
+            set {
+                if (_currentWorkingState != value) {
+                    _currentWorkingState = value;
+                    OnWorkingStateChanged();
                 }
             }
         }
 
-        private void StopLoading() {
-            _currentWorkingState = TrolleyWorkingState.TransportingToElevator;
+        public TrolleyData(WarehouseData warehouseData) : base(Constants.TROLLEY_BASE_CAPACITY,
+            Constants.TROLLEY_BASE_WORK_CYCLE_TIME) {
+            WalkingSpeed = Constants.TROLLEY_BASE_WALKING_SPEED;
+            _warehouseData = warehouseData;
+            StartWorking();
         }
 
-        private bool IsFull() {
-            return CurrentCargoAmount >= Capacity;
+        protected override void SetWorkingState() {
+            CurrentWorkingState = TrolleyWorkingState.Working;
         }
 
-        private bool IsLoadingFinished() {
-            return _currentProductionCycle >= CargoLoadingTime;
+        public override bool IsWorking() {
+            return CurrentWorkingState == TrolleyWorkingState.Working;
+        }
+
+        protected override void FinishWorking() {
+            base.FinishWorking();
+            var availableTrolleyCapacity = Capacity - CurrentCargoAmount;
+            var cargoLoadedFromWarehouse = _warehouseData.DistributeCargo(availableTrolleyCapacity);
+            if (cargoLoadedFromWarehouse > 0) {
+                CurrentCargoAmount += cargoLoadedFromWarehouse;
+                CheckIfCapacityIsFull();
+            }
+        }
+
+        protected override void StopWork() {
+            CurrentWorkingState = TrolleyWorkingState.TransportingToElevator;
         }
     }
 }

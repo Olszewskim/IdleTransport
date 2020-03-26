@@ -14,7 +14,7 @@ namespace IdleTransport.GameCore.Views {
         }
 
         private void Update() {
-            _warehouseData.UpdateWarehouse(Time.deltaTime);
+            _warehouseData.UpdateUnit(Time.deltaTime);
         }
     }
 }

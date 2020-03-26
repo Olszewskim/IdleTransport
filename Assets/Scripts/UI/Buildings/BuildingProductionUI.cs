@@ -1,23 +1,22 @@
-﻿using IdleTransport.GameCore.Models;
+﻿using GameCore.Models;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using BigInteger = IdleTransport.Utilities.BigInteger;
-using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.UI.Buildings {
     public class BuildingProductionUI : MonoBehaviour {
         [SerializeField] private TextMeshProUGUI _capacityMeterText;
         [SerializeField] private Slider _productionMeterUISlider;
 
-        public void Init(WarehouseData warehouseData) {
+        public void Init(WorkingUnitData workingUnitData) {
             InitProductionMeterUISlider();
-            warehouseData.OnProductionCompleted += RefreshCapacityMeter;
-            warehouseData.OnProgressUpdated += RefreshProductionMeterUISlider;
-            warehouseData.OnBuildingWorkingStateChanged += ChangeProductionMeterUISliderVisibility;
-            RefreshCapacityMeter(warehouseData.CurrentCargoAmount, warehouseData.Capacity);
-            RefreshProductionMeterUISlider(warehouseData.CurrentProductionProgress);
-            ChangeProductionMeterUISliderVisibility(warehouseData.CurrentWorkingState);
+            workingUnitData.OnCapacityStatusChanged += RefreshCapacityMeter;
+            workingUnitData.OnProgressUpdated += RefreshProductionMeterUISlider;
+            workingUnitData.OnUnitWorkingStateChanged += ChangeProductionMeterUISliderVisibility;
+            RefreshCapacityMeter(workingUnitData.CurrentCargoAmount, workingUnitData.Capacity);
+            RefreshProductionMeterUISlider(workingUnitData.CurrentProductionProgress);
+            ChangeProductionMeterUISliderVisibility(workingUnitData.IsWorking());
         }
 
         private void InitProductionMeterUISlider() {
@@ -33,8 +32,8 @@ namespace IdleTransport.UI.Buildings {
             _productionMeterUISlider.value = (float) progress;
         }
 
-        private void ChangeProductionMeterUISliderVisibility(BuildingWorkingState buildingWorkingState) {
-            _productionMeterUISlider.gameObject.SetActive(buildingWorkingState == BuildingWorkingState.Working);
+        private void ChangeProductionMeterUISliderVisibility(bool isWorking) {
+            _productionMeterUISlider.gameObject.SetActive(isWorking);
         }
     }
 }

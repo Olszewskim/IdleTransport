@@ -8,7 +8,7 @@
 
         public enum TrolleyWorkingState {
             Waiting,
-            Loading,
+            Working,
             TransportingToElevator,
             LoadingElevator,
             ReturningToWarehouse

@@ -13,7 +13,7 @@ namespace GameCore.Views
         }
 
         private void Update() {
-            _trolleyData.UpdateTrolley(Time.deltaTime);
+            _trolleyData.UpdateUnit(Time.deltaTime);
         }
     }
 }
