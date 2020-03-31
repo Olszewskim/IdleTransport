@@ -9,8 +9,8 @@ namespace IdleTransport.GameCore.Models {
 
         public Player() {
             WarehouseData = new WarehouseData();
-            TrolleyData = new TrolleyData(WarehouseData);
             ElevatorData = new ElevatorData();
+            TrolleyData = new TrolleyData(WarehouseData,ElevatorData);
         }
 
         public Player(PlayerJSON playerJson) {

@@ -15,6 +15,7 @@ namespace IdleTransport.GameCore.Views {
             unitData = PlayerManager.Instance.Player.TrolleyData;
             _trolleyData = unitData as TrolleyData;
             _trolleyData.OnTrolleyStartTransportingToElevator += StartTransportingToElevatorAnimation;
+            _trolleyData.OnTrolleyStartReturningToWarehouse += StartReturningToWarehouseAnimation;
             _startPos = transform.position;
             base.Init();
         }
@@ -24,6 +25,11 @@ namespace IdleTransport.GameCore.Views {
                 transform.position.z);
             transform.DOMove(destinationPos, (float) _trolleyData.WalkingSpeed);
             unitSpriteRenderer.flipX = false;
+        }
+
+        private void StartReturningToWarehouseAnimation() {
+            transform.DOMove(_startPos, (float) _trolleyData.WalkingSpeed);
+            unitSpriteRenderer.flipX = true;
         }
     }
 }
