@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace IdleTransport.GameCore.Views {
     public abstract class UnitView : MonoBehaviour {
-        [SerializeField] private CapacityStatusUI capacityStatusUI;
+        [SerializeField] protected SpriteRenderer unitSpriteRenderer;
+        [SerializeField] private CapacityStatusUI _capacityStatusUI;
+
         protected UnitData unitData;
 
         private void Start() {
@@ -12,7 +14,7 @@ namespace IdleTransport.GameCore.Views {
         }
 
         protected virtual void Init() {
-            capacityStatusUI.Init(unitData);
+            _capacityStatusUI.Init(unitData);
         }
     }
 }

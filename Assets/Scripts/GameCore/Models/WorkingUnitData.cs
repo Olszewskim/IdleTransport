@@ -23,7 +23,7 @@ namespace IdleTransport.GameCore.Models {
 
         protected abstract void SetWorkingState();
 
-        public void UpdateUnit(float deltaTime) {
+        public virtual void UpdateUnit(float deltaTime) {
             if (IsWorking()) {
                 Work(deltaTime);
             }

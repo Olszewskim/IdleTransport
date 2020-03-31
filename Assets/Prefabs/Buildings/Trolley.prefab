@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c018c717dfe4f9981a466330ebe60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capacityStatusUI: {fileID: 5576985262872231956}
-  workingStatusUI: {fileID: 6327697558286279113}
+  _capacityStatusUI: {fileID: 5576985262872231956}
+  unitSpriteRenderer: {fileID: 3575675057158712076}
+  _workingStatusUI: {fileID: 6327697558286279113}
+  _elevatorView: {fileID: 0}
 --- !u!1 &6554070386482583301
 GameObject:
   m_ObjectHideFlags: 0

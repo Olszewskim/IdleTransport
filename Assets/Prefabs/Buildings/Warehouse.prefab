@@ -126,8 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c672cac7bd5f048fa9e6aad1d57bf89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capacityStatusUI: {fileID: 2052134723914827344}
-  workingStatusUI: {fileID: 490809086726907789}
+  _capacityStatusUI: {fileID: 2052134723914827344}
+  unitSpriteRenderer: {fileID: 7052641047688564542}
+  _workingStatusUI: {fileID: 490809086726907789}
 --- !u!1001 &9112215264447230
 PrefabInstance:
   m_ObjectHideFlags: 0

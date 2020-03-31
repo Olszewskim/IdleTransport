@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace IdleTransport.GameCore.Views {
     public abstract class WorkingUnitView : UnitView {
-        [SerializeField] private WorkingStatusUI workingStatusUI;
+        [SerializeField] private WorkingStatusUI _workingStatusUI;
 
         private WorkingUnitData _workingUnitData;
 
         protected override void Init() {
             _workingUnitData = unitData as WorkingUnitData;
             base.Init();
-            workingStatusUI.Init(_workingUnitData);
+            _workingStatusUI.Init(_workingUnitData);
         }
 
         private void Update() {
