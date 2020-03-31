@@ -33,6 +33,7 @@ namespace IdleTransport.GameCore.Models {
 
         protected UnitData(BigInteger capacity) {
             Capacity = capacity;
+            CurrentCargoAmount = 0;
         }
 
         protected bool IsFull() {

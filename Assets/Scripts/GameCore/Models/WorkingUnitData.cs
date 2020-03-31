@@ -14,7 +14,6 @@ namespace IdleTransport.GameCore.Models {
 
         protected WorkingUnitData(BigInteger capacity, double workCycleTime) : base(capacity) {
             WorkCycleTime = workCycleTime;
-            CurrentCargoAmount = 0;
         }
 
         protected void StartWorking() {

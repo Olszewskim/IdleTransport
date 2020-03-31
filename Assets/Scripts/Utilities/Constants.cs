@@ -13,6 +13,9 @@
         public const double TROLLEY_BASE_WORK_CYCLE_TIME = 4.0;
         public const double TROLLEY_BASE_WALKING_SPEED = 3.0;
 
+        public const int ELEVATOR_BASE_CAPACITY = 5;
+        public const double ELEVATOR_TRAVEL_SPEED_PER_FLOOR = 1.0;
+
         #endregion
     }
 }
