@@ -1,9 +1,8 @@
-﻿using System;
-using GameCore.Models;
+﻿using IdleTransport.GameCore.Models;
 using IdleTransport.UI.Buildings;
 using UnityEngine;
 
-namespace GameCore.Views {
+namespace IdleTransport.GameCore.Views {
     public abstract class WorkingUnitView : MonoBehaviour {
         [SerializeField] private WorkingStatusUI workingStatusUi;
         protected WorkingUnitData workingUnitData;

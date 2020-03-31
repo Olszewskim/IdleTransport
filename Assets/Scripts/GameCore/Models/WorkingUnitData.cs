@@ -2,8 +2,7 @@
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 
-namespace GameCore.Models {
-    public abstract class WorkingUnitData {
+namespace IdleTransport.GameCore.Models {
         public event Action<bool> OnUnitWorkingStateChanged;
         public event Action<BigInteger, BigInteger> OnCapacityStatusChanged;
         public event Action<double> OnProgressUpdated;

@@ -1,5 +1,4 @@
-﻿using GameCore.Models;
-using IdleTransport.Utilities;
+﻿using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 
 namespace IdleTransport.GameCore.Models {

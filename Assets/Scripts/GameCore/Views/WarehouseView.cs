@@ -1,5 +1,4 @@
-﻿using GameCore.Views;
-using IdleTransport.Managers;
+﻿using IdleTransport.Managers;
 
 namespace IdleTransport.GameCore.Views {
     public class WarehouseView : WorkingUnitView {

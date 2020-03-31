@@ -1,6 +1,6 @@
 ﻿using IdleTransport.Managers;
 
-namespace GameCore.Views {
+namespace IdleTransport.GameCore.Views {
     public class TrolleyView : WorkingUnitView {
         protected override void Init() {
             workingUnitData = PlayerManager.Instance.Player.TrolleyData;

@@ -1,9 +1,8 @@
-﻿using IdleTransport.GameCore.Models;
-using IdleTransport.Utilities;
+﻿using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
-namespace GameCore.Models {
+namespace IdleTransport.GameCore.Models {
     public class TrolleyData : WorkingUnitData {
         [ShowInInspector] public double WalkingSpeed { get; private set; }
 
