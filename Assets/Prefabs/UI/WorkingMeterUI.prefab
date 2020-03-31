@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5672670434893750253}
   - component: {fileID: 3841598458455169789}
+  - component: {fileID: 5024453012343543500}
   m_Layer: 5
-  m_Name: ProductionMeterUI
+  m_Name: WorkingMeterUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,6 +89,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5024453012343543500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079473795110136205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c17c7d3fc1e4b7f810c55be7f65a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _productionMeterUISlider: {fileID: 3841598458455169789}
 --- !u!1 &5556310872462307487
 GameObject:
   m_ObjectHideFlags: 0

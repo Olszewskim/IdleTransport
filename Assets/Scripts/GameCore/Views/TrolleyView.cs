@@ -3,7 +3,7 @@
 namespace IdleTransport.GameCore.Views {
     public class TrolleyView : WorkingUnitView {
         protected override void Init() {
-            workingUnitData = PlayerManager.Instance.Player.TrolleyData;
+            unitData = PlayerManager.Instance.Player.TrolleyData;
             base.Init();
         }
     }

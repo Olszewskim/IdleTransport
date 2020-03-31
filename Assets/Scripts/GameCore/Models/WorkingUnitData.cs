@@ -3,43 +3,16 @@ using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 
 namespace IdleTransport.GameCore.Models {
+    public abstract class WorkingUnitData : UnitData {
         public event Action<bool> OnUnitWorkingStateChanged;
-        public event Action<BigInteger, BigInteger> OnCapacityStatusChanged;
         public event Action<double> OnProgressUpdated;
 
-        private BigInteger _capacity;
-
-        [ShowInInspector, DisplayAsString]
-        public BigInteger Capacity {
-            get => _capacity;
-            private set {
-                if (_capacity != value) {
-                    _capacity = value;
-                    OnCapacityStatusChanged?.Invoke(CurrentCargoAmount, Capacity);
-                }
-            }
-        }
-
         [ShowInInspector] public double WorkCycleTime { get; private set; }
-
-        private BigInteger _currentCargoAmount;
-
-        [ShowInInspector, DisplayAsString]
-        public BigInteger CurrentCargoAmount {
-            get => _currentCargoAmount;
-            protected set {
-                if (_currentCargoAmount != value) {
-                    _currentCargoAmount = value;
-                    OnCapacityStatusChanged?.Invoke(CurrentCargoAmount, Capacity);
-                }
-            }
-        }
 
         public double CurrentProductionProgress => _currentProductionCycle / WorkCycleTime;
         [ShowInInspector] private double _currentProductionCycle;
 
-        protected WorkingUnitData(BigInteger capacity, double workCycleTime) {
-            Capacity = capacity;
+        protected WorkingUnitData(BigInteger capacity, double workCycleTime) : base(capacity) {
             WorkCycleTime = workCycleTime;
             CurrentCargoAmount = 0;
         }
@@ -80,10 +53,6 @@ namespace IdleTransport.GameCore.Models {
                 CurrentCargoAmount = Capacity;
                 StopWork();
             }
-        }
-
-        private bool IsFull() {
-            return CurrentCargoAmount >= Capacity;
         }
 
         protected abstract void StopWork();

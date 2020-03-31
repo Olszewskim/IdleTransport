@@ -3,20 +3,19 @@ using IdleTransport.UI.Buildings;
 using UnityEngine;
 
 namespace IdleTransport.GameCore.Views {
-    public abstract class WorkingUnitView : MonoBehaviour {
-        [SerializeField] private WorkingStatusUI workingStatusUi;
-        protected WorkingUnitData workingUnitData;
+    public abstract class WorkingUnitView : UnitView {
+        [SerializeField] private WorkingStatusUI workingStatusUI;
 
-        private void Start() {
-            Init();
-        }
+        private WorkingUnitData _workingUnitData;
 
-        protected virtual void Init() {
-            workingStatusUi.Init(workingUnitData);
+        protected override void Init() {
+            _workingUnitData = unitData as WorkingUnitData;
+            base.Init();
+            workingStatusUI.Init(_workingUnitData);
         }
 
         private void Update() {
-            workingUnitData.UpdateUnit(Time.deltaTime);
+            _workingUnitData.UpdateUnit(Time.deltaTime);
         }
     }
 }
