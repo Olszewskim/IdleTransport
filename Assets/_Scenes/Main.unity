@@ -121,6 +121,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &263290337 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8882681331450942711, guid: cd2d66decd1364f45bc20739138b6115,
+    type: 3}
+  m_PrefabInstance: {fileID: 3083715393407688992}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cd108e3db0a4a5983189737d73d8ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &363834525 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3921295173290258196, guid: cd2d66decd1364f45bc20739138b6115,
+    type: 3}
+  m_PrefabInstance: {fileID: 3083715393407688992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &717756634
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +507,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trolley
       objectReference: {fileID: 0}
+    - target: {fileID: 8938256145989580459, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: _elevatorView
+      value: 
+      objectReference: {fileID: 263290337}
+    - target: {fileID: 8938256145989580459, guid: 5e74a2898612e4069ae5bca1851e0592,
+        type: 3}
+      propertyPath: _transportingDestinationTransform
+      value: 
+      objectReference: {fileID: 363834525}
     - target: {fileID: 9189200709208526296, guid: 5e74a2898612e4069ae5bca1851e0592,
         type: 3}
       propertyPath: m_AnchorMax.y

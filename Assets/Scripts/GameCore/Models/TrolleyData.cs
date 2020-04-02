@@ -1,14 +1,9 @@
-﻿using System;
-using IdleTransport.Utilities;
+﻿using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
-    public class TrolleyData : WorkingUnitData {
-        public event Action OnTrolleyStartTransportingToElevator;
-        public event Action OnTrolleyStartReturningToWarehouse;
-        [ShowInInspector] public double WalkingSpeed { get; private set; }
-
+    public class TrolleyData : TransportingUnitData {
         private readonly WarehouseData _warehouseData;
         private readonly ElevatorData _elevatorData;
 
@@ -24,12 +19,9 @@ namespace IdleTransport.GameCore.Models {
             }
         }
 
-        private double _currentWalkingTime;
-
         public TrolleyData(WarehouseData warehouseData, ElevatorData elevatorData) : base(
             Constants.TROLLEY_BASE_CAPACITY,
-            Constants.TROLLEY_BASE_WORK_CYCLE_TIME) {
-            WalkingSpeed = Constants.TROLLEY_BASE_WALKING_SPEED;
+            Constants.TROLLEY_BASE_WORK_CYCLE_TIME, Constants.TROLLEY_BASE_WALKING_SPEED) {
             _warehouseData = warehouseData;
             _elevatorData = elevatorData;
             StartWorking();
@@ -37,18 +29,6 @@ namespace IdleTransport.GameCore.Models {
 
         protected override void SetWorkingState() {
             CurrentWorkingState = TrolleyWorkingState.Working;
-        }
-
-        public override void UpdateUnit(float deltaTime) {
-            base.UpdateUnit(deltaTime);
-
-            if (IsTransportingToElevator()) {
-                TransportToElevator(deltaTime);
-            }
-
-            if (IsReturningToElevator()) {
-                ReturningToElevator(deltaTime);
-            }
         }
 
         public override bool IsWorking() {
@@ -65,25 +45,19 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void StopWork() {
-            StartTransportingToElevator();
+            StartTransporting();
         }
 
-        private void StartTransportingToElevator() {
-            CurrentWorkingState = TrolleyWorkingState.TransportingToElevator;
-            _currentWalkingTime = 0;
-            OnTrolleyStartTransportingToElevator?.Invoke();
-        }
-
-        private bool IsTransportingToElevator() {
+        protected override bool IsTransporting() {
             return CurrentWorkingState == TrolleyWorkingState.TransportingToElevator;
         }
 
-        private void TransportToElevator(float deltaTime) {
-            _currentWalkingTime += deltaTime;
-            //TODO: Adjust Walking Speed ​after upgrade on the ​next cycle
-            if (_currentWalkingTime >= WalkingSpeed) {
-                LoadElevator();
-            }
+        protected override void SetTransportingState() {
+            CurrentWorkingState = TrolleyWorkingState.TransportingToElevator;
+        }
+
+        protected override void FinishTransporting() {
+            LoadElevator();
         }
 
         private void LoadElevator() {
@@ -91,25 +65,20 @@ namespace IdleTransport.GameCore.Models {
             _elevatorData.LoadCargo(CurrentCargoAmount, out var loadedCargo);
             if (loadedCargo > 0) {
                 CurrentCargoAmount -= loadedCargo;
-                StartReturningToWarehouse();
+                StartReturning();
             }
         }
 
-        private void StartReturningToWarehouse() {
-            CurrentWorkingState = TrolleyWorkingState.ReturningToWarehouse;
-            _currentWalkingTime = 0;
-            OnTrolleyStartReturningToWarehouse?.Invoke();
-        }
-
-        private bool IsReturningToElevator() {
+        protected override bool IsReturning() {
             return CurrentWorkingState == TrolleyWorkingState.ReturningToWarehouse;
         }
 
-        private void ReturningToElevator(float deltaTime) {
-            _currentWalkingTime += deltaTime;
-            if (_currentWalkingTime >= WalkingSpeed) {
-                StartWorking();
-            }
+        protected override void SetReturningState() {
+            CurrentWorkingState = TrolleyWorkingState.ReturningToWarehouse;
+        }
+
+        protected override void FinishReturning() {
+            StartWorking();
         }
     }
 }

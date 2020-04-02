@@ -1,15 +1,9 @@
-﻿using System;
-using IdleTransport.Utilities;
+﻿using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
-    public class LoaderData : WorkingUnitData {
-        public event Action OnLoaderStartTransportingToTruck;
-        public event Action OnLoaderStartReturningToElevator;
-
-        [ShowInInspector] public double WalkingSpeed { get; private set; }
-
+    public class LoaderData : TransportingUnitData {
         [ShowInInspector] private LoaderWorkingState _currentWorkingState;
 
         private LoaderWorkingState CurrentWorkingState {
@@ -22,10 +16,8 @@ namespace IdleTransport.GameCore.Models {
             }
         }
 
-        private double _currentWalkingTime;
-
-        public LoaderData() : base(Constants.LOADER_BASE_CAPACITY, Constants.LOADER_BASE_WORK_CYCLE_TIME) {
-            WalkingSpeed = Constants.LOADER_BASE_WALKING_SPEED;
+        public LoaderData() : base(Constants.LOADER_BASE_CAPACITY, Constants.LOADER_BASE_WORK_CYCLE_TIME,
+            Constants.LOADER_BASE_WALKING_SPEED) {
         }
 
         protected override void SetWorkingState() {
@@ -37,6 +29,28 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void StopWork() {
+        }
+
+        protected override bool IsTransporting() {
+            return CurrentWorkingState == LoaderWorkingState.TransportingToTruck;
+        }
+
+        protected override void SetTransportingState() {
+            CurrentWorkingState = LoaderWorkingState.TransportingToTruck;
+        }
+
+        protected override void FinishTransporting() {
+        }
+
+        protected override bool IsReturning() {
+            return CurrentWorkingState == LoaderWorkingState.ReturningToElevator;
+        }
+
+        protected override void SetReturningState() {
+            CurrentWorkingState = LoaderWorkingState.ReturningToElevator;
+        }
+
+        protected override void FinishReturning() {
         }
     }
 }
