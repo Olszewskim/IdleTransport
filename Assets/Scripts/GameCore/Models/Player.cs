@@ -7,12 +7,14 @@ namespace IdleTransport.GameCore.Models {
         [ShowInInspector] public TrolleyData TrolleyData { get; }
         [ShowInInspector] public ElevatorData ElevatorData { get; }
         [ShowInInspector] public LoaderData LoaderData { get; }
+        [ShowInInspector] public TruckData TruckData { get; }
 
         public Player() {
             WarehouseData = new WarehouseData();
             ElevatorData = new ElevatorData();
             TrolleyData = new TrolleyData(WarehouseData, ElevatorData);
             LoaderData = new LoaderData();
+            TruckData = new TruckData();
         }
 
         public Player(PlayerJSON playerJson) {

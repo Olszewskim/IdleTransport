@@ -1,5 +1,4 @@
-﻿namespace IdleTransport.Utilities
-{
+﻿namespace IdleTransport.Utilities {
     public static class Constants {
         public const string SAVE_PLAYER_KEY = "PlayerSave";
 
@@ -19,6 +18,10 @@
         public const int LOADER_BASE_CAPACITY = 5;
         public const double LOADER_BASE_WORK_CYCLE_TIME = 4.0;
         public const double LOADER_BASE_WALKING_SPEED = 2.0;
+
+        public const int TRUCK_BASE_CAPACITY = 10;
+        public const double TRUCK_BASE_WORK_CYCLE_TIME = 5.0;
+        public const double TRUCK_BASE_WALKING_SPEED = 1.0;
 
         #endregion
     }

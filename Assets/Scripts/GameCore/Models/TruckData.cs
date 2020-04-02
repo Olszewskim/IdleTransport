@@ -1,0 +1,56 @@
+﻿using IdleTransport.Utilities;
+using Sirenix.OdinInspector;
+using static IdleTransport.Utilities.Enums;
+
+namespace IdleTransport.GameCore.Models {
+    public class TruckData : TransportingUnitData {
+        [ShowInInspector] private TruckWorkingState _currentWorkingState;
+
+        private TruckWorkingState CurrentWorkingState {
+            get => _currentWorkingState;
+            set {
+                if (_currentWorkingState != value) {
+                    _currentWorkingState = value;
+                    OnWorkingStateChanged();
+                }
+            }
+        }
+
+        public TruckData() : base(Constants.TRUCK_BASE_CAPACITY, Constants.TRUCK_BASE_WORK_CYCLE_TIME,
+            Constants.TRUCK_BASE_WALKING_SPEED) {
+        }
+
+        public override bool IsWorking() {
+            return CurrentWorkingState == TruckWorkingState.Working;
+        }
+
+        protected override void SetWorkingState() {
+            CurrentWorkingState = TruckWorkingState.Working;
+        }
+
+        protected override void StopWork() {
+        }
+
+        protected override bool IsTransporting() {
+            return CurrentWorkingState == TruckWorkingState.TransportingToMarket;
+        }
+
+        protected override void SetTransportingState() {
+            CurrentWorkingState = TruckWorkingState.TransportingToMarket;
+        }
+
+        protected override void FinishTransporting() {
+        }
+
+        protected override bool IsReturning() {
+            return CurrentWorkingState == TruckWorkingState.ReturningToGate;
+        }
+
+        protected override void SetReturningState() {
+            CurrentWorkingState = TruckWorkingState.ReturningToGate;
+        }
+
+        protected override void FinishReturning() {
+        }
+    }
+}

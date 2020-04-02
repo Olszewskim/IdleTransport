@@ -21,6 +21,8 @@ namespace IdleTransport.GameCore.Models {
             SetWorkingState();
         }
 
+        public abstract bool IsWorking();
+
         protected abstract void SetWorkingState();
 
         public virtual void UpdateUnit(float deltaTime) {
@@ -28,8 +30,6 @@ namespace IdleTransport.GameCore.Models {
                 Work(deltaTime);
             }
         }
-
-        public abstract bool IsWorking();
 
         private void Work(float deltaTime) {
             _currentProductionCycle += deltaTime;

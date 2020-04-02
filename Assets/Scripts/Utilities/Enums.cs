@@ -21,5 +21,12 @@
             Working,
             ReturningToElevator
         }
+
+        public enum TruckWorkingState {
+            Waiting,
+            TransportingToMarket,
+            Working,
+            ReturningToGate
+        }
     }
 }
