@@ -13,5 +13,13 @@
             LoadingElevator,
             ReturningToWarehouse
         }
+
+        public enum LoaderWorkingState {
+            Waiting,
+            GetCargoFromElevator,
+            TransportingToTruck,
+            Working,
+            ReturningToElevator
+        }
     }
 }
