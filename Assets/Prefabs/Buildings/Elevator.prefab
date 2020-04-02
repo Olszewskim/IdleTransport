@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cd108e3db0a4a5983189737d73d8ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _capacityStatusUI: {fileID: 8923817175348144353}
   unitSpriteRenderer: {fileID: 517337235920126969}
+  _capacityStatusUI: {fileID: 8923817175348144353}
 --- !u!1001 &7461688716489368655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -238,17 +238,17 @@ PrefabInstance:
     - target: {fileID: 7928381354644120781, guid: 117ecd3ac18654f0997bde33ff39e996,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.326
+      value: 1.103
       objectReference: {fileID: 0}
     - target: {fileID: 7928381354644120781, guid: 117ecd3ac18654f0997bde33ff39e996,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 256
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 7928381354644120781, guid: 117ecd3ac18654f0997bde33ff39e996,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 128
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 7928381354644120781, guid: 117ecd3ac18654f0997bde33ff39e996,
         type: 3}
