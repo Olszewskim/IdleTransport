@@ -1,11 +1,9 @@
-﻿using IdleTransport.Managers;
+﻿using IdleTransport.GameCore.Models;
 
-namespace IdleTransport.GameCore.Views
-{
-    public class TruckView : TransportingUnitView
-    {
-        protected override void Init() {
-            unitData = PlayerManager.Instance.Player.TruckData;
+namespace IdleTransport.GameCore.Views {
+    public class TruckView : TransportingUnitView {
+        public void Init(TruckData truckData) {
+            unitData = truckData;
             base.Init();
         }
     }

@@ -1,4 +1,5 @@
-﻿using IdleTransport.GameCore.Models;
+﻿using System;
+using IdleTransport.GameCore.Models;
 using IdleTransport.Utilities;
 using Newtonsoft.Json;
 using Sirenix.OdinInspector;
@@ -6,6 +7,8 @@ using UnityEngine;
 
 namespace IdleTransport.Managers {
     public class PlayerManager : Singleton<PlayerManager> {
+        public static event Action OnPlayerLoaded;
+
         private readonly string _strPassword = "6yw>BuTD5p]zLhR{";
         private readonly string _strSalt = "zb]W!ep($7EAwcJ#";
 
@@ -41,6 +44,7 @@ namespace IdleTransport.Managers {
             } else {
                 _player = new Player();
             }
+            OnPlayerLoaded?.Invoke();
         }
 
         private void SetupEvents() {

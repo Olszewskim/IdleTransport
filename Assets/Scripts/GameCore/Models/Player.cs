@@ -1,4 +1,5 @@
-﻿using IdleTransport.Utilities;
+﻿using System.Collections.Generic;
+using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 
 namespace IdleTransport.GameCore.Models {
@@ -6,15 +7,14 @@ namespace IdleTransport.GameCore.Models {
         [ShowInInspector] public WarehouseData WarehouseData { get; }
         [ShowInInspector] public TrolleyData TrolleyData { get; }
         [ShowInInspector] public ElevatorData ElevatorData { get; }
-        [ShowInInspector] public LoaderData LoaderData { get; }
-        [ShowInInspector] public TruckData TruckData { get; }
+
+        [ShowInInspector] public List<LoadingRampData> LoadingRampDataList { get; }
 
         public Player() {
             WarehouseData = new WarehouseData();
             ElevatorData = new ElevatorData();
             TrolleyData = new TrolleyData(WarehouseData, ElevatorData);
-            LoaderData = new LoaderData();
-            TruckData = new TruckData();
+            LoadingRampDataList = new List<LoadingRampData> {new LoadingRampData(), new LoadingRampData()};
         }
 
         public Player(PlayerJSON playerJson) {
