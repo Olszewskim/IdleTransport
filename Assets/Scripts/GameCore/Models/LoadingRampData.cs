@@ -8,8 +8,8 @@ namespace IdleTransport.GameCore.Models
         [ShowInInspector] public TruckData TruckData { get; }
 
         public LoadingRampData() {
-            LoaderData = new LoaderData();
             TruckData = new TruckData();
+            LoaderData = new LoaderData(TruckData);
         }
     }
 }

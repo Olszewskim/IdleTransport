@@ -48,14 +48,12 @@ namespace IdleTransport.GameCore.Models {
             CurrentWorkingState = BuildingWorkingState.Full;
         }
 
-        public BigInteger DistributeCargo(BigInteger availableTrolleyCapacity) {
-            var cargoToDistribute = BigInteger.Min(CurrentCargoAmount, availableTrolleyCapacity);
-            CurrentCargoAmount -= cargoToDistribute;
+        public void DistributeCargo(BigInteger availableTrolleyCapacity, out BigInteger distributedCargo) {
+            distributedCargo = BigInteger.Min(CurrentCargoAmount, availableTrolleyCapacity);
+            CurrentCargoAmount -= distributedCargo;
             if (IsProductionStopped()) {
                 StartWorking();
             }
-
-            return cargoToDistribute;
         }
 
         private bool IsProductionStopped() {

@@ -5,6 +5,7 @@ using static IdleTransport.Utilities.Enums;
 namespace IdleTransport.GameCore.Models {
     public class LoaderData : TransportingUnitData {
         [ShowInInspector] private LoaderWorkingState _currentWorkingState;
+        private TruckData _truckData;
 
         private LoaderWorkingState CurrentWorkingState {
             get => _currentWorkingState;
@@ -16,8 +17,10 @@ namespace IdleTransport.GameCore.Models {
             }
         }
 
-        public LoaderData() : base(Constants.LOADER_BASE_CAPACITY, Constants.LOADER_BASE_WORK_CYCLE_TIME,
+        public LoaderData(TruckData truckData) : base(Constants.LOADER_BASE_CAPACITY,
+            Constants.LOADER_BASE_WORK_CYCLE_TIME,
             Constants.LOADER_BASE_WALKING_SPEED) {
+            _truckData = truckData;
             StartWaiting();
         }
 
@@ -39,7 +42,13 @@ namespace IdleTransport.GameCore.Models {
 
         protected override void FinishWorking() {
             base.FinishWorking();
-            StopWork();
+            _truckData.TryLoadCargo(CurrentCargoAmount, out var unloadedCargo);
+            if (unloadedCargo > 0) {
+                CurrentCargoAmount -= unloadedCargo;
+                StopWork();
+            } else {
+                CurrentWorkingState = LoaderWorkingState.WaitingForTruck;
+            }
         }
 
         protected override void StopWork() {
@@ -55,6 +64,11 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void FinishTransporting() {
+            if (_truckData.IsFull()) {
+                CurrentWorkingState = LoaderWorkingState.WaitingForTruck;
+                return;
+            }
+
             StartWorking();
         }
 

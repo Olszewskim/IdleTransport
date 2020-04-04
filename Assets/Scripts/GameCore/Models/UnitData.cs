@@ -42,7 +42,7 @@ namespace IdleTransport.GameCore.Models {
 
         public abstract bool IsWaiting();
 
-        protected bool IsFull() {
+        public bool IsFull() {
             return CurrentCargoAmount >= Capacity;
         }
     }

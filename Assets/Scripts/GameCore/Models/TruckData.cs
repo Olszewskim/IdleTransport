@@ -60,5 +60,18 @@ namespace IdleTransport.GameCore.Models {
 
         protected override void FinishReturning() {
         }
+
+        public void TryLoadCargo(BigInteger loaderCargoAmount, out BigInteger unloadedCargo) {
+            unloadedCargo = 0;
+            if (!IsWaiting()) {
+                return;
+            }
+
+            unloadedCargo = BigInteger.Min(AvailableCapacity, loaderCargoAmount);
+            CurrentCargoAmount += unloadedCargo;
+            if (IsFull()) {
+                StartTransporting();
+            }
+        }
     }
 }

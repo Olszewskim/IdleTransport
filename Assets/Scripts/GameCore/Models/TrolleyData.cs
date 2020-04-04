@@ -45,7 +45,7 @@ namespace IdleTransport.GameCore.Models {
 
         protected override void FinishWorking() {
             base.FinishWorking();
-            var cargoLoadedFromWarehouse = _warehouseData.DistributeCargo(AvailableCapacity);
+            _warehouseData.DistributeCargo(AvailableCapacity, out var cargoLoadedFromWarehouse);
             if (cargoLoadedFromWarehouse > 0) {
                 CurrentCargoAmount += cargoLoadedFromWarehouse;
                 StopWork();

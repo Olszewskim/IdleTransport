@@ -24,6 +24,7 @@
             Waiting,
             GetCargoFromElevator,
             TransportingToTruck,
+            WaitingForTruck,
             Working,
             ReturningToElevator
         }
