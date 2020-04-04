@@ -42,8 +42,8 @@ namespace IdleTransport.GameCore.Views {
                 return _startPosition;
             }
 
-            var loadingRamp = _loadingRampsView.GetLoadingRampViewOfIndex(_currentDestinationIndex);
-            return new Vector3(_startPosition.x, loadingRamp.transform.position.y, _startPosition.z);
+            var elevatorLandingPoint = _loadingRampsView.GetLoadingRampElevatorLandingPoint(_currentDestinationIndex);
+            return new Vector3(_startPosition.x, elevatorLandingPoint.transform.position.y, _startPosition.z);
         }
     }
 }

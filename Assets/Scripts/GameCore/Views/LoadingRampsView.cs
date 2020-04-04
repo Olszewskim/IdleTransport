@@ -37,8 +37,8 @@ namespace IdleTransport.GameCore.Views
             PlayerManager.OnPlayerLoaded -= InitView;
         }
 
-        public LoadingRampView GetLoadingRampViewOfIndex(int currentDestinationIndex) {
-            return _loadingRampViewsList[currentDestinationIndex];
+        public Transform GetLoadingRampElevatorLandingPoint(int currentDestinationIndex) {
+            return _loadingRampViewsList[currentDestinationIndex].GetElevatorLandingPoint();
         }
     }
 }
