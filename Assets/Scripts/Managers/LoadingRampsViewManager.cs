@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using IdleTransport.GameCore.Views;
 using IdleTransport.Managers;
 using UnityEngine;
@@ -10,8 +11,11 @@ public class LoadingRampsViewManager : MonoBehaviour {
     private readonly List<LoadingRampView> _loadingRampViewsList = new List<LoadingRampView>();
 
     private void Awake() {
-        PlayerManager.OnPlayerLoaded += InitView;
         _loadingRampViewPrefab.gameObject.SetActive(false);
+    }
+
+    private void Start() {
+        InitView();
     }
 
     private void InitView() {
