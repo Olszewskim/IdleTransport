@@ -73,12 +73,29 @@ namespace IdleTransport.GameCore.Models {
         }
 
         private void TryUnloadCargo() {
-            //TODO: Move cargo to loader
+            if (_currentLoadingRampData != null && !IsEmpty()) {
+                _currentLoadingRampData.LoaderData.TryLoadCargo(CurrentCargoAmount, out var unloadedCargo);
+                CurrentCargoAmount -= unloadedCargo;
+            }
+
+            if (IsEmptyAndGoingDown()) {
+                StartDistributingCargoUpwards();
+                return;
+            }
+
             if (IsDistributingDownwards()) {
                 SetupNextLoadingRampData();
             } else if (IsDistributingUpwards()) {
                 SetupPrevLoadingRampData();
             }
+        }
+
+        private bool IsEmptyAndGoingDown() {
+            return IsEmpty() && IsDistributingDownwards();
+        }
+
+        private bool IsEmpty() {
+            return CurrentCargoAmount == 0;
         }
 
         private void StartDistributingCargoUpwards() {

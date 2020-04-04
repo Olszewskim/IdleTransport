@@ -8,7 +8,7 @@ namespace IdleTransport.GameCore.Models {
         public event Action OnUnitStartReturning;
 
         [ShowInInspector] public double WalkingSpeed { get; private set; }
-        private double _currentWalkingTime;
+        [ShowInInspector] private double _currentWalkingTime;
 
         protected TransportingUnitData(BigInteger capacity, double workCycleTime, double walkingSpeed) : base(capacity,
             workCycleTime) {
@@ -28,7 +28,6 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected abstract bool IsTransporting();
-
 
         protected void StartTransporting() {
             SetTransportingState();
@@ -57,6 +56,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected abstract void SetReturningState();
+
         private void Return(float deltaTime) {
             _currentWalkingTime += deltaTime;
             if (HasReachedTarget()) {

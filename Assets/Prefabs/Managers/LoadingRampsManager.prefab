@@ -56,7 +56,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _transportingDestinationTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3599888403111611207}
     - target: {fileID: 2880134712478277027, guid: 1ef1be6a9c8984db1aabafe681d3e828,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -157,3 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 035a6137b8f6a42dc944d523ff6a5c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &3599888403111611207 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3868364528206943853, guid: 1ef1be6a9c8984db1aabafe681d3e828,
+    type: 3}
+  m_PrefabInstance: {fileID: 313684512850255146}
+  m_PrefabAsset: {fileID: 0}
