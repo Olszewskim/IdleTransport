@@ -31,12 +31,16 @@ namespace IdleTransport.GameCore.Models {
             }
         }
 
-        protected BigInteger AvailableCapacity =>  Capacity - CurrentCargoAmount;
+        protected BigInteger AvailableCapacity => Capacity - CurrentCargoAmount;
 
         protected UnitData(BigInteger capacity) {
             Capacity = capacity;
             CurrentCargoAmount = 0;
         }
+
+        protected abstract void StartWaiting();
+
+        public abstract bool IsWaiting();
 
         protected bool IsFull() {
             return CurrentCargoAmount >= Capacity;

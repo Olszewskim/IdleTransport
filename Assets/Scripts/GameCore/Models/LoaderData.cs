@@ -18,14 +18,14 @@ namespace IdleTransport.GameCore.Models {
 
         public LoaderData() : base(Constants.LOADER_BASE_CAPACITY, Constants.LOADER_BASE_WORK_CYCLE_TIME,
             Constants.LOADER_BASE_WALKING_SPEED) {
-            StartWaitingForCargo();
+            StartWaiting();
         }
 
-        private void StartWaitingForCargo() {
+        protected override void StartWaiting() {
             _currentWorkingState = LoaderWorkingState.Waiting;
         }
 
-        private bool IsWaiting() {
+        public override bool IsWaiting() {
             return CurrentWorkingState == LoaderWorkingState.Waiting;
         }
 
@@ -67,7 +67,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void FinishReturning() {
-            StartWaitingForCargo();
+            StartWaiting();
         }
 
         public void TryLoadCargo(BigInteger elevatorCargoAmount, out BigInteger unloadedCargo) {

@@ -27,6 +27,14 @@ namespace IdleTransport.GameCore.Models {
             StartWorking();
         }
 
+        protected override void StartWaiting() {
+            CurrentWorkingState = TrolleyWorkingState.Waiting;
+        }
+
+        public override bool IsWaiting() {
+            return CurrentWorkingState == TrolleyWorkingState.Waiting;
+        }
+
         protected override void SetWorkingState() {
             CurrentWorkingState = TrolleyWorkingState.Working;
         }

@@ -22,6 +22,14 @@ namespace IdleTransport.GameCore.Models {
             StartWorking();
         }
 
+        protected override void StartWaiting() {
+            CurrentWorkingState = BuildingWorkingState.Waiting;
+        }
+
+        public override bool IsWaiting() {
+            return CurrentWorkingState == BuildingWorkingState.Waiting;
+        }
+
         protected override void SetWorkingState() {
             CurrentWorkingState = BuildingWorkingState.Working;
         }
@@ -33,7 +41,7 @@ namespace IdleTransport.GameCore.Models {
         protected override void FinishWorking() {
             base.FinishWorking();
             CurrentCargoAmount += TotalCargoAmountInPackage;
-           CheckIfCapacityIsFull();
+            CheckIfCapacityIsFull();
         }
 
         protected override void StopWork() {

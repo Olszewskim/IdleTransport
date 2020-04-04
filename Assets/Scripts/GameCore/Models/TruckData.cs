@@ -20,6 +20,14 @@ namespace IdleTransport.GameCore.Models {
             Constants.TRUCK_BASE_WALKING_SPEED) {
         }
 
+        protected override void StartWaiting() {
+            CurrentWorkingState = TruckWorkingState.Waiting;
+        }
+
+        public override bool IsWaiting() {
+            return CurrentWorkingState == TruckWorkingState.Waiting;
+        }
+
         public override bool IsWorking() {
             return CurrentWorkingState == TruckWorkingState.Working;
         }

@@ -21,15 +21,15 @@ namespace IdleTransport.GameCore.Models {
         public ElevatorData(LoadingRampsManager loadingRampsManager) : base(Constants.ELEVATOR_BASE_CAPACITY) {
             TravelSpeedPerFloor = Constants.ELEVATOR_TRAVEL_SPEED_PER_FLOOR;
             _loadingRampsManager = loadingRampsManager;
-            StartWaitingForCargo();
+            StartWaiting();
         }
 
-        private void StartWaitingForCargo() {
+        protected override void StartWaiting() {
             _currentWorkingState = ElevatorWorkingState.Waiting;
             _currentFloorRampIndex = -1;
         }
 
-        public bool IsWaiting() {
+        public override bool IsWaiting() {
             return _currentWorkingState == ElevatorWorkingState.Waiting;
         }
 
@@ -109,7 +109,7 @@ namespace IdleTransport.GameCore.Models {
                 _currentFloorRampIndex--;
                 _currentTravelingTime = 0;
             } else {
-                StartWaitingForCargo();
+                StartWaiting();
             }
         }
 
