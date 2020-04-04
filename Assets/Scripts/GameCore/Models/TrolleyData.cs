@@ -62,6 +62,10 @@ namespace IdleTransport.GameCore.Models {
 
         private void LoadElevator() {
             CurrentWorkingState = TrolleyWorkingState.LoadingElevator;
+            if (!_elevatorData.IsWaiting()) {
+                return;
+            }
+
             _elevatorData.LoadCargo(CurrentCargoAmount, out var loadedCargo);
             if (loadedCargo > 0) {
                 CurrentCargoAmount -= loadedCargo;

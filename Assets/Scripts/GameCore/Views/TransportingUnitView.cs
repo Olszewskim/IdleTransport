@@ -10,7 +10,7 @@ namespace IdleTransport.GameCore.Views
         private Vector3 _startPos;
         private TransportingUnitData _transportingUnitData;
         protected override void Init() {
-             _transportingUnitData = unitData as TransportingUnitData;
+             _transportingUnitData = (TransportingUnitData) unitData;
              _transportingUnitData.OnUnitStartTransporting += StartTransportingAnimation;
              _transportingUnitData.OnUnitStartReturning += StartReturningAnimation;
             _startPos = transform.position;

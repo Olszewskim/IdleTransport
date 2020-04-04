@@ -487,6 +487,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8882681331450942711, guid: cd2d66decd1364f45bc20739138b6115,
+        type: 3}
+      propertyPath: _loadingRampsView
+      value: 
+      objectReference: {fileID: 1849169318}
     - target: {fileID: 9098696830256171582, guid: cd2d66decd1364f45bc20739138b6115,
         type: 3}
       propertyPath: m_Name
@@ -500,6 +505,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1659126688}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1849169318 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 404047513915395803, guid: d2255dd9d07b447a3a86da461fd4d589,
+    type: 3}
+  m_PrefabInstance: {fileID: 6614264378628128017}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ceba27ff0ad4bffaa0a78d51b07cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1968655501
 GameObject:
   m_ObjectHideFlags: 0

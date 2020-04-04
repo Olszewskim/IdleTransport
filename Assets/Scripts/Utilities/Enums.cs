@@ -14,6 +14,12 @@
             ReturningToWarehouse
         }
 
+        public enum ElevatorWorkingState {
+            Waiting,
+            DistributingDownwards,
+            DistributingUpwards
+        }
+
         public enum LoaderWorkingState {
             Waiting,
             GetCargoFromElevator,

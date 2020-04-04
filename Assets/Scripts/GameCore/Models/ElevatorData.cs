@@ -1,17 +1,107 @@
-﻿using IdleTransport.Utilities;
+﻿using System;
+using IdleTransport.Managers;
+using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
+using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
     public class ElevatorData : UnitData {
+        public event Action<int, double> OnElevatorMove;
         [ShowInInspector] public double TravelSpeedPerFloor { get; private set; }
 
-        public ElevatorData() : base(Constants.ELEVATOR_BASE_CAPACITY) {
+        [ShowInInspector] private ElevatorWorkingState _currentWorkingState;
+
+        private LoadingRampsManager _loadingRampsManager;
+        [ShowInInspector] private int _currentFloorRampIndex = -1;
+        private LoadingRampData _currentLoadingRampData;
+
+        private double _currentTravelingTime;
+        private double _currentTraveledDistanceProgress => _currentTravelingTime / TravelSpeedPerFloor;
+
+        public ElevatorData(LoadingRampsManager loadingRampsManager) : base(Constants.ELEVATOR_BASE_CAPACITY) {
             TravelSpeedPerFloor = Constants.ELEVATOR_TRAVEL_SPEED_PER_FLOOR;
+            _loadingRampsManager = loadingRampsManager;
+            StartWaitingForCargo();
+        }
+
+        private void StartWaitingForCargo() {
+            _currentWorkingState = ElevatorWorkingState.Waiting;
+            _currentFloorRampIndex = -1;
+        }
+
+        public bool IsWaiting() {
+            return _currentWorkingState == ElevatorWorkingState.Waiting;
+        }
+
+        public void UpdateUnit(float deltaTime) {
+            if (IsDistributingDownwards() || IsDistributingUpwards()) {
+                Move(deltaTime);
+            }
         }
 
         public void LoadCargo(BigInteger cargo, out BigInteger loadedCargo) {
             loadedCargo = BigInteger.Min(AvailableCapacity, cargo);
             CurrentCargoAmount += loadedCargo;
+            StartDistributingCargoDownwards();
+        }
+
+        private void Move(float deltaTime) {
+            _currentTravelingTime += deltaTime;
+            OnElevatorMove?.Invoke(_currentFloorRampIndex, _currentTraveledDistanceProgress);
+            if (HasReachedTarget()) {
+                TryUnloadCargo();
+            }
+        }
+
+        private void StartDistributingCargoDownwards() {
+            _currentWorkingState = ElevatorWorkingState.DistributingDownwards;
+            SetupNextLoadingRampData();
+        }
+
+        private void SetupNextLoadingRampData() {
+            _currentLoadingRampData = _loadingRampsManager.GetNextLoadingRampData(_currentFloorRampIndex);
+            if (_currentLoadingRampData != null) {
+                _currentTravelingTime = 0;
+                _currentFloorRampIndex++;
+            } else {
+                StartDistributingCargoUpwards();
+            }
+        }
+
+        private bool IsDistributingDownwards() {
+            return _currentWorkingState == ElevatorWorkingState.DistributingDownwards;
+        }
+
+        private void TryUnloadCargo() {
+            //TODO: Move cargo to loader
+            if (IsDistributingDownwards()) {
+                SetupNextLoadingRampData();
+            } else if (IsDistributingUpwards()) {
+                SetupPrevLoadingRampData();
+            }
+        }
+
+        private void StartDistributingCargoUpwards() {
+            _currentWorkingState = ElevatorWorkingState.DistributingUpwards;
+            SetupPrevLoadingRampData();
+        }
+
+        private void SetupPrevLoadingRampData() {
+            _currentLoadingRampData = _loadingRampsManager.GetPreviousLoadingRampData(_currentFloorRampIndex);
+            if (_currentLoadingRampData != null || _currentFloorRampIndex == 0) {
+                _currentFloorRampIndex--;
+                _currentTravelingTime = 0;
+            } else {
+                StartWaitingForCargo();
+            }
+        }
+
+        private bool IsDistributingUpwards() {
+            return _currentWorkingState == ElevatorWorkingState.DistributingUpwards;
+        }
+
+        private bool HasReachedTarget() {
+            return _currentTravelingTime >= TravelSpeedPerFloor;
         }
     }
 }

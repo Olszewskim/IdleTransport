@@ -36,5 +36,9 @@ namespace IdleTransport.GameCore.Views
         private void OnDestroy() {
             PlayerManager.OnPlayerLoaded -= InitView;
         }
+
+        public LoadingRampView GetLoadingRampViewOfIndex(int currentDestinationIndex) {
+            return _loadingRampViewsList[currentDestinationIndex];
+        }
     }
 }

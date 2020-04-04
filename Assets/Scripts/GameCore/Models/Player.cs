@@ -10,10 +10,10 @@ namespace IdleTransport.GameCore.Models {
         [ShowInInspector] public LoadingRampsManager LoadingRampsManager { get; }
 
         public Player() {
-            WarehouseData = new WarehouseData();
-            ElevatorData = new ElevatorData();
-            TrolleyData = new TrolleyData(WarehouseData, ElevatorData);
             LoadingRampsManager = new LoadingRampsManager();
+            WarehouseData = new WarehouseData();
+            ElevatorData = new ElevatorData(LoadingRampsManager);
+            TrolleyData = new TrolleyData(WarehouseData, ElevatorData);
         }
 
         public Player(PlayerJSON playerJson) {
