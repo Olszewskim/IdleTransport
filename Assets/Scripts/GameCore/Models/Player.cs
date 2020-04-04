@@ -18,5 +18,12 @@ namespace IdleTransport.GameCore.Models {
 
         public Player(PlayerJSON playerJson) {
         }
+
+#if UNITY_EDITOR
+        [OnInspectorGUI]
+        private void OnInspectorGUI() {
+            Sirenix.Utilities.Editor.GUIHelper.RequestRepaint();
+        }
+#endif
     }
 }
