@@ -1,12 +1,14 @@
 ﻿using System;
 using IdleTransport.Utilities;
+using Sirenix.OdinInspector;
+using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Currencies {
     public abstract class Currency {
         public event Action<BigInteger> OnCurrencyAmountChanged;
-        public Enums.CurrencyType CurrencyType { get; protected set; }
+        public CurrencyType CurrencyType { get; protected set; }
 
-        public BigInteger CurrencyAmount { get; private set; }
+        [ShowInInspector, DisplayAsString] public BigInteger CurrencyAmount { get; private set; }
 
         public Currency(BigInteger currencyAmount) {
             CurrencyAmount = currencyAmount;

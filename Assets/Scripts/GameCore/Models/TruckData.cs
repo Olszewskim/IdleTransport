@@ -1,4 +1,5 @@
-﻿using IdleTransport.Utilities;
+﻿using IdleTransport.Managers;
+using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
@@ -42,6 +43,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void StopWork() {
+            PlayerManager.Instance.AddCurrency(CurrencyType.Gold, CurrentCargoAmount);
             CurrentCargoAmount = 0;
             StartReturning();
         }

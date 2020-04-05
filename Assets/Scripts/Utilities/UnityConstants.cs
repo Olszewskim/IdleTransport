@@ -44,6 +44,10 @@ namespace UnityConstants
         /// ID of sorting layer 'Default'.
         /// </summary>
         public const int Default = 0;
+        /// <summary>
+        /// ID of sorting layer 'WorldUI'.
+        /// </summary>
+        public const int WorldUI = 1382353853;
     }
 
     public static class Layers

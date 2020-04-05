@@ -46,6 +46,16 @@ namespace IdleTransport.GameCore.Models {
             return null;
         }
 
+        public void AddCurrency(CurrencyType currencyType, BigInteger amount) {
+            var currency = GetCurrencyType(currencyType);
+            currency?.AddCurrency(amount);
+        }
+
+        public bool SpendCurrency(CurrencyType currencyType, BigInteger amount) {
+            var currency = GetCurrencyType(currencyType);
+            return currency?.SpendCurrency(amount) ?? false;
+        }
+
         #endregion
 
 #if UNITY_EDITOR
