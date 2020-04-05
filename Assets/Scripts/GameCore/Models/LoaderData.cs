@@ -43,7 +43,7 @@ namespace IdleTransport.GameCore.Models {
 
         protected override void FinishWorking() {
             base.FinishWorking();
-            _truckData.TryLoadCargo(CurrentCargoAmount, out var unloadedCargo);
+            _truckData.LoadCargo(CurrentCargoAmount, out var unloadedCargo);
             if (unloadedCargo > 0) {
                 CurrentCargoAmount -= unloadedCargo;
                 StopWork();
@@ -100,14 +100,13 @@ namespace IdleTransport.GameCore.Models {
             StartWaiting();
         }
 
-        public void TryLoadCargo(BigInteger elevatorCargoAmount, out BigInteger unloadedCargo) {
+        public override void LoadCargo(BigInteger elevatorCargoAmount, out BigInteger unloadedCargo) {
             unloadedCargo = 0;
             if (!IsWaiting()) {
                 return;
             }
 
-            unloadedCargo = BigInteger.Min(AvailableCapacity, elevatorCargoAmount);
-            CurrentCargoAmount += unloadedCargo;
+            base.LoadCargo(elevatorCargoAmount, out unloadedCargo);
             StartTransporting();
         }
     }

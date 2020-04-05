@@ -4,7 +4,6 @@ using Sirenix.OdinInspector;
 
 namespace IdleTransport.GameCore.Models {
     public abstract class UnitData {
-
         public event Action OnSwitchedToWaitingState;
         public event Action<BigInteger, BigInteger> OnCapacityStatusChanged;
         private BigInteger _capacity;
@@ -48,6 +47,11 @@ namespace IdleTransport.GameCore.Models {
 
         public bool IsFull() {
             return CurrentCargoAmount >= Capacity;
+        }
+
+        public virtual void LoadCargo(BigInteger cargo, out BigInteger loadedCargo) {
+            loadedCargo = BigInteger.Min(AvailableCapacity, cargo);
+            CurrentCargoAmount += loadedCargo;
         }
     }
 }
