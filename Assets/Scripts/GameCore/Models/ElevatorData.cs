@@ -42,8 +42,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         public void LoadCargo(BigInteger cargo, out BigInteger loadedCargo) {
-            loadedCargo = BigInteger.Min(AvailableCapacity, cargo);
-            CurrentCargoAmount += loadedCargo;
+            base.LoadCargo(cargo, out loadedCargo);
             StartDistributingCargoDownwards();
         }
 
@@ -76,7 +75,7 @@ namespace IdleTransport.GameCore.Models {
 
         private void TryUnloadCargo() {
             if (_currentLoadingRampData != null && !IsEmpty()) {
-                _currentLoadingRampData.LoaderData.TryLoadCargo(CurrentCargoAmount, out var unloadedCargo);
+                _currentLoadingRampData.LoaderData.LoadCargo(CurrentCargoAmount, out var unloadedCargo);
                 CurrentCargoAmount -= unloadedCargo;
             }
 
