@@ -64,7 +64,12 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void FinishTransporting() {
-            if (_truckData.IsFull()) {
+            if (!_truckData.IsWaiting()) {
+                if (!IsFull()) {
+                    StartReturning();
+                    return;
+                }
+
                 CurrentWorkingState = LoaderWorkingState.WaitingForTruck;
                 return;
             }
