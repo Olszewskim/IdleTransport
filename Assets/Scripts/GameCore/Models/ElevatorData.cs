@@ -7,7 +7,6 @@ using static IdleTransport.Utilities.Enums;
 namespace IdleTransport.GameCore.Models {
     public class ElevatorData : UnitData {
 
-        public event Action OnSwitchedToWaitingState;
         public event Action<int, double> OnElevatorMove;
         [ShowInInspector] public double TravelSpeedPerFloor { get; private set; }
 
@@ -29,7 +28,7 @@ namespace IdleTransport.GameCore.Models {
         protected override void StartWaiting() {
             _currentWorkingState = ElevatorWorkingState.Waiting;
             _currentFloorRampIndex = -1;
-            OnSwitchedToWaitingState?.Invoke();
+            base.StartWaiting();
         }
 
         public override bool IsWaiting() {

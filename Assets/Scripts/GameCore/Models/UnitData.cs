@@ -4,6 +4,8 @@ using Sirenix.OdinInspector;
 
 namespace IdleTransport.GameCore.Models {
     public abstract class UnitData {
+
+        public event Action OnSwitchedToWaitingState;
         public event Action<BigInteger, BigInteger> OnCapacityStatusChanged;
         private BigInteger _capacity;
 
@@ -38,7 +40,9 @@ namespace IdleTransport.GameCore.Models {
             CurrentCargoAmount = 0;
         }
 
-        protected abstract void StartWaiting();
+        protected virtual void StartWaiting() {
+            OnSwitchedToWaitingState?.Invoke();
+        }
 
         public abstract bool IsWaiting();
 

@@ -23,6 +23,7 @@ namespace IdleTransport.GameCore.Models {
 
         protected override void StartWaiting() {
             CurrentWorkingState = TruckWorkingState.Waiting;
+            base.StartWaiting();
         }
 
         public override bool IsWaiting() {

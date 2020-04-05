@@ -21,6 +21,7 @@ namespace IdleTransport.GameCore.Models {
             Constants.LOADER_BASE_WORK_CYCLE_TIME,
             Constants.LOADER_BASE_WALKING_SPEED) {
             _truckData = truckData;
+            _truckData.OnSwitchedToWaitingState += TryToLoadTruck;
             StartWaiting();
         }
 
@@ -53,6 +54,16 @@ namespace IdleTransport.GameCore.Models {
 
         protected override void StopWork() {
             StartReturning();
+        }
+
+        private void TryToLoadTruck() {
+            if (IsWaitingForTruck()) {
+                StartWorking();
+            }
+        }
+
+        private bool IsWaitingForTruck() {
+            return CurrentWorkingState == LoaderWorkingState.WaitingForTruck;
         }
 
         protected override bool IsTransporting() {
