@@ -35,5 +35,9 @@
             Working,
             ReturningToGate
         }
+
+        public enum CurrencyType {
+            Gold
+        }
     }
 }
