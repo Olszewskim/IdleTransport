@@ -6,5 +6,10 @@ namespace IdleTransport.GameCore.Views {
             unitData = truckData;
             base.Init();
         }
+
+        protected override void OnReturningAnimationFinished() {
+            base.OnReturningAnimationFinished();
+            unitSpriteRenderer.flipX = false;
+        }
     }
 }

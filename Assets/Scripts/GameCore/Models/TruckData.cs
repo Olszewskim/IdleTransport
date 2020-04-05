@@ -36,7 +36,14 @@ namespace IdleTransport.GameCore.Models {
             CurrentWorkingState = TruckWorkingState.Working;
         }
 
+        protected override void FinishWorking() {
+            base.FinishWorking();
+            StopWork();
+        }
+
         protected override void StopWork() {
+            CurrentCargoAmount = 0;
+            StartReturning();
         }
 
         protected override bool IsTransporting() {
@@ -48,6 +55,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void FinishTransporting() {
+            StartWorking();
         }
 
         protected override bool IsReturning() {
@@ -59,6 +67,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void FinishReturning() {
+            StartWaiting();
         }
 
         public void TryLoadCargo(BigInteger loaderCargoAmount, out BigInteger unloadedCargo) {
