@@ -24,6 +24,7 @@ namespace IdleTransport.GameCore.Models {
             Constants.TROLLEY_BASE_WORK_CYCLE_TIME, Constants.TROLLEY_BASE_WALKING_SPEED) {
             _warehouseData = warehouseData;
             _elevatorData = elevatorData;
+            _elevatorData.OnSwitchedToWaitingState += TryToLoadElevator;
             StartWorking();
         }
 
@@ -68,6 +69,12 @@ namespace IdleTransport.GameCore.Models {
             LoadElevator();
         }
 
+        private void TryToLoadElevator() {
+            if (IsLoadingElevator()) {
+                LoadElevator();
+            }
+        }
+
         private void LoadElevator() {
             CurrentWorkingState = TrolleyWorkingState.LoadingElevator;
             if (!_elevatorData.IsWaiting()) {
@@ -79,6 +86,10 @@ namespace IdleTransport.GameCore.Models {
                 CurrentCargoAmount -= loadedCargo;
                 StartReturning();
             }
+        }
+
+        private bool IsLoadingElevator() {
+            return CurrentWorkingState == TrolleyWorkingState.LoadingElevator;
         }
 
         protected override bool IsReturning() {
