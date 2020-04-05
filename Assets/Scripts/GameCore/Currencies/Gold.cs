@@ -1,6 +1,6 @@
 ﻿using IdleTransport.Utilities;
 
-namespace IdleTransport.GameCore.Currency
+namespace IdleTransport.GameCore.Currencies
 {
     public class Gold : Currency
     {

@@ -1,19 +1,16 @@
 ﻿using System;
 using IdleTransport.Utilities;
-using static IdleTransport.Utilities.Enums;
 
-namespace IdleTransport.GameCore.Currency
-{
+namespace IdleTransport.GameCore.Currencies {
     public abstract class Currency {
-        public event Action< BigInteger> OnCurrencyAmountChanged;
-        public CurrencyType CurrencyType { get; protected set; }
+        public event Action<BigInteger> OnCurrencyAmountChanged;
+        public Enums.CurrencyType CurrencyType { get; protected set; }
 
         public BigInteger CurrencyAmount { get; private set; }
 
         public Currency(BigInteger currencyAmount) {
             CurrencyAmount = currencyAmount;
         }
-
 
         public virtual void AddCurrency(BigInteger amount) {
             CurrencyAmount += amount;

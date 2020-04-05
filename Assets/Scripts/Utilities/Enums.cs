@@ -1,4 +1,6 @@
-﻿namespace IdleTransport.Utilities {
+﻿using System;
+
+namespace IdleTransport.Utilities {
     public static class Enums {
         public enum BuildingWorkingState {
             Waiting,
@@ -38,6 +40,10 @@
 
         public enum CurrencyType {
             Gold
+        }
+
+        public static string GetEnumName<T>(T element) {
+            return Enum.GetName(typeof(T), element);
         }
     }
 }

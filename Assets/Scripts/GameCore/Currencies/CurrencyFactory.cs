@@ -1,16 +1,15 @@
 ﻿using IdleTransport.Utilities;
 using UnityEngine;
-using static IdleTransport.Utilities.Enums;
 
-namespace IdleTransport.GameCore.Currency {
+namespace IdleTransport.GameCore.Currencies {
     public static class CurrencyFactory {
-        public static Currency CreateCurrencyInstance(CurrencyJSON currencyJSON) {
+        public static Currencies.Currency CreateCurrencyInstance(CurrencyJSON currencyJSON) {
             return CreateCurrencyInstance(new BigInteger(currencyJSON.currencyAmount), currencyJSON.currencyType);
         }
 
-        public static Currency CreateCurrencyInstance(BigInteger currencyAmount, CurrencyType currencyType) {
+        public static Currencies.Currency CreateCurrencyInstance(BigInteger currencyAmount, Enums.CurrencyType currencyType) {
             switch (currencyType) {
-                case CurrencyType.Gold:
+                case Enums.CurrencyType.Gold:
                     return new Gold(currencyAmount);
             }
 

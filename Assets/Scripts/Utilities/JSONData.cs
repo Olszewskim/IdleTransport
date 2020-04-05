@@ -1,4 +1,4 @@
-﻿using IdleTransport.GameCore.Currency;
+﻿using IdleTransport.GameCore.Currencies;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.Utilities {
