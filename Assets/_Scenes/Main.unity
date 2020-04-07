@@ -1368,6 +1368,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeUnitWindowCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2944999494007677583, guid: 3bff05c83faef4cbeb85f4d6d04b72d4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021655379969142558, guid: 3bff05c83faef4cbeb85f4d6d04b72d4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3730425523917293724, guid: 3bff05c83faef4cbeb85f4d6d04b72d4,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1522,6 +1532,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359963062631003192, guid: 3bff05c83faef4cbeb85f4d6d04b72d4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5538553652737161573, guid: 3bff05c83faef4cbeb85f4d6d04b72d4,
         type: 3}
@@ -1616,6 +1631,11 @@ PrefabInstance:
     - target: {fileID: 6651353758966360143, guid: 3bff05c83faef4cbeb85f4d6d04b72d4,
         type: 3}
       propertyPath: m_textInfo.materialCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072595209368334356, guid: 3bff05c83faef4cbeb85f4d6d04b72d4,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8558531447449522087, guid: 3bff05c83faef4cbeb85f4d6d04b72d4,

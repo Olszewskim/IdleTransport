@@ -42,6 +42,13 @@ namespace IdleTransport.Utilities {
             Gold
         }
 
+        public enum UpgradeMultiplierMode {
+            x1,
+            x10,
+            x50,
+            Max
+        }
+
         public static string GetEnumName<T>(T element) {
             return Enum.GetName(typeof(T), element);
         }
