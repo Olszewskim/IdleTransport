@@ -10,6 +10,7 @@ namespace IdleTransport.UI
     public abstract class WindowBehaviour<T> : Screen<T> where T : Screen<T> {
         public bool IsOpen { get; protected set; }
         [SerializeField] private Button _closeWindowClickableArea;
+        [SerializeField] private Button _closeButton;
         protected float animTime = 0.5f;
         protected CanvasGroup canvasGroup;
 
@@ -19,6 +20,7 @@ namespace IdleTransport.UI
             canvasGroup.alpha = 0;
             canvasGroup.LockGroup();
             _closeWindowClickableArea?.onClick.AddListener(ForceCloseWindow);
+            _closeButton?.onClick.AddListener(ForceCloseWindow);
         }
 
         private void OnDisable() {
