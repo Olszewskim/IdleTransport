@@ -8,6 +8,10 @@ namespace IdleTransport.Utilities {
         public const string CURRENCY_ATLAS_NAME = "CurrencyAtlas";
         public const string SPRITES_FOLDER_NAME = "Sprites";
 
+        public const ulong SECONDS_IN_HOUR = 3600;
+        public const float ENABLED_GROUP_ALPHA = 1f;
+        public const float DISABLED_GROUP_ALPHA = 0.65f;
+
         #region Buildings initial data
 
         public const int WAREHOUSE_BASE_CAPACITY = 5;
