@@ -2,6 +2,14 @@
 
 namespace IdleTransport.Utilities {
     public static class Enums {
+
+        public enum UnitType {
+            Warehouse,
+            Trolley,
+            Elevator,
+            Loader,
+            Truck
+        }
         public enum BuildingWorkingState {
             Waiting,
             Working,
