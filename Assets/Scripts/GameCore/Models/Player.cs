@@ -20,7 +20,7 @@ namespace IdleTransport.GameCore.Models {
             InitCurrencyDictionary();
             LoadingRampsManager = new LoadingRampsManager();
             WarehouseData = new WarehouseData();
-            ElevatorData = new ElevatorData(LoadingRampsManager);
+            ElevatorData = new ElevatorData(LoadingRampsManager, UnitType.Elevator);
             TrolleyData = new TrolleyData(WarehouseData, ElevatorData);
         }
 

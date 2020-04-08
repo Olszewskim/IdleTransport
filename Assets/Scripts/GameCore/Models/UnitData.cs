@@ -1,11 +1,14 @@
 ﻿using System;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
+using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
     public abstract class UnitData {
         public event Action OnSwitchedToWaitingState;
         public event Action<BigInteger, BigInteger> OnCapacityStatusChanged;
+     [ShowInInspector]   public UnitType UnitType { get; }
+
         private BigInteger _capacity;
 
         [ShowInInspector, DisplayAsString]
@@ -34,9 +37,10 @@ namespace IdleTransport.GameCore.Models {
 
         protected BigInteger AvailableCapacity => Capacity - CurrentCargoAmount;
 
-        protected UnitData(BigInteger capacity) {
+        protected UnitData(BigInteger capacity, UnitType unitType) {
             Capacity = capacity;
             CurrentCargoAmount = 0;
+            UnitType = unitType;
         }
 
         protected virtual void StartWaiting() {

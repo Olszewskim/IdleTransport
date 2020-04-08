@@ -1,6 +1,7 @@
 ﻿using System;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
+using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
     public abstract class WorkingUnitData : UnitData {
@@ -12,7 +13,8 @@ namespace IdleTransport.GameCore.Models {
         public double CurrentProductionProgress => _currentProductionCycle / WorkCycleTime;
         [ShowInInspector] private double _currentProductionCycle;
 
-        protected WorkingUnitData(BigInteger capacity, double workCycleTime) : base(capacity) {
+        protected WorkingUnitData(BigInteger capacity, double workCycleTime, UnitType unitType) : base(capacity,
+            unitType) {
             WorkCycleTime = workCycleTime;
         }
 

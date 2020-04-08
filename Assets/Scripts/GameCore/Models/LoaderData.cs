@@ -19,7 +19,7 @@ namespace IdleTransport.GameCore.Models {
 
         public LoaderData(TruckData truckData) : base(Constants.LOADER_BASE_CAPACITY,
             Constants.LOADER_BASE_WORK_CYCLE_TIME,
-            Constants.LOADER_BASE_WALKING_SPEED) {
+            Constants.LOADER_BASE_WALKING_SPEED, UnitType.Loader) {
             _truckData = truckData;
             _truckData.OnSwitchedToWaitingState += TryToLoadTruck;
             StartWaiting();

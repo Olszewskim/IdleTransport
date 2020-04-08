@@ -1,6 +1,7 @@
 ﻿using System;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
+using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
     public abstract class TransportingUnitData : WorkingUnitData {
@@ -10,8 +11,9 @@ namespace IdleTransport.GameCore.Models {
         [ShowInInspector] public double WalkingSpeed { get; private set; }
         [ShowInInspector] private double _currentWalkingTime;
 
-        protected TransportingUnitData(BigInteger capacity, double workCycleTime, double walkingSpeed) : base(capacity,
-            workCycleTime) {
+        protected TransportingUnitData(BigInteger capacity, double workCycleTime, double walkingSpeed,
+            UnitType unitType) : base(capacity,
+            workCycleTime, unitType) {
             WalkingSpeed = walkingSpeed;
         }
 
