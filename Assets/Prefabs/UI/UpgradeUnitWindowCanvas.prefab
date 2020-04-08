@@ -1010,9 +1010,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b734ee3d0603a4a07a509d55a999906b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   _closeWindowClickableArea: {fileID: 1541917552364285536}
   _closeButton: {fileID: 4594276713968026501}
   _upgradingUnitTitleText: {fileID: 5963710362450850105}
+  _upgradingUnitIcon: {fileID: 3217678996497434868}
   _upgradeCostText: {fileID: 4377708707602143035}
   _upgradeButton: {fileID: 2994415505449541536}
   _statInfoRowUIPrefab: {fileID: 4358800880682218040}

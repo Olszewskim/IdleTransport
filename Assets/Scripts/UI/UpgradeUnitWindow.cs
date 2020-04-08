@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using IdleTransport.Databases;
 using IdleTransport.ExtensionsMethods;
+using IdleTransport.GameCore.Models;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +10,7 @@ using static IdleTransport.Utilities.Enums;
 namespace IdleTransport.UI {
     public class UpgradeUnitWindow : WindowBehaviour<UpgradeUnitWindow> {
         [SerializeField] private TextMeshProUGUI _upgradingUnitTitleText;
+        [SerializeField] private Image _upgradingUnitIcon;
         [SerializeField] private TextMeshProUGUI _upgradeCostText;
         [SerializeField] private ButtonWithText _upgradeButton;
         [SerializeField] private StatInfoRowUI _statInfoRowUIPrefab;
@@ -36,6 +39,13 @@ namespace IdleTransport.UI {
 
         private void SwitchUpgradesMultiplierMode(UpgradeMultiplierMode upgradeMultiplierMode) {
             _currentUpgradeMultiplierMode = upgradeMultiplierMode;
+        }
+
+        public void ShowWindow(UnitData unitData) {
+            base.ShowWindow();
+            _upgradingUnitTitleText.text = unitData.UnitType.ToString();
+            _upgradingUnitIcon.sprite = GameResourcesDatabase.GetUnitSprite(unitData.UnitType);
+
         }
     }
 }
