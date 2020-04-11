@@ -68,7 +68,7 @@ namespace IdleTransport.Utilities {
             ElevatorTotalTransportationPerSecond,
             LoaderTotalTransportationPerSecond,
             TruckTotalIncomePerSecond,
-            
+
             //Upgradable
             WarehouseProductionSpeed,
             WarehouseProductionAmountPerCycle,
@@ -84,7 +84,7 @@ namespace IdleTransport.Utilities {
             LoaderWalkingSpeed,
             LoaderCapacity,
             TruckSellSpeed,
-            TryckCapacity
+            TruckCapacity
         }
 
         public static string GetEnumName<T>(T element) {
