@@ -1,4 +1,7 @@
-﻿using IdleTransport.Utilities;
+﻿using System.Collections.Generic;
+using IdleTransport.ExtensionsMethods;
+using IdleTransport.GameCore.Stats;
+using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
@@ -102,6 +105,16 @@ namespace IdleTransport.GameCore.Models {
 
         protected override void FinishReturning() {
             StartWorking();
+        }
+
+        public override List<StatInfo> GetUnitStats() {
+            return new List<StatInfo> {
+                new StatInfo(StatType.TrolleyTotalTransportationPerSecond, "0", "0"),
+                new StatInfo(StatType.TrolleyLoadingSpeed, WorkCycleTime.ToSecondsWithTwoDecimalPlaces(), "0"),
+                new StatInfo(StatType.TrolleyAmount, "1", "0"),
+                new StatInfo(StatType.TrolleyWalkingSpeed, WalkingSpeed.ToTimePerSecond(), "0"),
+                new StatInfo(StatType.TrolleyCapacity, Capacity.FormatHugeNumber(), "0")
+            };
         }
     }
 }

@@ -14,5 +14,11 @@ namespace IdleTransport.Databases {
                 ? Instance._unitSpritesDictionary[unitType]
                 : null;
         }
+
+        public static Sprite GetStatIcon(StatType statType) {
+            return Instance._statIconsDictionary.ContainsKey(statType)
+                ? Instance._statIconsDictionary[statType]
+                : null;
+        }
     }
 }

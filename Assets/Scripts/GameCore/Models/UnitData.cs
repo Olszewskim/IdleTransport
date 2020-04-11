@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using IdleTransport.GameCore.Stats;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
@@ -57,5 +59,7 @@ namespace IdleTransport.GameCore.Models {
             loadedCargo = BigInteger.Min(AvailableCapacity, cargo);
             CurrentCargoAmount += loadedCargo;
         }
+
+        public abstract List<StatInfo> GetUnitStats();
     }
 }

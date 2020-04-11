@@ -1,4 +1,7 @@
-﻿using IdleTransport.Managers;
+﻿using System.Collections.Generic;
+using IdleTransport.ExtensionsMethods;
+using IdleTransport.GameCore.Stats;
+using IdleTransport.Managers;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
@@ -83,6 +86,14 @@ namespace IdleTransport.GameCore.Models {
             if (IsFull()) {
                 StartTransporting();
             }
+        }
+
+        public override List<StatInfo> GetUnitStats() {
+            return new List<StatInfo> {
+                new StatInfo(StatType.TruckTotalIncomePerSecond, "0", "0"),
+                new StatInfo(StatType.TruckSellSpeed, WorkCycleTime.ToSecondsWithTwoDecimalPlaces(), "0"),
+                new StatInfo(StatType.TruckCapacity, Capacity.FormatHugeNumber(), "0")
+            };
         }
     }
 }

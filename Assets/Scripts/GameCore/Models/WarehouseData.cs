@@ -1,4 +1,7 @@
-﻿using IdleTransport.Utilities;
+﻿using System.Collections.Generic;
+using IdleTransport.ExtensionsMethods;
+using IdleTransport.GameCore.Stats;
+using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
@@ -59,6 +62,16 @@ namespace IdleTransport.GameCore.Models {
 
         private bool IsProductionStopped() {
             return CurrentWorkingState == BuildingWorkingState.Full;
+        }
+
+        public override List<StatInfo> GetUnitStats() {
+            return new List<StatInfo> {
+                new StatInfo(StatType.WarehouseTotalProductionPerSecond, "0", "0"),
+                new StatInfo(StatType.WarehouseProductionSpeed, WorkCycleTime.ToSecondsWithTwoDecimalPlaces(), "0"),
+                new StatInfo(StatType.WarehouseProductionAmountPerCycle, TotalCargoAmountInPackage.FormatHugeNumber(),
+                    "0"),
+                new StatInfo(StatType.WarehouseCapacity, Capacity.FormatHugeNumber(), "0")
+            };
         }
     }
 }

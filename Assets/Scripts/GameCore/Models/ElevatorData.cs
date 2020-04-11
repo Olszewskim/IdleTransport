@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using IdleTransport.ExtensionsMethods;
+using IdleTransport.GameCore.Stats;
 using IdleTransport.Managers;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
@@ -120,6 +123,14 @@ namespace IdleTransport.GameCore.Models {
 
         private bool HasReachedTarget() {
             return _currentTravelingTime >= TravelSpeedPerFloor;
+        }
+
+        public override List<StatInfo> GetUnitStats() {
+            return new List<StatInfo> {
+                new StatInfo(StatType.ElevatorTotalTransportationPerSecond, "0", "0"),
+                new StatInfo(StatType.ElevatorMovementSpeed, TravelSpeedPerFloor.ToTimePerSecond(), "0"),
+                new StatInfo(StatType.ElevatorCapacity, Capacity.FormatHugeNumber(), "0")
+            };
         }
     }
 }

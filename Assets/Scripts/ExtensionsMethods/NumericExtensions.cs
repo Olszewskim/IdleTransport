@@ -7,10 +7,15 @@ namespace IdleTransport.ExtensionsMethods
 {
     public static class NumericExtensions {
 
-        public static float ToTwoDecimalPlaces(this float number) {
-            return Mathf.Round(number * 100f) / 100f;
+
+
+        public static string ToSecondsWithTwoDecimalPlaces(this double seconds) {
+            return $"{(seconds):0.##}s";
         }
 
+        public static string ToTimePerSecond(this double seconds) {
+            return $"{(1 / seconds):0.##}";
+        }
 
         public static string ToPercentString(this double number) {
             return ((float)number).ToPercentString();
