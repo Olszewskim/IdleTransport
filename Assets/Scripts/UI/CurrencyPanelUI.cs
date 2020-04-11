@@ -31,7 +31,7 @@ namespace IdleTransport.UI {
         private void RefreshCurrencyStatusText() {
             if (CurrencyValueText) {
                 var currencyIcon = CurrencyIcon != null ? "" : Sprites.GetCurrencySprite(CurrencyType);
-                CurrencyValueText.text = $"{_currentCurrencyAmount.FormatHugeNumber()} {currencyIcon}";
+                CurrencyValueText.text = $"{currencyIcon} {_currentCurrencyAmount.FormatHugeNumber()}";
             }
         }
     }

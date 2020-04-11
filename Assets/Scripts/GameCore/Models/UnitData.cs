@@ -9,7 +9,8 @@ namespace IdleTransport.GameCore.Models {
     public abstract class UnitData {
         public event Action OnSwitchedToWaitingState;
         public event Action<BigInteger, BigInteger> OnCapacityStatusChanged;
-     [ShowInInspector]   public UnitType UnitType { get; }
+        [ShowInInspector] public UnitType UnitType { get; }
+        [ShowInInspector] public int UpgradeLevel { get; private set; }
 
         private BigInteger _capacity;
 
@@ -60,6 +61,12 @@ namespace IdleTransport.GameCore.Models {
             CurrentCargoAmount += loadedCargo;
         }
 
+        public void UpgradeUnit(int levels) {
+            UpgradeLevel += levels;
+        }
+
         public abstract List<StatInfo> GetUnitStats();
+
+
     }
 }

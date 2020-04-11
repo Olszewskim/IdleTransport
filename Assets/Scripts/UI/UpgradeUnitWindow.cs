@@ -12,7 +12,7 @@ namespace IdleTransport.UI {
         [SerializeField] private TextMeshProUGUI _upgradingUnitTitleText;
         [SerializeField] private Image _upgradingUnitIcon;
         [SerializeField] private TextMeshProUGUI _upgradeCostText;
-        [SerializeField] private ButtonWithText _upgradeButton;
+        [SerializeField] private ButtonWithCurrencyCost _upgradeButton;
         [SerializeField] private StatInfoRowUI _statInfoRowUIPrefab;
         [SerializeField] private ToggleGroup _upgradesMultiplierToggleGroupGroup;
 

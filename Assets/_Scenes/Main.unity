@@ -1983,6 +1983,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5163190474123008448, guid: 3bff05c83faef4cbeb85f4d6d04b72d4,
+        type: 3}
+      propertyPath: _currencyCostString
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5359963062631003192, guid: 3bff05c83faef4cbeb85f4d6d04b72d4,
         type: 3}
       propertyPath: m_Enabled
