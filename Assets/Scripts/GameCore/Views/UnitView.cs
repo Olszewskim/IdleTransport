@@ -19,6 +19,7 @@ namespace IdleTransport.GameCore.Views {
         protected virtual void Init() {
             _capacityStatusUI.Init(unitData);
             _upgradeUnitButton.Button.RegisterButton(ShowUpgradeWindow);
+            _upgradeUnitButton.InitButton(unitData);
         }
 
         private void ShowUpgradeWindow() {

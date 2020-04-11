@@ -19,6 +19,8 @@ namespace IdleTransport.UI {
         private UpgradeMultiplierMode _currentUpgradeMultiplierMode;
         private readonly List<StatInfoRowUI> _statInfoRowUIList = new List<StatInfoRowUI>();
 
+        private UnitData _currentlyUpgradingUnit;
+
         protected override void Awake() {
             base.Awake();
             _statInfoRowUIPrefab.SetActive(false);
@@ -43,15 +45,16 @@ namespace IdleTransport.UI {
 
         public void ShowWindow(UnitData unitData) {
             base.ShowWindow();
-            _upgradingUnitTitleText.text = GameTexts.GetUnitName(unitData.UnitType);
+            _currentlyUpgradingUnit = unitData;
+            _upgradingUnitTitleText.text = $"{GameTexts.GetUnitName(unitData.UnitType)} {GameTexts.GetLevelText(unitData.UpgradeLevel)}";
             _upgradingUnitIcon.sprite = GameResourcesDatabase.GetUnitSprite(unitData.UnitType);
-            ShowUnitStats(unitData);
+            ShowUnitStats();
         }
 
-        private void ShowUnitStats(UnitData unitData)
+        private void ShowUnitStats()
         {
             TurnOffAllStatInfoRows();
-            var unitStats = unitData.GetUnitStats();
+            var unitStats = _currentlyUpgradingUnit.GetUnitStats();
             for (int i = 0; i < unitStats.Count; i++)
             {
                 if (i >= _statInfoRowUIList.Count)

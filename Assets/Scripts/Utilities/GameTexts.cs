@@ -69,5 +69,9 @@ namespace IdleTransport {
                     return "";
             }
         }
+
+        public static string GetLevelText(int level) {
+            return $"Level {level}";
+        }
     }
 }
