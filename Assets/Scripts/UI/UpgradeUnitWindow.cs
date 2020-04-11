@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using IdleTransport.Databases;
 using IdleTransport.ExtensionsMethods;
 using IdleTransport.GameCore.Models;
@@ -20,10 +21,12 @@ namespace IdleTransport.UI {
         private readonly List<StatInfoRowUI> _statInfoRowUIList = new List<StatInfoRowUI>();
 
         private UnitData _currentlyUpgradingUnit;
+        private int _numberOfUpgrades;
 
         protected override void Awake() {
             base.Awake();
             _statInfoRowUIPrefab.SetActive(false);
+            _upgradeButton.OnClickAction += UpgradeUnit;
             InitUpgradesMultiplierToggleGroup();
         }
 
@@ -41,24 +44,41 @@ namespace IdleTransport.UI {
 
         private void SwitchUpgradesMultiplierMode(UpgradeMultiplierMode upgradeMultiplierMode) {
             _currentUpgradeMultiplierMode = upgradeMultiplierMode;
+            RefreshUpgradeButton();
         }
 
         public void ShowWindow(UnitData unitData) {
             base.ShowWindow();
             _currentlyUpgradingUnit = unitData;
-            _upgradingUnitTitleText.text = $"{GameTexts.GetUnitName(unitData.UnitType)} {GameTexts.GetLevelText(unitData.UpgradeLevel)}";
             _upgradingUnitIcon.sprite = GameResourcesDatabase.GetUnitSprite(unitData.UnitType);
+            RefreshView();
+        }
+
+        private void RefreshView() {
+            _upgradingUnitTitleText.text =
+                $"{GameTexts.GetUnitName(_currentlyUpgradingUnit.UnitType)} {GameTexts.GetLevelText(_currentlyUpgradingUnit.UpgradeLevel)}";
+            RefreshUpgradeButton();
             ShowUnitStats();
         }
 
-        private void ShowUnitStats()
-        {
+        private void RefreshUpgradeButton() {
+            //TODO: Set upgrade cost
+            _numberOfUpgrades = GetNumberOfUpgrades();
+            _upgradeButton.SetButtonText(GameTexts.GetLevelUpMultiplierText(_numberOfUpgrades));
+        }
+
+
+
+        private void UpgradeUnit() {
+            _currentlyUpgradingUnit.UpgradeUnit(_numberOfUpgrades);
+            RefreshView();
+        }
+
+        private void ShowUnitStats() {
             TurnOffAllStatInfoRows();
             var unitStats = _currentlyUpgradingUnit.GetUnitStats();
-            for (int i = 0; i < unitStats.Count; i++)
-            {
-                if (i >= _statInfoRowUIList.Count)
-                {
+            for (int i = 0; i < unitStats.Count; i++) {
+                if (i >= _statInfoRowUIList.Count) {
                     _statInfoRowUIList.Add(Instantiate(_statInfoRowUIPrefab, _statInfoRowUIPrefab.transform.parent));
                 }
 
@@ -69,6 +89,21 @@ namespace IdleTransport.UI {
         private void TurnOffAllStatInfoRows() {
             for (int i = 0; i < _statInfoRowUIList.Count; i++) {
                 _statInfoRowUIList[i].SetActive(false);
+            }
+        }
+
+        private int GetNumberOfUpgrades() {
+            switch (_currentUpgradeMultiplierMode) {
+                case UpgradeMultiplierMode.x1:
+                    return 1;
+                case UpgradeMultiplierMode.x10:
+                    return 10;
+                case UpgradeMultiplierMode.x50:
+                    return 50;
+                case UpgradeMultiplierMode.Max:
+                    return 100; //TODO: Calculate max uprades amount
+                default:
+                    return 1;
             }
         }
     }

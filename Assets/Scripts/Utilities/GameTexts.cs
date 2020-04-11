@@ -73,5 +73,9 @@ namespace IdleTransport {
         public static string GetLevelText(int level) {
             return $"Level {level}";
         }
+
+        public static string GetLevelUpMultiplierText(int numberOfUpgrades) {
+            return $"Level Up x{numberOfUpgrades}";
+        }
     }
 }
