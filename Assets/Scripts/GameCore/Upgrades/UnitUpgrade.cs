@@ -2,6 +2,7 @@ using System;
 using IdleTransport.ExtensionsMethods;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace IdleTransport.GameCore.Upgrades {
     public abstract class UnitUpgrade {
@@ -30,12 +31,16 @@ namespace IdleTransport.GameCore.Upgrades {
             return totalCost;
         }
 
-        public virtual BigInteger GetUpgradeCost(int upgradeLevel) {
+        public BigInteger GetUpgradeCost(int upgradeLevel) {
+            if (upgradeLevel < 2) {
+                return 0;
+            }
+
             if (upgradeLevel == 2) {
                 return _upgradeCost.BaseCost;
             }
 
-            return GetNextNUpgradesCost(upgradeLevel - 1).MultipleByDouble(_upgradeCost.CostMultiplier);
+            return GetUpgradeCost(upgradeLevel - 1).MultipleByDouble(_upgradeCost.CostMultiplier);
         }
 
         public int GetPossibleUpgradesCount(BigInteger currencyAmount) {

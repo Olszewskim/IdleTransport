@@ -3,12 +3,8 @@ using System.Globalization;
 using IdleTransport.Utilities;
 using UnityEngine;
 
-namespace IdleTransport.ExtensionsMethods
-{
+namespace IdleTransport.ExtensionsMethods {
     public static class NumericExtensions {
-
-
-
         public static string ToSecondsWithTwoDecimalPlaces(this double seconds) {
             return $"{(seconds):0.##}s";
         }
@@ -18,7 +14,7 @@ namespace IdleTransport.ExtensionsMethods
         }
 
         public static string ToPercentString(this double number) {
-            return ((float)number).ToPercentString();
+            return ((float) number).ToPercentString();
         }
 
         public static string ToPercentString(this float number) {
@@ -26,7 +22,9 @@ namespace IdleTransport.ExtensionsMethods
         }
 
         public static string ConvertToTimeStringAuto(this uint seconds) {
-            return seconds < Constants.SECONDS_IN_HOUR ? seconds.ConvertToTimeStringMSFormat() : seconds.ConvertToTimeStringHMSFormat();
+            return seconds < Constants.SECONDS_IN_HOUR
+                ? seconds.ConvertToTimeStringMSFormat()
+                : seconds.ConvertToTimeStringHMSFormat();
         }
 
         public static string ConvertToTimeStringMSFormat(this uint seconds) {
@@ -54,12 +52,12 @@ namespace IdleTransport.ExtensionsMethods
         }
 
         public static string ConvertToThousandsFormat<T>(this T number) where T : struct, IFormattable {
-            var numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+            var numberFormatInfo = (NumberFormatInfo) CultureInfo.InvariantCulture.NumberFormat.Clone();
             numberFormatInfo.NumberGroupSeparator = " ";
             return number.ToString("#,0", numberFormatInfo);
         }
 
-        public static BigInteger MultipleByDouble(this BigInteger number, double? multiplier, int decimalDigits = 2) {
+        public static BigInteger MultipleByDouble(this BigInteger number, double? multiplier, int decimalDigits = 3) {
             multiplier = multiplier ?? 0;
             var decimalFactor = (int) Math.Pow(10, decimalDigits);
             var intMultiplier = (int) (multiplier * decimalFactor);
