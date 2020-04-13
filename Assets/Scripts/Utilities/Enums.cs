@@ -87,6 +87,14 @@ namespace IdleTransport.Utilities {
             TruckCapacity
         }
 
+        public enum UpgradeType{
+            WorkCycleTime,
+            CargoPerCycle,
+            Capacity,
+            NumberOfUnits,
+            MovementSpeed
+        }
+
         public static string GetEnumName<T>(T element) {
             return Enum.GetName(typeof(T), element);
         }

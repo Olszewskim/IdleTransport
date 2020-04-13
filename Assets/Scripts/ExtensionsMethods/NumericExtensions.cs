@@ -58,5 +58,12 @@ namespace IdleTransport.ExtensionsMethods
             numberFormatInfo.NumberGroupSeparator = " ";
             return number.ToString("#,0", numberFormatInfo);
         }
+
+        public static BigInteger MultipleByDouble(this BigInteger number, double? multiplier, int decimalDigits = 2) {
+            multiplier = multiplier ?? 0;
+            var decimalFactor = (int) Math.Pow(10, decimalDigits);
+            var intMultiplier = (int) (multiplier * decimalFactor);
+            return BigInteger.Divide(BigInteger.Multiply(number, intMultiplier), decimalFactor);
+        }
     }
 }

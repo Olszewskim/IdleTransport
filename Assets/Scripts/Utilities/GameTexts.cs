@@ -1,4 +1,3 @@
-using System;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport {

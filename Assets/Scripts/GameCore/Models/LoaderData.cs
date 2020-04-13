@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IdleTransport.ExtensionsMethods;
 using IdleTransport.GameCore.Stats;
+using IdleTransport.GameCore.Upgrades;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
@@ -20,9 +21,9 @@ namespace IdleTransport.GameCore.Models {
             }
         }
 
-        public LoaderData(TruckData truckData) : base(Constants.LOADER_BASE_CAPACITY,
-            Constants.LOADER_BASE_WORK_CYCLE_TIME,
-            Constants.LOADER_BASE_WALKING_SPEED, UnitType.Loader) {
+        public LoaderData(TruckData truckData)
+            : base(Constants.LOADER_BASE_CAPACITY, Constants.LOADER_BASE_WORK_CYCLE_TIME,
+                Constants.LOADER_BASE_WALKING_SPEED, UnitType.Loader, new LoaderUpgrade()) {
             _truckData = truckData;
             _truckData.OnSwitchedToWaitingState += TryToLoadTruck;
             StartWaiting();

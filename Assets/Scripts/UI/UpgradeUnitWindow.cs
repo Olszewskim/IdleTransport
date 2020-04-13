@@ -56,7 +56,7 @@ namespace IdleTransport.UI {
 
         private void RefreshView() {
             _upgradingUnitTitleText.text =
-                $"{GameTexts.GetUnitName(_currentlyUpgradingUnit.UnitType)} {GameTexts.GetLevelText(_currentlyUpgradingUnit.UpgradeLevel)}";
+                $"{GameTexts.GetUnitName(_currentlyUpgradingUnit.UnitType)} {GameTexts.GetLevelText(_currentlyUpgradingUnit.UnitUpgrade.UpgradeLevel)}";
             RefreshUpgradeButton();
             ShowUnitStats();
         }
@@ -101,7 +101,7 @@ namespace IdleTransport.UI {
                 case UpgradeMultiplierMode.x50:
                     return 50;
                 case UpgradeMultiplierMode.Max:
-                    return 100; //TODO: Calculate max uprades amount
+                    return 100; //TODO: Calculate max upgrades amount
                 default:
                     return 1;
             }

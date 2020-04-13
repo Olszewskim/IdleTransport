@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using IdleTransport.GameCore.Stats;
+using IdleTransport.GameCore.Upgrades;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
@@ -9,9 +10,9 @@ namespace IdleTransport.GameCore.Models {
     public abstract class UnitData {
         public event Action OnSwitchedToWaitingState;
         public event Action<BigInteger, BigInteger> OnCapacityStatusChanged;
-        public event Action OnUnitUpgraded;
         [ShowInInspector] public UnitType UnitType { get; }
-        [ShowInInspector] public int UpgradeLevel { get; private set; }
+
+        [ShowInInspector] public UnitUpgrade UnitUpgrade { get; }
 
         private BigInteger _capacity;
 
@@ -41,11 +42,11 @@ namespace IdleTransport.GameCore.Models {
 
         protected BigInteger AvailableCapacity => Capacity - CurrentCargoAmount;
 
-        protected UnitData(BigInteger capacity, UnitType unitType) {
-            UpgradeLevel = 1;
+        protected UnitData(BigInteger capacity, UnitType unitType, UnitUpgrade unitUpgrade) {
             Capacity = capacity;
             CurrentCargoAmount = 0;
             UnitType = unitType;
+            UnitUpgrade = unitUpgrade;
         }
 
         protected virtual void StartWaiting() {
@@ -64,12 +65,9 @@ namespace IdleTransport.GameCore.Models {
         }
 
         public void UpgradeUnit(int levels) {
-            UpgradeLevel += levels;
-            OnUnitUpgraded?.Invoke();
+            UnitUpgrade.IncreaseUpgradeLevel(levels);
         }
 
         public abstract List<StatInfo> GetUnitStats();
-
-
     }
 }

@@ -6,12 +6,12 @@ namespace IdleTransport.UI {
 
         public void InitButton(UnitData unitData) {
             _unitData = unitData;
-            _unitData.OnUnitUpgraded += RefreshButtonText;
+            _unitData.UnitUpgrade.OnUpgradeLevelUp += RefreshButtonText;
             RefreshButtonText();
         }
 
         private void RefreshButtonText() {
-            SetButtonText(_unitData.UpgradeLevel.ToString());
+            SetButtonText(_unitData.UnitUpgrade.UpgradeLevel.ToString());
         }
     }
 }

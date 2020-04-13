@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IdleTransport.ExtensionsMethods;
 using IdleTransport.GameCore.Stats;
+using IdleTransport.GameCore.Upgrades;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
@@ -22,9 +23,9 @@ namespace IdleTransport.GameCore.Models {
             }
         }
 
-        public TrolleyData(WarehouseData warehouseData, ElevatorData elevatorData) : base(
-            Constants.TROLLEY_BASE_CAPACITY,
-            Constants.TROLLEY_BASE_WORK_CYCLE_TIME, Constants.TROLLEY_BASE_WALKING_SPEED, UnitType.Trolley) {
+        public TrolleyData(WarehouseData warehouseData, ElevatorData elevatorData)
+            : base(Constants.TROLLEY_BASE_CAPACITY, Constants.TROLLEY_BASE_WORK_CYCLE_TIME,
+                Constants.TROLLEY_BASE_WALKING_SPEED, UnitType.Trolley, new TrolleyUpgrade()) {
             _warehouseData = warehouseData;
             _elevatorData = elevatorData;
             _elevatorData.OnSwitchedToWaitingState += TryToLoadElevator;
