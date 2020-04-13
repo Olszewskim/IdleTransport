@@ -14,33 +14,33 @@ namespace IdleTransport {
                     return "Total Transportation";
 
                 case StatType.TruckTotalIncomePerSecond:
-                    return "Total income";
+                    return "Total Income";
 
                 case StatType.WarehouseProductionSpeed:
-                    return "Production cycle time";
+                    return "Production Cycle Time";
 
                 case StatType.WarehouseProductionAmountPerCycle:
-                    return "Cargo per cycle";
+                    return "Cargo Per Cycle";
 
                 case StatType.TrolleyLoadingSpeed:
                 case StatType.LoaderLoadingSpeed:
-                    return "Loading time";
+                    return "Loading Time";
 
                 case StatType.TrolleyAmount:
                     return "Trolleys";
 
                 case StatType.TrolleyWalkingSpeed:
                 case StatType.LoaderWalkingSpeed:
-                    return "Walking speed";
+                    return "Walking Speed";
 
                 case StatType.ElevatorMovementSpeed:
-                    return "Movement speed";
+                    return "Movement Speed";
 
                 case StatType.LoaderAmount:
                     return "Loaders";
 
                 case StatType.TruckSellSpeed:
-                    return "Selling time";
+                    return "Selling Time";
 
                 case StatType.WarehouseCapacity:
                 case StatType.TrolleyCapacity:
