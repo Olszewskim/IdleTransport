@@ -15,14 +15,15 @@ namespace IdleTransport.GameCore.Upgrades {
 
         protected BigIntegerUpgradeData(BigInteger baseUpgradeValue, double upgradeMultiplier) :
             base(upgradeMultiplier) {
+            _baseUpgradeValue = baseUpgradeValue;
         }
 
-        public BigInteger GetUpgradeLevelValue(int upgradeLevel) {
+        public virtual BigInteger GetUpgradeValue(int upgradeLevel) {
             if (upgradeLevel == 1) {
                 return _baseUpgradeValue;
             }
 
-            return GetUpgradeLevelValue(upgradeLevel - 1).MultipleByDouble(upgradeMultiplier);
+            return GetUpgradeValue(upgradeLevel - 1).MultipleByDouble(upgradeMultiplier);
         }
     }
 
@@ -33,12 +34,12 @@ namespace IdleTransport.GameCore.Upgrades {
             _baseUpgradeValue = baseUpgradeValue;
         }
 
-        public double GetUpgradeLevelValue(int upgradeLevel) {
+        public double GetUpgradeValue(int upgradeLevel) {
             if (upgradeLevel == 1) {
                 return _baseUpgradeValue;
             }
 
-            return GetUpgradeLevelValue(upgradeLevel - 1) + upgradeMultiplier;
+            return GetUpgradeValue(upgradeLevel - 1) + upgradeMultiplier;
         }
     }
 
@@ -63,6 +64,30 @@ namespace IdleTransport.GameCore.Upgrades {
     public class NumberOfUnitsUpgradeData : BigIntegerUpgradeData {
         public NumberOfUnitsUpgradeData(BigInteger baseUpgradeValue, double upgradeMultiplier) : base(baseUpgradeValue,
             upgradeMultiplier) {
+        }
+
+        public override BigInteger GetUpgradeValue(int upgradeLevel) {
+            if (upgradeLevel < 10) {
+                return 1;
+            }
+
+            if (upgradeLevel < 50) {
+                return 2;
+            }
+
+            if (upgradeLevel < 100) {
+                return 3;
+            }
+
+            if (upgradeLevel < 200) {
+                return 4;
+            }
+
+            if (upgradeLevel < 400) {
+                return 5;
+            }
+
+            return 6;
         }
     }
 
