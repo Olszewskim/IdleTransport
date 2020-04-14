@@ -19,7 +19,7 @@ namespace IdleTransport.GameCore.Upgrades {
                 case UpgradeType.Capacity:
                     return Capacity.GetUpgradeValue(UpgradeLevel);
                 default:
-                    Debug.LogError("Elevator doesn't have upgrade " + upgradeType);
+                    Debug.LogError("Truck doesn't have upgrade " + upgradeType);
                     return null;
             }
         }

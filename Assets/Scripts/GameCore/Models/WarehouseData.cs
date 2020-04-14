@@ -8,7 +8,8 @@ using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
     public class WarehouseData : WorkingUnitData {
-        [ShowInInspector, DisplayAsString] public BigInteger TotalCargoAmountInPackage { get; private set; }
+        [ShowInInspector, DisplayAsString]
+        public BigInteger CargoPerCycle => (BigInteger)UnitUpgrade.GetUpgradeValue(UpgradeType.CargoPerCycle);
         [ShowInInspector] private BuildingWorkingState _currentWorkingState;
 
         private BuildingWorkingState CurrentWorkingState {
@@ -23,7 +24,6 @@ namespace IdleTransport.GameCore.Models {
 
         public WarehouseData()
             : base(Constants.WAREHOUSE_BASE_WORK_CYCLE_SPEED, UnitType.Warehouse, new WarehouseUpgrade()) {
-            TotalCargoAmountInPackage = Constants.WAREHOUSE_BASE_CARGO_AMOUNT_IN_PACKAGE;
             StartWorking();
         }
 
@@ -45,7 +45,7 @@ namespace IdleTransport.GameCore.Models {
 
         protected override void FinishWorking() {
             base.FinishWorking();
-            CurrentCargoAmount += TotalCargoAmountInPackage;
+            CurrentCargoAmount += CargoPerCycle;
             CheckIfCapacityIsFull();
         }
 
@@ -69,7 +69,7 @@ namespace IdleTransport.GameCore.Models {
             return new List<StatInfo> {
                 new StatInfo(StatType.WarehouseTotalProductionPerSecond, "0", "0"),
                 new StatInfo(StatType.WarehouseProductionSpeed, WorkCycleTime.ToSecondsWithTwoDecimalPlaces(), "0"),
-                new StatInfo(StatType.WarehouseProductionAmountPerCycle, TotalCargoAmountInPackage.FormatHugeNumber(),
+                new StatInfo(StatType.WarehouseProductionAmountPerCycle, CargoPerCycle.FormatHugeNumber(),
                     "0"),
                 new StatInfo(StatType.WarehouseCapacity, Capacity.FormatHugeNumber(), "0")
             };

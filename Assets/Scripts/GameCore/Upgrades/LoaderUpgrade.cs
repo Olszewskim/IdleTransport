@@ -27,7 +27,7 @@ namespace IdleTransport.GameCore.Upgrades {
                 case UpgradeType.MovementSpeed:
                     return MovementSpeed.GetUpgradeValue(UpgradeLevel);
                 default:
-                    Debug.LogError("Elevator doesn't have upgrade " + upgradeType);
+                    Debug.LogError("Loader doesn't have upgrade " + upgradeType);
                     return null;
             }
         }

@@ -14,8 +14,6 @@ namespace IdleTransport.GameCore.Models {
 
         [ShowInInspector] public UnitUpgrade UnitUpgrade { get; }
 
-        private BigInteger _capacity;
-
         [ShowInInspector, DisplayAsString]
         public BigInteger Capacity => (BigInteger) UnitUpgrade.GetUpgradeValue(UpgradeType.Capacity);
 

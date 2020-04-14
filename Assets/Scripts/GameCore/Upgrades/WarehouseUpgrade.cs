@@ -20,8 +20,10 @@ namespace IdleTransport.GameCore.Upgrades {
                     return WorkCycleTime.GetUpgradeValue(UpgradeLevel);
                 case UpgradeType.Capacity:
                     return Capacity.GetUpgradeValue(UpgradeLevel);
+                case UpgradeType.CargoPerCycle:
+                    return CargoPerCycle.GetUpgradeValue(UpgradeLevel);
                 default:
-                    Debug.LogError("Elevator doesn't have upgrade " + upgradeType);
+                    Debug.LogError("Warehouse doesn't have upgrade " + upgradeType);
                     return null;
             }
         }

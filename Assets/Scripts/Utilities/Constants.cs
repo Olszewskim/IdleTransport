@@ -18,7 +18,7 @@ namespace IdleTransport.Utilities {
 
         public const int WAREHOUSE_BASE_CAPACITY = 60;
         public const double WAREHOUSE_BASE_WORK_CYCLE_SPEED = 7.0;
-        public const int WAREHOUSE_BASE_CARGO_AMOUNT_IN_PACKAGE = 20;
+        public const int WAREHOUSE_BASE_CARGO_PER_CYCLE = 20;
 
         public const int TROLLEY_BASE_CAPACITY = 25;
         public const double TROLLEY_BASE_WORK_CYCLE_TIME = 4.0;
@@ -51,7 +51,7 @@ namespace IdleTransport.Utilities {
         public static readonly Dictionary<UpgradeType, UpgradeData> WAREHOUSE_UPGRADE_DATA =
             new Dictionary<UpgradeType, UpgradeData> {
                 {UpgradeType.WorkCycleTime, new WorkCycleTimeUpgradeData(WAREHOUSE_BASE_WORK_CYCLE_SPEED, -0.05)},
-                {UpgradeType.CargoPerCycle, new CargoPerCycleUpgradeData(WAREHOUSE_BASE_CARGO_AMOUNT_IN_PACKAGE, 1.1)},
+                {UpgradeType.CargoPerCycle, new CargoPerCycleUpgradeData(WAREHOUSE_BASE_CARGO_PER_CYCLE, 1.1)},
                 {UpgradeType.Capacity, new CapacityUpgradeData(WAREHOUSE_BASE_CAPACITY, 1.3)}
             };
 
