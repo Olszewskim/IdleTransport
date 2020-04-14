@@ -7,8 +7,8 @@ namespace IdleTransport.GameCore.Views {
             base.Init();
         }
 
-        protected override void OnReturningAnimationFinished() {
-            base.OnReturningAnimationFinished();
+        protected override void OnUnitReturningAnimationFinished() {
+            base.OnUnitReturningAnimationFinished();
             unitSpriteRenderer.flipX = false;
         }
     }
