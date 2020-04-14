@@ -24,7 +24,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         public TrolleyData(WarehouseData warehouseData, ElevatorData elevatorData)
-            : base(Constants.TROLLEY_BASE_WALKING_SPEED, UnitType.Trolley, new TrolleyUpgrade()) {
+            : base( UnitType.Trolley, new TrolleyUpgrade()) {
             _warehouseData = warehouseData;
             _elevatorData = elevatorData;
             _elevatorData.OnSwitchedToWaitingState += TryToLoadElevator;
@@ -69,6 +69,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void FinishTransporting() {
+            base.FinishTransporting();
             LoadElevator();
         }
 
@@ -104,6 +105,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void FinishReturning() {
+            base.FinishReturning();
             StartWorking();
         }
 

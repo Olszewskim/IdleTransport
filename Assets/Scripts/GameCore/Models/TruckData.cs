@@ -10,6 +10,7 @@ using static IdleTransport.Utilities.Enums;
 namespace IdleTransport.GameCore.Models {
     public class TruckData : TransportingUnitData {
         [ShowInInspector] private TruckWorkingState _currentWorkingState;
+        [ShowInInspector] public override double WalkingSpeed => Constants.TRUCK_BASE_WALKING_SPEED;
 
         private TruckWorkingState CurrentWorkingState {
             get => _currentWorkingState;
@@ -22,7 +23,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         public TruckData()
-            : base(Constants.TRUCK_BASE_WALKING_SPEED, UnitType.Truck, new TruckUpgrade()) {
+            : base(UnitType.Truck, new TruckUpgrade()) {
         }
 
         protected override void StartWaiting() {
@@ -62,6 +63,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void FinishTransporting() {
+            base.FinishTransporting();
             StartWorking();
         }
 
@@ -74,6 +76,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void FinishReturning() {
+            base.FinishReturning();
             StartWaiting();
         }
 

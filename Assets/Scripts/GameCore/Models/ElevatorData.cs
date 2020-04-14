@@ -12,7 +12,7 @@ namespace IdleTransport.GameCore.Models {
     public class ElevatorData : UnitData {
 
         public event Action<int, double> OnElevatorMove;
-        [ShowInInspector] public double TravelSpeedPerFloor { get; private set; }
+        [ShowInInspector] public double TravelSpeedPerFloor => (double)UnitUpgrade.GetUpgradeValue(UpgradeType.MovementSpeed);
 
         [ShowInInspector] private ElevatorWorkingState _currentWorkingState;
 
@@ -24,7 +24,6 @@ namespace IdleTransport.GameCore.Models {
         private double _currentTraveledDistanceProgress => _currentTravelingTime / TravelSpeedPerFloor;
 
         public ElevatorData(LoadingRampsManager loadingRampsManager, UnitType unitType) : base(unitType, new ElevatorUpgrade()) {
-            TravelSpeedPerFloor = Constants.ELEVATOR_TRAVEL_SPEED_PER_FLOOR;
             _loadingRampsManager = loadingRampsManager;
             StartWaiting();
         }

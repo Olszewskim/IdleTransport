@@ -1,20 +1,25 @@
 ﻿using System;
 using IdleTransport.GameCore.Upgrades;
-using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
     public abstract class TransportingUnitData : WorkingUnitData {
         public event Action OnUnitStartTransporting;
+        public event Action<double> OnUnitTransporting;
+        public event Action OnUnitFinishTransporting;
         public event Action OnUnitStartReturning;
+        public event Action<double> OnUnitReturning;
+        public event Action OnUnitFinishReturning;
 
-        [ShowInInspector] public double WalkingSpeed { get; private set; }
+        [ShowInInspector]
+        public virtual double WalkingSpeed => (double) UnitUpgrade.GetUpgradeValue(UpgradeType.MovementSpeed);
+
         [ShowInInspector] private double _currentWalkingTime;
+        private double _currentTraveledDistanceProgress => _currentWalkingTime / WalkingSpeed;
 
-        protected TransportingUnitData(double walkingSpeed, UnitType unitType, UnitUpgrade unitUpgrade)
+        protected TransportingUnitData(UnitType unitType, UnitUpgrade unitUpgrade)
             : base(unitType, unitUpgrade) {
-            WalkingSpeed = walkingSpeed;
         }
 
         public override void UpdateUnit(float deltaTime) {
@@ -41,13 +46,15 @@ namespace IdleTransport.GameCore.Models {
 
         private void Transport(float deltaTime) {
             _currentWalkingTime += deltaTime;
-            //TODO: Adjust Walking Speed ​after upgrade on the ​next cycle
+            OnUnitTransporting?.Invoke(_currentTraveledDistanceProgress);
             if (_currentWalkingTime >= WalkingSpeed) {
                 FinishTransporting();
             }
         }
 
-        protected abstract void FinishTransporting();
+        protected virtual void FinishTransporting() {
+            OnUnitFinishTransporting?.Invoke();
+        }
 
         protected abstract bool IsReturning();
 
@@ -61,12 +68,15 @@ namespace IdleTransport.GameCore.Models {
 
         private void Return(float deltaTime) {
             _currentWalkingTime += deltaTime;
+            OnUnitReturning?.Invoke(_currentTraveledDistanceProgress);
             if (HasReachedTarget()) {
                 FinishReturning();
             }
         }
 
-        protected abstract void FinishReturning();
+        protected virtual void FinishReturning() {
+            OnUnitFinishReturning?.Invoke();
+        }
 
         private bool HasReachedTarget() {
             return _currentWalkingTime >= WalkingSpeed;

@@ -22,7 +22,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         public LoaderData(TruckData truckData)
-            : base(Constants.LOADER_BASE_WALKING_SPEED, UnitType.Loader, new LoaderUpgrade()) {
+            : base(UnitType.Loader, new LoaderUpgrade()) {
             _truckData = truckData;
             _truckData.OnSwitchedToWaitingState += TryToLoadTruck;
             StartWaiting();
@@ -78,6 +78,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void FinishTransporting() {
+            base.FinishTransporting();
             if (!_truckData.IsWaiting()) {
                 if (!IsFull()) {
                     StartReturning();
@@ -100,6 +101,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         protected override void FinishReturning() {
+            base.FinishReturning();
             StartWaiting();
         }
 
