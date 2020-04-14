@@ -1,4 +1,5 @@
 using IdleTransport.Utilities;
+using UnityEngine;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Upgrades {
@@ -11,6 +12,18 @@ namespace IdleTransport.GameCore.Upgrades {
             WorkCycleTime = (WorkCycleTimeUpgradeData) Constants.WAREHOUSE_UPGRADE_DATA[UpgradeType.WorkCycleTime];
             CargoPerCycle = (CargoPerCycleUpgradeData) Constants.WAREHOUSE_UPGRADE_DATA[UpgradeType.CargoPerCycle];
             Capacity = (CapacityUpgradeData) Constants.WAREHOUSE_UPGRADE_DATA[UpgradeType.Capacity];
+        }
+
+        public override object GetUpgradeValue(UpgradeType upgradeType) {
+            switch (upgradeType) {
+                case UpgradeType.WorkCycleTime:
+                    return WorkCycleTime.GetUpgradeValue(UpgradeLevel);
+                case UpgradeType.Capacity:
+                    return Capacity.GetUpgradeValue(UpgradeLevel);
+                default:
+                    Debug.LogError("Elevator doesn't have upgrade " + upgradeType);
+                    return null;
+            }
         }
     }
 }

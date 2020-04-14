@@ -2,7 +2,7 @@ using System;
 using IdleTransport.ExtensionsMethods;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
-using UnityEngine;
+using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Upgrades {
     public abstract class UnitUpgrade {
@@ -62,5 +62,7 @@ namespace IdleTransport.GameCore.Upgrades {
             UpgradeLevel += levelsToAdd;
             OnUpgradeLevelUp?.Invoke();
         }
+
+        public abstract object GetUpgradeValue(UpgradeType upgradeType);
     }
 }
