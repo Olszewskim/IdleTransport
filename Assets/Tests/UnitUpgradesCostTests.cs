@@ -14,7 +14,7 @@ namespace Tests {
         public void Warehouse_Upgrade_Level_Up_Cost_Is_Correct(int upgradeLevel, string expectedUpgradeCost) {
             var upgrade = new WarehouseUpgrade();
             var upgradeCost = upgrade.GetUpgradeCost(upgradeLevel);
-            Assert.AreEqual(new BigInteger(expectedUpgradeCost), upgradeCost);
+            Assert.AreEqual(new BigInteger(expectedUpgradeCost.Replace(" ", string.Empty)), upgradeCost);
         }
 
         [TestCase(1, "0")]
@@ -27,7 +27,7 @@ namespace Tests {
         public void Trolley_Upgrade_Level_Up_Cost_Is_Correct(int upgradeLevel, string expectedUpgradeCost) {
             var upgrade = new TrolleyUpgrade();
             var upgradeCost = upgrade.GetUpgradeCost(upgradeLevel);
-            Assert.AreEqual(new BigInteger(expectedUpgradeCost), upgradeCost);
+            Assert.AreEqual(new BigInteger(expectedUpgradeCost.Replace(" ", string.Empty)), upgradeCost);
         }
 
         [TestCase(1, "0")]
@@ -40,7 +40,7 @@ namespace Tests {
         public void Elevator_Upgrade_Level_Up_Cost_Is_Correct(int upgradeLevel, string expectedUpgradeCost) {
             var upgrade = new ElevatorUpgrade();
             var upgradeCost = upgrade.GetUpgradeCost(upgradeLevel);
-            Assert.AreEqual(new BigInteger(expectedUpgradeCost), upgradeCost);
+            Assert.AreEqual(new BigInteger(expectedUpgradeCost.Replace(" ", string.Empty)), upgradeCost);
         }
 
         [TestCase(1, "0")]
@@ -53,7 +53,7 @@ namespace Tests {
         public void Loader_Upgrade_Level_Up_Cost_Is_Correct(int upgradeLevel, string expectedUpgradeCost) {
             var upgrade = new LoaderUpgrade();
             var upgradeCost = upgrade.GetUpgradeCost(upgradeLevel);
-            Assert.AreEqual(new BigInteger(expectedUpgradeCost), upgradeCost);
+            Assert.AreEqual(new BigInteger(expectedUpgradeCost.Replace(" ", string.Empty)), upgradeCost);
         }
 
         [TestCase(1, "0")]
@@ -66,7 +66,7 @@ namespace Tests {
         public void Truck_Upgrade_Level_Up_Cost_Is_Correct(int upgradeLevel, string expectedUpgradeCost) {
             var upgrade = new TruckUpgrade();
             var upgradeCost = upgrade.GetUpgradeCost(upgradeLevel);
-            Assert.AreEqual(new BigInteger(expectedUpgradeCost), upgradeCost);
+            Assert.AreEqual(new BigInteger(expectedUpgradeCost.Replace(" ", string.Empty)), upgradeCost);
         }
     }
 }
