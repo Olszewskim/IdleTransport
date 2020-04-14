@@ -1,6 +1,5 @@
 ﻿using System;
 using IdleTransport.GameCore.Upgrades;
-using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
@@ -9,14 +8,13 @@ namespace IdleTransport.GameCore.Models {
         public event Action<bool> OnUnitWorkingStateChanged;
         public event Action<double> OnProgressUpdated;
 
-        [ShowInInspector] public double WorkCycleTime { get; private set; }
+        [ShowInInspector] public double WorkCycleTime => (double)UnitUpgrade.GetUpgradeValue(UpgradeType.WorkCycleTime);
 
         public double CurrentProductionProgress => _currentProductionCycle / WorkCycleTime;
         [ShowInInspector] private double _currentProductionCycle;
 
-        protected WorkingUnitData(double workCycleTime, UnitType unitType, UnitUpgrade unitUpgrade)
+        protected WorkingUnitData(UnitType unitType, UnitUpgrade unitUpgrade)
             : base(unitType, unitUpgrade) {
-            WorkCycleTime = workCycleTime;
         }
 
         protected void StartWorking() {

@@ -22,8 +22,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         public TruckData()
-            : base(Constants.TRUCK_BASE_WORK_CYCLE_TIME, Constants.TRUCK_BASE_WALKING_SPEED, UnitType.Truck,
-                new TruckUpgrade()) {
+            : base(Constants.TRUCK_BASE_WALKING_SPEED, UnitType.Truck, new TruckUpgrade()) {
         }
 
         protected override void StartWaiting() {
