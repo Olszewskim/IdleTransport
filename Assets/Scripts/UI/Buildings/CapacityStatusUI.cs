@@ -13,7 +13,7 @@ namespace IdleTransport.UI.Buildings {
         }
 
         private void RefreshCapacityMeter(BigInteger currentCapacity, BigInteger maxCapacity) {
-            _capacityMeterText.text = $"{currentCapacity}/{maxCapacity}";
+            _capacityMeterText.text = $"{currentCapacity.FormatHugeNumber()}/{maxCapacity.FormatHugeNumber()}";
         }
     }
 }

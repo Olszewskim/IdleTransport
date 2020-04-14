@@ -14,8 +14,8 @@ namespace IdleTransport.GameCore.Models {
         public double CurrentProductionProgress => _currentProductionCycle / WorkCycleTime;
         [ShowInInspector] private double _currentProductionCycle;
 
-        protected WorkingUnitData(BigInteger capacity, double workCycleTime, UnitType unitType, UnitUpgrade unitUpgrade)
-            : base(capacity, unitType, unitUpgrade) {
+        protected WorkingUnitData(double workCycleTime, UnitType unitType, UnitUpgrade unitUpgrade)
+            : base(unitType, unitUpgrade) {
             WorkCycleTime = workCycleTime;
         }
 

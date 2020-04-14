@@ -22,8 +22,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         public WarehouseData()
-            : base(Constants.WAREHOUSE_BASE_CAPACITY, Constants.WAREHOUSE_BASE_WORK_CYCLE_SPEED, UnitType.Warehouse,
-                new WarehouseUpgrade()) {
+            : base(Constants.WAREHOUSE_BASE_WORK_CYCLE_SPEED, UnitType.Warehouse, new WarehouseUpgrade()) {
             TotalCargoAmountInPackage = Constants.WAREHOUSE_BASE_CARGO_AMOUNT_IN_PACKAGE;
             StartWorking();
         }

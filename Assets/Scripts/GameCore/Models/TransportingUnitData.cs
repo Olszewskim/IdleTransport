@@ -12,9 +12,9 @@ namespace IdleTransport.GameCore.Models {
         [ShowInInspector] public double WalkingSpeed { get; private set; }
         [ShowInInspector] private double _currentWalkingTime;
 
-        protected TransportingUnitData(BigInteger capacity, double workCycleTime, double walkingSpeed,
+        protected TransportingUnitData(double workCycleTime, double walkingSpeed,
             UnitType unitType, UnitUpgrade unitUpgrade)
-            : base(capacity, workCycleTime, unitType, unitUpgrade) {
+            : base(workCycleTime, unitType, unitUpgrade) {
             WalkingSpeed = walkingSpeed;
         }
 

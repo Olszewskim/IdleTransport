@@ -24,8 +24,8 @@ namespace IdleTransport.GameCore.Models {
         }
 
         public TrolleyData(WarehouseData warehouseData, ElevatorData elevatorData)
-            : base(Constants.TROLLEY_BASE_CAPACITY, Constants.TROLLEY_BASE_WORK_CYCLE_TIME,
-                Constants.TROLLEY_BASE_WALKING_SPEED, UnitType.Trolley, new TrolleyUpgrade()) {
+            : base(Constants.TROLLEY_BASE_WORK_CYCLE_TIME, Constants.TROLLEY_BASE_WALKING_SPEED, UnitType.Trolley,
+                new TrolleyUpgrade()) {
             _warehouseData = warehouseData;
             _elevatorData = elevatorData;
             _elevatorData.OnSwitchedToWaitingState += TryToLoadElevator;

@@ -23,7 +23,7 @@ namespace IdleTransport.GameCore.Models {
         private double _currentTravelingTime;
         private double _currentTraveledDistanceProgress => _currentTravelingTime / TravelSpeedPerFloor;
 
-        public ElevatorData(LoadingRampsManager loadingRampsManager, UnitType unitType) : base(Constants.ELEVATOR_BASE_CAPACITY, unitType, new ElevatorUpgrade()) {
+        public ElevatorData(LoadingRampsManager loadingRampsManager, UnitType unitType) : base(unitType, new ElevatorUpgrade()) {
             TravelSpeedPerFloor = Constants.ELEVATOR_TRAVEL_SPEED_PER_FLOOR;
             _loadingRampsManager = loadingRampsManager;
             StartWaiting();
