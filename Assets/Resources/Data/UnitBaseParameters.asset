@@ -15,15 +15,60 @@ MonoBehaviour:
   warehouseUpgradeCost:
     _baseCostString: 10
     costMultiplier: 1.16
+  warehohouseWorkCycleTime:
+    upgradeMultiplier: -0.05
+    _baseUpgradeValue: 7
+  warehohouseCargoPerCycle:
+    upgradeMultiplier: 1.1
+    _baseUpgradeValueString: 20
+  warehohouseCapacity:
+    upgradeMultiplier: 1.3
+    _baseUpgradeValueString: 60
   trolleyUpgradeCost:
     _baseCostString: 240
     costMultiplier: 1.2
+  trolleyWorkCycleTime:
+    upgradeMultiplier: -0.05
+    _baseUpgradeValue: 4
+  trolleyNumberOfUnits:
+    upgradeMultiplier: 1
+    _baseUpgradeValueString: 1
+  trolleyMovementSpeed:
+    upgradeMultiplier: -0.05
+    _baseUpgradeValue: 3
+  trolleyCapacity:
+    upgradeMultiplier: 1.3
+    _baseUpgradeValueString: 25
   elevatorUpgradeCost:
     _baseCostString: 240
     costMultiplier: 1.2
+  elevatorMovementSpeed:
+    upgradeMultiplier: -0.01
+    _baseUpgradeValue: 2.5
+  elevatorCapacity:
+    upgradeMultiplier: 1.3
+    _baseUpgradeValueString: 20
   loaderUpgradeCost:
     _baseCostString: 240
     costMultiplier: 1.2
+  loaderWorkCycleTime:
+    upgradeMultiplier: -0.05
+    _baseUpgradeValue: 4
+  loaderNumberOfUnits:
+    upgradeMultiplier: 1
+    _baseUpgradeValueString: 1
+  loaderMovementSpeed:
+    upgradeMultiplier: -0.05
+    _baseUpgradeValue: 4
+  loaderCapacity:
+    upgradeMultiplier: 1.3
+    _baseUpgradeValueString: 25
   truckUpgradeCost:
     _baseCostString: 300
     costMultiplier: 1.2
+  truckWorkCycleTime:
+    upgradeMultiplier: -0.05
+    _baseUpgradeValue: 7
+  truckCapacity:
+    upgradeMultiplier: 1.3
+    _baseUpgradeValueString: 30
