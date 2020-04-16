@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IdleTransport.ScriptableObjectData;
 using IdleTransport.Utilities;
 using UnityEngine;
 using static IdleTransport.Utilities.Enums;
@@ -8,6 +9,7 @@ namespace IdleTransport.Databases {
         [SerializeField]
         private Dictionary<UnitType, Sprite> _unitSpritesDictionary = new Dictionary<UnitType, Sprite>();
         [SerializeField] private Dictionary<StatType, Sprite> _statIconsDictionary = new Dictionary<StatType, Sprite>();
+        [SerializeField] private UnitBaseParameters _unitBaseParameters;
 
         public static Sprite GetUnitSprite(UnitType unitType) {
             return Instance._unitSpritesDictionary.ContainsKey(unitType)
@@ -19,6 +21,13 @@ namespace IdleTransport.Databases {
             return Instance._statIconsDictionary.ContainsKey(statType)
                 ? Instance._statIconsDictionary[statType]
                 : null;
+        }
+
+        public static UnitBaseParameters GetUnitBaseParameters() {
+            if (Instance._unitBaseParameters == null) {
+                Instance._unitBaseParameters = Resources.Load<UnitBaseParameters>(Constants.UNIT_BASE_PARAMETERS_PATH);
+            }
+            return Instance._unitBaseParameters;
         }
     }
 }

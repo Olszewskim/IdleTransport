@@ -79,11 +79,11 @@ MonoBehaviour:
     - Name: _unitSpritesDictionary
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[IdleTransport.Utilities.Enums+UnitType,
-        Assembly-CSharp],[UnityEngine.Sprite, UnityEngine.CoreModule]], mscorlib
+        Scripts],[UnityEngine.Sprite, UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[IdleTransport.Utilities.Enums+UnitType,
-        Assembly-CSharp]], mscorlib
+        Scripts]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -165,11 +165,11 @@ MonoBehaviour:
     - Name: _statIconsDictionary
       Entry: 7
       Data: 2|System.Collections.Generic.Dictionary`2[[IdleTransport.Utilities.Enums+StatType,
-        Assembly-CSharp],[UnityEngine.Sprite, UnityEngine.CoreModule]], mscorlib
+        Scripts],[UnityEngine.Sprite, UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[IdleTransport.Utilities.Enums+StatType,
-        Assembly-CSharp]], mscorlib
+        Scripts]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -428,3 +428,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  _unitBaseParameters: {fileID: 11400000, guid: db61a3e6e485b4cc6805075e56c0a863,
+    type: 2}

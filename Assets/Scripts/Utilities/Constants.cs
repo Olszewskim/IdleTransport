@@ -9,6 +9,7 @@ namespace IdleTransport.Utilities {
         public const string RESOURCES_ICONS_FOLDER_NAME = "Icons";
         public const string CURRENCY_ATLAS_NAME = "CurrencyAtlas";
         public const string SPRITES_FOLDER_NAME = "Sprites";
+        public const string UNIT_BASE_PARAMETERS_PATH = "Data/UnitBaseParameters";
 
         public const ulong SECONDS_IN_HOUR = 3600;
         public const float ENABLED_GROUP_ALPHA = 1f;
@@ -39,15 +40,6 @@ namespace IdleTransport.Utilities {
 
         #region Upgrades
 
-        public static readonly Dictionary<UnitType, UpgradeCost> UNIT_UPGRADE_COST =
-            new Dictionary<UnitType, UpgradeCost> {
-                {UnitType.Warehouse, new UpgradeCost(10, 1.16)},
-                {UnitType.Trolley, new UpgradeCost(240, 1.2)},
-                {UnitType.Elevator, new UpgradeCost(240, 1.2)},
-                {UnitType.Loader, new UpgradeCost(240, 1.2)},
-                {UnitType.Truck, new UpgradeCost(300, 1.2)}
-            };
-
         public static readonly Dictionary<UpgradeType, UpgradeData> WAREHOUSE_UPGRADE_DATA =
             new Dictionary<UpgradeType, UpgradeData> {
                 {UpgradeType.WorkCycleTime, new WorkCycleTimeUpgradeData(WAREHOUSE_BASE_WORK_CYCLE_SPEED, -0.05)},
@@ -76,7 +68,6 @@ namespace IdleTransport.Utilities {
                 {UpgradeType.MovementSpeed, new MovementSpeedUpgradeData(LOADER_BASE_WALKING_SPEED, -0.05)},
                 {UpgradeType.Capacity, new CapacityUpgradeData(LOADER_BASE_CAPACITY, 1.3)}
             };
-
 
         public static readonly Dictionary<UpgradeType, UpgradeData> TRUCK_UPGRADE_DATA =
             new Dictionary<UpgradeType, UpgradeData> {

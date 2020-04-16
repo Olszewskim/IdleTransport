@@ -37,10 +37,10 @@ namespace IdleTransport.GameCore.Upgrades {
             }
 
             if (upgradeLevel == 2) {
-                return _upgradeCost.BaseCost;
+                return _upgradeCost.GetBaseCost();
             }
 
-            return GetUpgradeCost(upgradeLevel - 1).MultipleByDouble(_upgradeCost.CostMultiplier);
+            return GetUpgradeCost(upgradeLevel - 1).MultipleByDouble(_upgradeCost.costMultiplier);
         }
 
         public int GetPossibleUpgradesCount(BigInteger currencyAmount) {

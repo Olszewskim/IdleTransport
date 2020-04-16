@@ -1,3 +1,4 @@
+using IdleTransport.Databases;
 using IdleTransport.Utilities;
 using UnityEngine;
 using static IdleTransport.Utilities.Enums;
@@ -7,7 +8,7 @@ namespace IdleTransport.GameCore.Upgrades {
         public WorkCycleTimeUpgradeData WorkCycleTime { get; }
         public CapacityUpgradeData Capacity { get; }
 
-        public TruckUpgrade() : base(Constants.UNIT_UPGRADE_COST[UnitType.Truck]) {
+        public TruckUpgrade() : base(GameResourcesDatabase.GetUnitBaseParameters().truckUpgradeCost) {
             WorkCycleTime = (WorkCycleTimeUpgradeData) Constants.TRUCK_UPGRADE_DATA[UpgradeType.WorkCycleTime];
             Capacity = (CapacityUpgradeData) Constants.TRUCK_UPGRADE_DATA[UpgradeType.Capacity];
         }

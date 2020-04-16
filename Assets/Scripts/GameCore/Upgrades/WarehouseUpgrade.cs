@@ -1,3 +1,4 @@
+using IdleTransport.Databases;
 using IdleTransport.Utilities;
 using UnityEngine;
 using static IdleTransport.Utilities.Enums;
@@ -8,7 +9,7 @@ namespace IdleTransport.GameCore.Upgrades {
         public CargoPerCycleUpgradeData CargoPerCycle { get; }
         public CapacityUpgradeData Capacity { get; }
 
-        public WarehouseUpgrade() : base(Constants.UNIT_UPGRADE_COST[UnitType.Warehouse]) {
+        public WarehouseUpgrade() : base(GameResourcesDatabase.GetUnitBaseParameters().warehouseUpgradeCost) {
             WorkCycleTime = (WorkCycleTimeUpgradeData) Constants.WAREHOUSE_UPGRADE_DATA[UpgradeType.WorkCycleTime];
             CargoPerCycle = (CargoPerCycleUpgradeData) Constants.WAREHOUSE_UPGRADE_DATA[UpgradeType.CargoPerCycle];
             Capacity = (CapacityUpgradeData) Constants.WAREHOUSE_UPGRADE_DATA[UpgradeType.Capacity];
