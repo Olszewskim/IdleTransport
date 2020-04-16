@@ -12,7 +12,6 @@ namespace IdleTransport.UI {
     public class UpgradeUnitWindow : WindowBehaviour<UpgradeUnitWindow> {
         [SerializeField] private TextMeshProUGUI _upgradingUnitTitleText;
         [SerializeField] private Image _upgradingUnitIcon;
-        [SerializeField] private TextMeshProUGUI _upgradeCostText;
         [SerializeField] private ButtonWithCurrencyCost _upgradeButton;
         [SerializeField] private StatInfoRowUI _statInfoRowUIPrefab;
         [SerializeField] private ToggleGroup _upgradesMultiplierToggleGroupGroup;
@@ -62,8 +61,9 @@ namespace IdleTransport.UI {
         }
 
         private void RefreshUpgradeButton() {
-            //TODO: Set upgrade cost
             _numberOfUpgrades = GetNumberOfUpgrades();
+            var upgradeCost = _currentlyUpgradingUnit.UnitUpgrade.GetNextNUpgradesCost(_numberOfUpgrades);
+            _upgradeButton.SetNewCurrencyCost(upgradeCost);
             _upgradeButton.SetButtonText(GameTexts.GetLevelUpMultiplierText(_numberOfUpgrades));
         }
 

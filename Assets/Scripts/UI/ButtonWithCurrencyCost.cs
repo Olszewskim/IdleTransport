@@ -25,7 +25,7 @@ namespace IdleTransport.UI
 
         private void Init() {
             RegisterCallbacks();
-            SetNewCurrencyCost(CurrencyFactory.CreateCurrencyInstance(_currencyCost, _currencyViewData.CurrencyType));
+            SetNewCurrencyCost(_currencyCost);
         }
 
         public void Init(Currency currency) {
@@ -44,9 +44,9 @@ namespace IdleTransport.UI
             }
         }
 
-        public void SetNewCurrencyCost(Currency currencyCost) {
-            _currencyCost = currencyCost.CurrencyAmount;
-            _currencyViewData.SetCurrencyValue(currencyCost.CurrencyAmount);
+        public void SetNewCurrencyCost(BigInteger currencyCost) {
+            _currencyCost = currencyCost;
+            _currencyViewData.SetCurrencyValue(currencyCost);
             if (_currency != null) {
                 RefreshButtonState(_currency.CurrencyAmount);
             }
