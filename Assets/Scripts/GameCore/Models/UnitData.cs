@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IdleTransport.ExtensionsMethods;
 using IdleTransport.GameCore.Stats;
 using IdleTransport.GameCore.Upgrades;
 using IdleTransport.Utilities;
@@ -66,16 +67,33 @@ namespace IdleTransport.GameCore.Models {
             return GetUpgradeValue<T>(upgradeType, UnitUpgrade.UpgradeLevel);
         }
 
-        private T GetUpgradeValue<T>(UpgradeType upgradeType, int level) {
+        protected T GetUpgradeValue<T>(UpgradeType upgradeType, int level) {
             return (T) UnitUpgrade.GetUpgradeValue(upgradeType, level);
         }
 
-        public abstract List<StatInfo> GetUnitStats();
+        public abstract List<StatInfo> GetUnitStats(int levelsToUpgrade);
 
-        protected abstract BigInteger GetTotalProduction();
+        protected abstract BigInteger GetTotalProduction(int level);
 
-        protected string GetTotalProductionStat() {
+        private BigInteger GetTotalProduction() {
+            return GetTotalProduction(UnitUpgrade.UpgradeLevel);
+        }
+
+        protected string GetTotalProductionDesc() {
             return $"{Sprites.goldSprite} {GetTotalProduction().FormatHugeNumber()}/s";
+        }
+
+        protected string GetTotalProductionAfterUpgradeBonus(int afterUpgradeLevel) {
+            var difference = GetTotalProduction(afterUpgradeLevel) - GetTotalProduction();
+            return $"+{Sprites.goldSprite} {difference.FormatHugeNumber()}";
+        }
+
+        protected string GetUpgradeValueDesc(UpgradeType upgradeType) {
+            return UnitUpgrade.GetUpgradeValueDesc(upgradeType);
+        }
+
+        protected string GetAfterUpgradeBonus(UpgradeType upgradeType, int afterUpgradeLevel) {
+            return UnitUpgrade.GetAfterUpgradeBonus(upgradeType, afterUpgradeLevel);
         }
     }
 }

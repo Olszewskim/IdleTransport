@@ -115,19 +115,32 @@ namespace IdleTransport.GameCore.Models {
             StartTransporting();
         }
 
-        public override List<StatInfo> GetUnitStats() {
+        public override List<StatInfo> GetUnitStats(int levelsToUpgrade) {
+            var levelAfterUpgrade = UnitUpgrade.UpgradeLevel + levelsToUpgrade;
             return new List<StatInfo> {
-                new StatInfo(StatType.LoaderTotalTransportationPerSecond, GetTotalProductionStat(), "0"),
-                new StatInfo(StatType.LoaderLoadingSpeed, WorkCycleTime.ToSecondsWithTwoDecimalPlaces(), "0"),
-                new StatInfo(StatType.LoaderAmount, "1", "0"),
-                new StatInfo(StatType.LoaderWalkingSpeed, WalkingSpeed.ToTimePerSecond(), "0"),
-                new StatInfo(StatType.LoaderCapacity, Capacity.FormatHugeNumber(), "0")
+                new StatInfo(StatType.TrolleyTotalTransportationPerSecond, GetTotalProductionDesc(),
+                    GetTotalProductionAfterUpgradeBonus(levelAfterUpgrade)),
+
+                new StatInfo(StatType.TrolleyLoadingSpeed, GetUpgradeValueDesc(UpgradeType.WorkCycleTime),
+                    GetAfterUpgradeBonus(UpgradeType.WorkCycleTime, levelAfterUpgrade)),
+
+                new StatInfo(StatType.TrolleyAmount, GetUpgradeValueDesc(UpgradeType.NumberOfUnits),
+                    GetAfterUpgradeBonus(UpgradeType.NumberOfUnits, levelAfterUpgrade)),
+
+                new StatInfo(StatType.TrolleyWalkingSpeed, GetUpgradeValueDesc(UpgradeType.MovementSpeed),
+                    GetAfterUpgradeBonus(UpgradeType.MovementSpeed, levelAfterUpgrade)),
+
+                new StatInfo(StatType.TrolleyCapacity, GetUpgradeValueDesc(UpgradeType.Capacity),
+                    GetAfterUpgradeBonus(UpgradeType.Capacity, levelAfterUpgrade))
             };
         }
 
-        protected override BigInteger GetTotalProduction() {
-            var movementTime = WorkCycleTime + 2 * WalkingSpeed;
-            return Capacity.MultipleByDouble(1 / movementTime);
+        protected override BigInteger GetTotalProduction(int level) {
+            var workCycleValueAtLevel = GetUpgradeValue<double>(UpgradeType.WorkCycleTime, level);
+            var capacityValueAtLevel = GetUpgradeValue<BigInteger>(UpgradeType.Capacity, level);
+            var movementSpeedAtLevel = GetUpgradeValue<double>(UpgradeType.MovementSpeed, level);
+            var movementTime = workCycleValueAtLevel + 2 * movementSpeedAtLevel;
+            return capacityValueAtLevel.MultipleByDouble(1 / movementTime);
         }
     }
 }

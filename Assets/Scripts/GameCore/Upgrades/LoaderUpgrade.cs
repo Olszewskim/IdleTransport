@@ -17,16 +17,16 @@ namespace IdleTransport.GameCore.Upgrades {
             Capacity = unitBaseParameters.loaderCapacity;
         }
 
-        public override object GetUpgradeValue(UpgradeType upgradeType, int level) {
+        protected override UpgradeData GetUpgradeData(UpgradeType upgradeType) {
             switch (upgradeType) {
                 case UpgradeType.WorkCycleTime:
-                    return WorkCycleTime.GetUpgradeValue(level);
+                    return WorkCycleTime;
                 case UpgradeType.NumberOfUnits:
-                    return NumberOfUnits.GetUpgradeValue(level);
+                    return NumberOfUnits;
                 case UpgradeType.Capacity:
-                    return Capacity.GetUpgradeValue(level);
+                    return Capacity;
                 case UpgradeType.MovementSpeed:
-                    return MovementSpeed.GetUpgradeValue(level);
+                    return MovementSpeed;
                 default:
                     Debug.LogError("Loader doesn't have upgrade " + upgradeType);
                     return null;

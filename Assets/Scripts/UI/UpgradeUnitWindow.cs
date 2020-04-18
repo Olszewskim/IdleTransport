@@ -52,7 +52,7 @@ namespace IdleTransport.UI {
 
         private void SwitchUpgradesMultiplierMode(UpgradeMultiplierMode upgradeMultiplierMode) {
             _currentUpgradeMultiplierMode = upgradeMultiplierMode;
-            RefreshUpgradeButton();
+            RefreshView();
         }
 
         public void ShowWindow(UnitData unitData) {
@@ -83,7 +83,7 @@ namespace IdleTransport.UI {
 
         private void ShowUnitStats() {
             TurnOffAllStatInfoRows();
-            var unitStats = _currentlyUpgradingUnit.GetUnitStats();
+            var unitStats = _currentlyUpgradingUnit.GetUnitStats(_numberOfUpgrades);
             for (int i = 0; i < unitStats.Count; i++) {
                 if (i >= _statInfoRowUIList.Count) {
                     _statInfoRowUIList.Add(Instantiate(_statInfoRowUIPrefab, _statInfoRowUIPrefab.transform.parent));

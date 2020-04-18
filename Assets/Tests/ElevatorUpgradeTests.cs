@@ -13,7 +13,7 @@ namespace Tests {
         [TestCase(100, 1.51)]
         public void Elevator_MovementSpeed_Upgrade_Value_Is_Correct(int upgradeLevel, double expectedUpgradeValue) {
             var upgrade = new ElevatorUpgrade();
-            var upgradeValue = upgrade.MovementSpeed.GetUpgradeValue(upgradeLevel);
+            var upgradeValue = (double)upgrade.MovementSpeed.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(expectedUpgradeValue, upgradeValue, delta: 0.001f);
         }
 
@@ -26,7 +26,7 @@ namespace Tests {
         [TestCase(100, "3542937493568")]
         public void Elevator_Capacity_Upgrade_Value_Is_Correct(int upgradeLevel, string expectedUpgradeValue) {
             var upgrade = new ElevatorUpgrade();
-            var upgradeValue = upgrade.Capacity.GetUpgradeValue(upgradeLevel);
+            var upgradeValue = (BigInteger)upgrade.Capacity.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeValue.Replace(" ", string.Empty)), upgradeValue);
         }
     }

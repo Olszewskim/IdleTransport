@@ -13,7 +13,7 @@ namespace Tests {
         [TestCase(100, 2.05)]
         public void Truck_WorkCycleTime_Upgrade_Value_Is_Correct(int upgradeLevel, double expectedUpgradeValue) {
             var upgrade = new TruckUpgrade();
-            var upgradeValue = upgrade.WorkCycleTime.GetUpgradeValue(upgradeLevel);
+            var upgradeValue = (double)upgrade.WorkCycleTime.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(expectedUpgradeValue, upgradeValue, delta: 0.001f);
         }
 
@@ -26,7 +26,7 @@ namespace Tests {
         [TestCase(100, "5518965775142")]
         public void Truck_Capacity_Upgrade_Value_Is_Correct(int upgradeLevel, string expectedUpgradeValue) {
             var upgrade = new TruckUpgrade();
-            var upgradeValue = upgrade.Capacity.GetUpgradeValue(upgradeLevel);
+            var upgradeValue = (BigInteger)upgrade.Capacity.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeValue.Replace(" ", string.Empty)), upgradeValue);
         }
     }

@@ -95,6 +95,11 @@ namespace IdleTransport.Utilities {
             MovementSpeed
         }
 
+        public enum DoubleFormatType {
+            ToSeconds,
+            ToTimePerSecond
+        }
+
         public static string GetEnumName<T>(T element) {
             return Enum.GetName(typeof(T), element);
         }

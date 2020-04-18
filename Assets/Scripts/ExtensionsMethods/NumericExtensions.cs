@@ -9,8 +9,12 @@ namespace IdleTransport.ExtensionsMethods {
             return $"{(seconds):0.##}s";
         }
 
+        public static string ToTimeWithThreeDecimalPlaces(this double seconds) {
+            return $"{(seconds):0.###}";
+        }
+
         public static string ToTimePerSecond(this double seconds) {
-            return $"{(1 / seconds):0.##}";
+            return $"{(1 / seconds):0.###}";
         }
 
         public static string ToPercentString(this double number) {

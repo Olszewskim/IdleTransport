@@ -19,7 +19,6 @@ namespace Tests {
         public void Warehouse_Possible_Upgrades_Count_Is_Correct(string currencyAmountString, int possibleUpgrades) {
             var upgrade = new WarehouseUpgrade();
             var currencyAmount = new BigInteger(currencyAmountString.Replace(" ", string.Empty));
-            Debug.Log(currencyAmount.FormatHugeNumber());
             var upgradesCount = upgrade.GetPossibleUpgradesCount(currencyAmount);
             Assert.AreEqual(possibleUpgrades, upgradesCount);
         }

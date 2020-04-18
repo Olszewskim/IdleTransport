@@ -66,18 +66,27 @@ namespace IdleTransport.GameCore.Models {
             return CurrentWorkingState == BuildingWorkingState.Full;
         }
 
-        public override List<StatInfo> GetUnitStats() {
+        public override List<StatInfo> GetUnitStats(int levelsToUpgrade) {
+            var levelAfterUpgrade = UnitUpgrade.UpgradeLevel + levelsToUpgrade;
             return new List<StatInfo> {
-                new StatInfo(StatType.WarehouseTotalProductionPerSecond, GetTotalProductionStat(), "0"),
-                new StatInfo(StatType.WarehouseProductionSpeed, WorkCycleTime.ToSecondsWithTwoDecimalPlaces(), "0"),
-                new StatInfo(StatType.WarehouseProductionAmountPerCycle, CargoPerCycle.FormatHugeNumber(),
-                    "0"),
-                new StatInfo(StatType.WarehouseCapacity, Capacity.FormatHugeNumber(), "0")
+                new StatInfo(StatType.WarehouseTotalProductionPerSecond, GetTotalProductionDesc(),
+                    GetTotalProductionAfterUpgradeBonus(levelAfterUpgrade)),
+
+                new StatInfo(StatType.WarehouseProductionSpeed, GetUpgradeValueDesc(UpgradeType.WorkCycleTime),
+                    GetAfterUpgradeBonus(UpgradeType.WorkCycleTime, levelAfterUpgrade)),
+
+                new StatInfo(StatType.WarehouseProductionAmountPerCycle, GetUpgradeValueDesc(UpgradeType.CargoPerCycle),
+                    GetAfterUpgradeBonus(UpgradeType.CargoPerCycle, levelAfterUpgrade)),
+
+                new StatInfo(StatType.WarehouseCapacity, GetUpgradeValueDesc(UpgradeType.Capacity),
+                    GetAfterUpgradeBonus(UpgradeType.Capacity, levelAfterUpgrade))
             };
         }
 
-        protected override BigInteger GetTotalProduction() {
-            return Capacity.MultipleByDouble(1 / WorkCycleTime);
+        protected override BigInteger GetTotalProduction(int level) {
+            var workCycleValueAtLevel = GetUpgradeValue<double>(UpgradeType.WorkCycleTime, level);
+            var capacityValueAtLevel = GetUpgradeValue<BigInteger>(UpgradeType.Capacity, level);
+            return capacityValueAtLevel.MultipleByDouble(1 / workCycleValueAtLevel);
         }
     }
 }

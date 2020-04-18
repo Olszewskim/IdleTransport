@@ -132,17 +132,25 @@ namespace IdleTransport.GameCore.Models {
             return _currentTravelingTime >= TravelSpeedPerFloor;
         }
 
-        public override List<StatInfo> GetUnitStats() {
+        public override List<StatInfo> GetUnitStats(int levelsToUpgrade) {
+            var levelAfterUpgrade = UnitUpgrade.UpgradeLevel + levelsToUpgrade;
             return new List<StatInfo> {
-                new StatInfo(StatType.ElevatorTotalTransportationPerSecond, GetTotalProductionStat(), "0"),
-                new StatInfo(StatType.ElevatorMovementSpeed, TravelSpeedPerFloor.ToTimePerSecond(), "0"),
-                new StatInfo(StatType.ElevatorCapacity, Capacity.FormatHugeNumber(), "0")
+                new StatInfo(StatType.ElevatorTotalTransportationPerSecond, GetTotalProductionDesc(),
+                    GetTotalProductionAfterUpgradeBonus(levelAfterUpgrade)),
+
+                new StatInfo(StatType.ElevatorMovementSpeed, GetUpgradeValueDesc(UpgradeType.MovementSpeed),
+                    UnitUpgrade.GetAfterUpgradeBonus(UpgradeType.MovementSpeed, levelAfterUpgrade)),
+
+                new StatInfo(StatType.ElevatorCapacity, GetUpgradeValueDesc(UpgradeType.Capacity),
+                    UnitUpgrade.GetAfterUpgradeBonus(UpgradeType.Capacity, levelAfterUpgrade))
             };
         }
 
-        protected override BigInteger GetTotalProduction() {
-            var movementTime = TravelSpeedPerFloor * _loadingRampsManager.LoadingRampsCount;
-            return Capacity.MultipleByDouble(1 / movementTime);
+        protected override BigInteger GetTotalProduction(int level) {
+            var capacityValueAtLevel = GetUpgradeValue<BigInteger>(UpgradeType.Capacity, level);
+            var movementSpeedAtLevel = GetUpgradeValue<double>(UpgradeType.MovementSpeed, level);
+            var movementTime = movementSpeedAtLevel * _loadingRampsManager.LoadingRampsCount;
+            return capacityValueAtLevel.MultipleByDouble(1 / movementTime);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Tests {
         [TestCase(100, -0.95)]
         public void Trolley_WorkCycleTime_Upgrade_Value_Is_Correct(int upgradeLevel, double expectedUpgradeValue) {
             var upgrade = new TrolleyUpgrade();
-            var upgradeValue = upgrade.WorkCycleTime.GetUpgradeValue(upgradeLevel);
+            var upgradeValue = (double)upgrade.WorkCycleTime.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(expectedUpgradeValue, upgradeValue, delta: 0.001f);
         }
 
@@ -27,7 +27,7 @@ namespace Tests {
         [TestCase(100, -1.95)]
         public void Trolley_MovementSpeed_Upgrade_Value_Is_Correct(int upgradeLevel, double expectedUpgradeValue) {
             var upgrade = new TrolleyUpgrade();
-            var upgradeValue = upgrade.MovementSpeed.GetUpgradeValue(upgradeLevel);
+            var upgradeValue = (double)upgrade.MovementSpeed.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(expectedUpgradeValue, upgradeValue, delta: 0.001f);
         }
 
@@ -40,7 +40,7 @@ namespace Tests {
         [TestCase(100, "4444267362580")]
         public void Trolley_Capacity_Upgrade_Value_Is_Correct(int upgradeLevel, string expectedUpgradeValue) {
             var upgrade = new TrolleyUpgrade();
-            var upgradeValue = upgrade.Capacity.GetUpgradeValue(upgradeLevel);
+            var upgradeValue = (BigInteger)upgrade.Capacity.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeValue.Replace(" ", string.Empty)), upgradeValue);
         }
 
@@ -52,7 +52,7 @@ namespace Tests {
         [TestCase(400, "6")]
         public void Trolley_NumberOfUnits_Upgrade_Value_Is_Correct(int upgradeLevel, string expectedUpgradeValue) {
             var upgrade = new TrolleyUpgrade();
-            var upgradeValue = upgrade.NumberOfUnits.GetUpgradeValue(upgradeLevel);
+            var upgradeValue = (BigInteger)upgrade.NumberOfUnits.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeValue.Replace(" ", string.Empty)), upgradeValue);
         }
 

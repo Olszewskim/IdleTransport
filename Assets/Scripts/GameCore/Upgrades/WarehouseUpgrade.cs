@@ -15,14 +15,14 @@ namespace IdleTransport.GameCore.Upgrades {
             Capacity = unitBaseParameters.warehohouseCapacity;
         }
 
-        public override object GetUpgradeValue(UpgradeType upgradeType, int level) {
+        protected override UpgradeData GetUpgradeData(UpgradeType upgradeType) {
             switch (upgradeType) {
                 case UpgradeType.WorkCycleTime:
-                    return WorkCycleTime.GetUpgradeValue(level);
+                    return WorkCycleTime;
                 case UpgradeType.Capacity:
-                    return Capacity.GetUpgradeValue(level);
+                    return Capacity;
                 case UpgradeType.CargoPerCycle:
-                    return CargoPerCycle.GetUpgradeValue(level);
+                    return CargoPerCycle;
                 default:
                     Debug.LogError("Warehouse doesn't have upgrade " + upgradeType);
                     return null;

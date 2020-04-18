@@ -77,6 +77,18 @@ namespace IdleTransport.GameCore.Upgrades {
             OnUpgradeLevelUp?.Invoke();
         }
 
-        public abstract object GetUpgradeValue(UpgradeType upgradeType, int level);
+        protected abstract UpgradeData GetUpgradeData(UpgradeType upgradeType);
+
+        public object GetUpgradeValue(UpgradeType upgradeType, int level) {
+            return GetUpgradeData(upgradeType)?.GetUpgradeValue(level);
+        }
+
+        public string GetUpgradeValueDesc(UpgradeType upgradeType) {
+            return GetUpgradeData(upgradeType)?.GetUpgradeValueDesc(UpgradeLevel);
+        }
+
+        public string GetAfterUpgradeBonus(UpgradeType upgradeType, int afterUpgradeLevel) {
+            return GetUpgradeData(upgradeType)?.GetAfterUpgradeBonus(UpgradeLevel, afterUpgradeLevel);
+        }
     }
 }
