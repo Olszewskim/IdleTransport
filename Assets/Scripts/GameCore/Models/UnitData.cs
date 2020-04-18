@@ -58,10 +58,16 @@ namespace IdleTransport.GameCore.Models {
             UnitUpgrade.IncreaseUpgradeLevel(levels);
         }
 
-        protected virtual void RefreshStatsAfterUpgrade() {
+        private void RefreshStatsAfterUpgrade() {
             OnCapacityStatusChanged?.Invoke(CurrentCargoAmount, Capacity);
         }
 
         public abstract List<StatInfo> GetUnitStats();
+
+        protected abstract BigInteger GetTotalProduction();
+
+        protected string GetTotalProductionStat() {
+            return $"{Sprites.goldSprite} {GetTotalProduction().FormatHugeNumber()}/s";
+        }
     }
 }

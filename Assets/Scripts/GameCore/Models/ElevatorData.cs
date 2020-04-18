@@ -135,10 +135,15 @@ namespace IdleTransport.GameCore.Models {
 
         public override List<StatInfo> GetUnitStats() {
             return new List<StatInfo> {
-                new StatInfo(StatType.ElevatorTotalTransportationPerSecond, "0", "0"),
+                new StatInfo(StatType.ElevatorTotalTransportationPerSecond, GetTotalProductionStat(), "0"),
                 new StatInfo(StatType.ElevatorMovementSpeed, TravelSpeedPerFloor.ToTimePerSecond(), "0"),
                 new StatInfo(StatType.ElevatorCapacity, Capacity.FormatHugeNumber(), "0")
             };
+        }
+
+        protected override BigInteger GetTotalProduction() {
+            var movementTime = TravelSpeedPerFloor * _loadingRampsManager.LoadingRampsCount;
+            return Capacity.MultipleByDouble(1 / movementTime);
         }
     }
 }

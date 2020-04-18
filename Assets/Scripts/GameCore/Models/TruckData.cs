@@ -94,10 +94,15 @@ namespace IdleTransport.GameCore.Models {
 
         public override List<StatInfo> GetUnitStats() {
             return new List<StatInfo> {
-                new StatInfo(StatType.TruckTotalIncomePerSecond, "0", "0"),
+                new StatInfo(StatType.TruckTotalIncomePerSecond, GetTotalProductionStat(), "0"),
                 new StatInfo(StatType.TruckSellSpeed, WorkCycleTime.ToSecondsWithTwoDecimalPlaces(), "0"),
                 new StatInfo(StatType.TruckCapacity, Capacity.FormatHugeNumber(), "0")
             };
+        }
+
+        protected override BigInteger GetTotalProduction() {
+            var movementTime = WorkCycleTime + 2 * WalkingSpeed;
+            return Capacity.MultipleByDouble(1 / movementTime);
         }
     }
 }

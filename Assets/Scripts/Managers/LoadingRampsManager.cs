@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 namespace IdleTransport.Managers {
     public class LoadingRampsManager {
         [ShowInInspector] public List<LoadingRampData> LoadingRampDataList { get; }
+        public int LoadingRampsCount => LoadingRampDataList.Count;
 
         public LoadingRampsManager() {
             LoadingRampDataList = new List<LoadingRampData>

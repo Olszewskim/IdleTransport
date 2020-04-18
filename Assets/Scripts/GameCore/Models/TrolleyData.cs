@@ -24,7 +24,7 @@ namespace IdleTransport.GameCore.Models {
         }
 
         public TrolleyData(WarehouseData warehouseData, ElevatorData elevatorData)
-            : base( UnitType.Trolley, new TrolleyUpgrade()) {
+            : base(UnitType.Trolley, new TrolleyUpgrade()) {
             _warehouseData = warehouseData;
             _elevatorData = elevatorData;
             _elevatorData.OnSwitchedToWaitingState += TryToLoadElevator;
@@ -111,12 +111,17 @@ namespace IdleTransport.GameCore.Models {
 
         public override List<StatInfo> GetUnitStats() {
             return new List<StatInfo> {
-                new StatInfo(StatType.TrolleyTotalTransportationPerSecond, "0", "0"),
+                new StatInfo(StatType.TrolleyTotalTransportationPerSecond, GetTotalProductionStat(), "0"),
                 new StatInfo(StatType.TrolleyLoadingSpeed, WorkCycleTime.ToSecondsWithTwoDecimalPlaces(), "0"),
                 new StatInfo(StatType.TrolleyAmount, "1", "0"),
                 new StatInfo(StatType.TrolleyWalkingSpeed, WalkingSpeed.ToTimePerSecond(), "0"),
                 new StatInfo(StatType.TrolleyCapacity, Capacity.FormatHugeNumber(), "0")
             };
+        }
+
+        protected override BigInteger GetTotalProduction() {
+            var movementTime = WorkCycleTime + 2 * WalkingSpeed;
+            return Capacity.MultipleByDouble(1 / movementTime);
         }
     }
 }

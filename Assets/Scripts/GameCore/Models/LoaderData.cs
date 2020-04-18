@@ -117,12 +117,17 @@ namespace IdleTransport.GameCore.Models {
 
         public override List<StatInfo> GetUnitStats() {
             return new List<StatInfo> {
-                new StatInfo(StatType.LoaderTotalTransportationPerSecond, "0", "0"),
+                new StatInfo(StatType.LoaderTotalTransportationPerSecond, GetTotalProductionStat(), "0"),
                 new StatInfo(StatType.LoaderLoadingSpeed, WorkCycleTime.ToSecondsWithTwoDecimalPlaces(), "0"),
                 new StatInfo(StatType.LoaderAmount, "1", "0"),
                 new StatInfo(StatType.LoaderWalkingSpeed, WalkingSpeed.ToTimePerSecond(), "0"),
                 new StatInfo(StatType.LoaderCapacity, Capacity.FormatHugeNumber(), "0")
             };
+        }
+
+        protected override BigInteger GetTotalProduction() {
+            var movementTime = WorkCycleTime + 2 * WalkingSpeed;
+            return Capacity.MultipleByDouble(1 / movementTime);
         }
     }
 }

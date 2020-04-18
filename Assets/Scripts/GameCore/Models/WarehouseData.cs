@@ -68,12 +68,16 @@ namespace IdleTransport.GameCore.Models {
 
         public override List<StatInfo> GetUnitStats() {
             return new List<StatInfo> {
-                new StatInfo(StatType.WarehouseTotalProductionPerSecond, "0", "0"),
+                new StatInfo(StatType.WarehouseTotalProductionPerSecond, GetTotalProductionStat(), "0"),
                 new StatInfo(StatType.WarehouseProductionSpeed, WorkCycleTime.ToSecondsWithTwoDecimalPlaces(), "0"),
                 new StatInfo(StatType.WarehouseProductionAmountPerCycle, CargoPerCycle.FormatHugeNumber(),
                     "0"),
                 new StatInfo(StatType.WarehouseCapacity, Capacity.FormatHugeNumber(), "0")
             };
+        }
+
+        protected override BigInteger GetTotalProduction() {
+            return Capacity.MultipleByDouble(1 / WorkCycleTime);
         }
     }
 }
