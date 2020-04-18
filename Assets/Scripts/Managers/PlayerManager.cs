@@ -36,7 +36,7 @@ namespace IdleTransport.Managers {
             }
         }
 
-        private void LoadSavedPlayer() {
+        public void LoadSavedPlayer() {
             _player = null;
             if (ZPlayerPrefs.HasKey(Constants.SAVE_PLAYER_KEY)) {
                 var playerJSON = JsonConvert.DeserializeObject<PlayerJSON>(
