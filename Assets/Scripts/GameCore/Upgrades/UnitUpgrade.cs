@@ -2,6 +2,7 @@ using System;
 using IdleTransport.ExtensionsMethods;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
+using UnityEngine;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Upgrades {
@@ -51,7 +52,7 @@ namespace IdleTransport.GameCore.Upgrades {
                 upgradesCount++;
             }
 
-            return upgradesCount - 2;
+            return Mathf.Max(upgradesCount - 2, 1);
         }
 
         public void IncreaseUpgradeLevel() {

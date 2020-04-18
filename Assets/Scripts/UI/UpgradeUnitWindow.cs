@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using IdleTransport.Databases;
 using IdleTransport.ExtensionsMethods;
+using IdleTransport.GameCore.Currencies;
 using IdleTransport.GameCore.Models;
+using IdleTransport.Managers;
+using IdleTransport.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,12 +24,18 @@ namespace IdleTransport.UI {
 
         private UnitData _currentlyUpgradingUnit;
         private int _numberOfUpgrades;
+        private Currency _playerCurrency;
 
         protected override void Awake() {
             base.Awake();
             _statInfoRowUIPrefab.SetActive(false);
             _upgradeButton.OnClickAction += UpgradeUnit;
             InitUpgradesMultiplierToggleGroup();
+        }
+
+        private void Start() {
+            _playerCurrency = PlayerManager.Instance.Player.GetCurrencyType(CurrencyType.Gold);
+            _playerCurrency.OnCurrencyAmountChanged += TryRefreshMaxNumberOfUpgrade;
         }
 
         private void InitUpgradesMultiplierToggleGroup() {
@@ -67,8 +76,6 @@ namespace IdleTransport.UI {
             _upgradeButton.SetButtonText(GameTexts.GetLevelUpMultiplierText(_numberOfUpgrades));
         }
 
-
-
         private void UpgradeUnit() {
             _currentlyUpgradingUnit.UpgradeUnit(_numberOfUpgrades);
             RefreshView();
@@ -101,9 +108,15 @@ namespace IdleTransport.UI {
                 case UpgradeMultiplierMode.x50:
                     return 50;
                 case UpgradeMultiplierMode.Max:
-                    return 100; //TODO: Calculate max upgrades amount
+                    return _currentlyUpgradingUnit.UnitUpgrade.GetPossibleUpgradesCount(_playerCurrency.CurrencyAmount);
                 default:
                     return 1;
+            }
+        }
+
+        private void TryRefreshMaxNumberOfUpgrade(BigInteger currencyAmount) {
+            if (_currentUpgradeMultiplierMode == UpgradeMultiplierMode.Max && IsOpen) {
+                RefreshView();
             }
         }
     }
