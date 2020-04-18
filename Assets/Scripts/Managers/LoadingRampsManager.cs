@@ -8,7 +8,7 @@ namespace IdleTransport.Managers {
 
         public LoadingRampsManager() {
             LoadingRampDataList = new List<LoadingRampData>
-                {new LoadingRampData(), new LoadingRampData()};
+                {new LoadingRampData()};
         }
 
         public LoadingRampData GetNextLoadingRampData(int currentRampIndex) {
