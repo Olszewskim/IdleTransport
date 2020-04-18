@@ -6,13 +6,15 @@ using IdleTransport.GameCore.Upgrades;
 using IdleTransport.Managers;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
+using UnityEngine;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
     public class ElevatorData : UnitData {
-
         public event Action<int, double> OnElevatorMove;
-        [ShowInInspector] public double TravelSpeedPerFloor => (double)UnitUpgrade.GetUpgradeValue(UpgradeType.MovementSpeed);
+
+        [ShowInInspector]
+        public double TravelSpeedPerFloor => (double) UnitUpgrade.GetUpgradeValue(UpgradeType.MovementSpeed);
 
         [ShowInInspector] private ElevatorWorkingState _currentWorkingState;
 
@@ -23,7 +25,8 @@ namespace IdleTransport.GameCore.Models {
         private double _currentTravelingTime;
         private double _currentTraveledDistanceProgress => _currentTravelingTime / TravelSpeedPerFloor;
 
-        public ElevatorData(LoadingRampsManager loadingRampsManager, UnitType unitType) : base(unitType, new ElevatorUpgrade()) {
+        public ElevatorData(LoadingRampsManager loadingRampsManager, UnitType unitType) : base(unitType,
+            new ElevatorUpgrade()) {
             _loadingRampsManager = loadingRampsManager;
             StartWaiting();
         }
@@ -113,6 +116,11 @@ namespace IdleTransport.GameCore.Models {
                 _currentFloorRampIndex--;
                 _currentTravelingTime = 0;
             } else {
+                if (IsFull()) {
+                    StartDistributingCargoDownwards();
+                    return;
+                }
+
                 StartWaiting();
             }
         }
