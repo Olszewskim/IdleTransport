@@ -13,7 +13,7 @@ namespace IdleTransport.GameCore.Models {
         public event Action OnUnitFinishReturning;
 
         [ShowInInspector]
-        public virtual double WalkingSpeed => (double) UnitUpgrade.GetUpgradeValue(UpgradeType.MovementSpeed);
+        public virtual double WalkingSpeed => GetUpgradeValue<double>(UpgradeType.MovementSpeed);
 
         [ShowInInspector] private double _currentWalkingTime;
         private double _currentTraveledDistanceProgress => _currentWalkingTime / WalkingSpeed;

@@ -9,7 +9,7 @@ using static IdleTransport.Utilities.Enums;
 namespace IdleTransport.GameCore.Models {
     public class WarehouseData : WorkingUnitData {
         [ShowInInspector, DisplayAsString]
-        public BigInteger CargoPerCycle => (BigInteger) UnitUpgrade.GetUpgradeValue(UpgradeType.CargoPerCycle);
+        public BigInteger CargoPerCycle => GetUpgradeValue<BigInteger>(UpgradeType.CargoPerCycle);
 
         [ShowInInspector] private BuildingWorkingState _currentWorkingState;
 

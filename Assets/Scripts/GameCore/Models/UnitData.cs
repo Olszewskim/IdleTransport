@@ -15,7 +15,7 @@ namespace IdleTransport.GameCore.Models {
         [ShowInInspector] public UnitUpgrade UnitUpgrade { get; }
 
         [ShowInInspector, DisplayAsString]
-        public BigInteger Capacity => (BigInteger) UnitUpgrade.GetUpgradeValue(UpgradeType.Capacity);
+        public BigInteger Capacity => GetUpgradeValue<BigInteger>(UpgradeType.Capacity);
 
         private BigInteger _currentCargoAmount;
 
@@ -60,6 +60,14 @@ namespace IdleTransport.GameCore.Models {
 
         private void RefreshStatsAfterUpgrade() {
             OnCapacityStatusChanged?.Invoke(CurrentCargoAmount, Capacity);
+        }
+
+        protected T GetUpgradeValue<T>(UpgradeType upgradeType) {
+            return GetUpgradeValue<T>(upgradeType, UnitUpgrade.UpgradeLevel);
+        }
+
+        private T GetUpgradeValue<T>(UpgradeType upgradeType, int level) {
+            return (T) UnitUpgrade.GetUpgradeValue(upgradeType, level);
         }
 
         public abstract List<StatInfo> GetUnitStats();

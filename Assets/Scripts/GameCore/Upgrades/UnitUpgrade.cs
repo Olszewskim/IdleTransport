@@ -13,7 +13,7 @@ namespace IdleTransport.GameCore.Upgrades {
         [ShowInInspector] public int UpgradeLevel { get; private set; }
 
         private UpgradeCost _upgradeCost;
-       private readonly Dictionary<int,BigInteger> _upgradeCostMap = new Dictionary<int, BigInteger>();
+        private readonly Dictionary<int, BigInteger> _upgradeCostMap = new Dictionary<int, BigInteger>();
 
         public UnitUpgrade(UpgradeCost upgradeCost) {
             UpgradeLevel = 1;
@@ -38,7 +38,7 @@ namespace IdleTransport.GameCore.Upgrades {
 
         public BigInteger GetUpgradeCost(int upgradeLevel) {
             if (_upgradeCostMap.ContainsKey(upgradeLevel)) {
-               return _upgradeCostMap[upgradeLevel];
+                return _upgradeCostMap[upgradeLevel];
             }
 
             if (upgradeLevel < 2) {
@@ -72,15 +72,11 @@ namespace IdleTransport.GameCore.Upgrades {
             }
         }
 
-        public void IncreaseUpgradeLevel() {
-            IncreaseUpgradeLevel(1);
-        }
-
         public void IncreaseUpgradeLevel(int levelsToAdd) {
             UpgradeLevel += levelsToAdd;
             OnUpgradeLevelUp?.Invoke();
         }
 
-        public abstract object GetUpgradeValue(UpgradeType upgradeType);
+        public abstract object GetUpgradeValue(UpgradeType upgradeType, int level);
     }
 }

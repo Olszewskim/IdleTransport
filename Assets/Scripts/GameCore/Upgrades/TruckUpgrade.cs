@@ -13,12 +13,12 @@ namespace IdleTransport.GameCore.Upgrades {
             Capacity = unitBaseParameters.truckCapacity;
         }
 
-        public override object GetUpgradeValue(UpgradeType upgradeType) {
+        public override object GetUpgradeValue(UpgradeType upgradeType, int level) {
             switch (upgradeType) {
                 case UpgradeType.WorkCycleTime:
-                    return WorkCycleTime.GetUpgradeValue(UpgradeLevel);
+                    return WorkCycleTime.GetUpgradeValue(level);
                 case UpgradeType.Capacity:
-                    return Capacity.GetUpgradeValue(UpgradeLevel);
+                    return Capacity.GetUpgradeValue(level);
                 default:
                     Debug.LogError("Truck doesn't have upgrade " + upgradeType);
                     return null;

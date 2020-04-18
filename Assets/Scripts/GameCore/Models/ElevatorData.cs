@@ -13,8 +13,7 @@ namespace IdleTransport.GameCore.Models {
     public class ElevatorData : UnitData {
         public event Action<int, double> OnElevatorMove;
 
-        [ShowInInspector]
-        public double TravelSpeedPerFloor => (double) UnitUpgrade.GetUpgradeValue(UpgradeType.MovementSpeed);
+        [ShowInInspector] public double TravelSpeedPerFloor => GetUpgradeValue<double>(UpgradeType.MovementSpeed);
 
         [ShowInInspector] private ElevatorWorkingState _currentWorkingState;
 

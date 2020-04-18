@@ -8,7 +8,7 @@ namespace IdleTransport.GameCore.Models {
         public event Action<bool> OnUnitWorkingStateChanged;
         public event Action<double> OnProgressUpdated;
 
-        [ShowInInspector] public double WorkCycleTime => (double)UnitUpgrade.GetUpgradeValue(UpgradeType.WorkCycleTime);
+        [ShowInInspector] public double WorkCycleTime => GetUpgradeValue<double>(UpgradeType.WorkCycleTime);
 
         public double CurrentProductionProgress => _currentProductionCycle / WorkCycleTime;
         [ShowInInspector] private double _currentProductionCycle;
