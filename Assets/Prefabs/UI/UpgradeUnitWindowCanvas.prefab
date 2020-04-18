@@ -389,6 +389,7 @@ GameObject:
   - component: {fileID: 2783302068933978519}
   - component: {fileID: 2783302068933978518}
   - component: {fileID: 9040334982774021957}
+  - component: {fileID: 1526684348670376904}
   m_Layer: 5
   m_Name: UpgradeUnitWindowCanvas
   m_TagString: Untagged
@@ -486,6 +487,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56010d48889be46bfa3f24ddc197d8af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1526684348670376904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783302068933978517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47429bda0e34e4152891efc95a55af90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4275406685767654369
@@ -792,7 +805,6 @@ MonoBehaviour:
   _closeButton: {fileID: 4594276713968026501}
   _upgradingUnitTitleText: {fileID: 5963710362450850105}
   _upgradingUnitIcon: {fileID: 3217678996497434868}
-  _upgradeCostText: {fileID: 4377708707602143035}
   _upgradeButton: {fileID: 5163190474123008448}
   _statInfoRowUIPrefab: {fileID: 4358800880682218040}
   _upgradesMultiplierToggleGroupGroup: {fileID: 6762503355354407553}
@@ -1387,18 +1399,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12bf78e7879a84b258f4ee34bcf01ccf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4377708707602143035 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2300074317557746306, guid: eb5fa928dae5a47e7af5c61aa5252b6c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2534189067898576313}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &5992765975717280451 stripped

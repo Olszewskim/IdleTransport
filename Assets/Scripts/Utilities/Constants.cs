@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IdleTransport.GameCore.Upgrades;
 using JetBrains.Annotations;
+using UnityEngine;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.Utilities {
@@ -14,6 +15,7 @@ namespace IdleTransport.Utilities {
         public const ulong SECONDS_IN_HOUR = 3600;
         public const float ENABLED_GROUP_ALPHA = 1f;
         public const float DISABLED_GROUP_ALPHA = 0.65f;
+        public static readonly Vector2 GAME_NATIVE_RESOLUTION = new Vector2(1080, 1920);
 
         #region Buildings initial data
 
