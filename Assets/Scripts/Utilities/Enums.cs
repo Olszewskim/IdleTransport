@@ -67,7 +67,7 @@ namespace IdleTransport.Utilities {
             TrolleyTotalTransportationPerSecond,
             ElevatorTotalTransportationPerSecond,
             LoaderTotalTransportationPerSecond,
-            TruckTotalIncomePerSecond,
+            TruckTotalTransportationPerSecond,
 
             //Upgradable
             WarehouseProductionSpeed,

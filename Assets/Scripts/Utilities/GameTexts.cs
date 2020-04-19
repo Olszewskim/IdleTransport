@@ -10,10 +10,8 @@ namespace IdleTransport {
                 case StatType.TrolleyTotalTransportationPerSecond:
                 case StatType.ElevatorTotalTransportationPerSecond:
                 case StatType.LoaderTotalTransportationPerSecond:
+                case StatType.TruckTotalTransportationPerSecond:
                     return "Total Transportation";
-
-                case StatType.TruckTotalIncomePerSecond:
-                    return "Total Income";
 
                 case StatType.WarehouseProductionSpeed:
                     return "Production Cycle Time";

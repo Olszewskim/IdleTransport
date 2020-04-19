@@ -95,7 +95,7 @@ namespace IdleTransport.GameCore.Models {
         public override List<StatInfo> GetUnitStats(int levelsToUpgrade) {
             var levelAfterUpgrade = UnitUpgrade.UpgradeLevel + levelsToUpgrade;
             return new List<StatInfo> {
-                new StatInfo(StatType.TruckTotalIncomePerSecond, GetTotalProductionDesc(),
+                new StatInfo(StatType.TruckTotalTransportationPerSecond, GetTotalProductionDesc(),
                     GetTotalProductionAfterUpgradeBonus(levelAfterUpgrade)),
 
                 new StatInfo(StatType.TruckSellSpeed, GetUpgradeValueDesc(UpgradeType.WorkCycleTime),
