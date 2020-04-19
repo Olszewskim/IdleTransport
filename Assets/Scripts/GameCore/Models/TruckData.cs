@@ -29,6 +29,11 @@ namespace IdleTransport.GameCore.Models {
 
         public TruckData(UnitDataJSON truckDataJson)
             : base(UnitType.Truck, new TruckUpgrade(), truckDataJson) {
+            if (!IsFull()) {
+                StartWaiting();
+            } else {
+                StartTransporting();
+            }
         }
 
         protected override void StartWaiting() {

@@ -38,7 +38,11 @@ namespace IdleTransport.GameCore.Models {
             _warehouseData = warehouseData;
             _elevatorData = elevatorData;
             _elevatorData.OnSwitchedToWaitingState += TryToLoadElevator;
-            StartWorking();
+            if (!IsFull()) {
+                StartWorking();
+            } else {
+                StopWork();
+            }
         }
 
         protected override void StartWaiting() {

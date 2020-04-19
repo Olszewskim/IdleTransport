@@ -26,11 +26,20 @@ namespace IdleTransport.GameCore.Models {
 
         public WarehouseData()
             : base(UnitType.Warehouse, new WarehouseUpgrade()) {
-            StartWorking();
+            InitWarehouse();
         }
 
-        public WarehouseData(UnitDataJSON warehouseDataJson) : base(UnitType.Warehouse, new WarehouseUpgrade(), warehouseDataJson) {
-            StartWorking();
+        public WarehouseData(UnitDataJSON warehouseDataJson) : base(UnitType.Warehouse, new WarehouseUpgrade(),
+            warehouseDataJson) {
+            InitWarehouse();
+        }
+
+        private void InitWarehouse() {
+            if (!IsFull()) {
+                StartWorking();
+            } else {
+                StopWork();
+            }
         }
 
         protected override void StartWaiting() {

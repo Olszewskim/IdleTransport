@@ -37,7 +37,11 @@ namespace IdleTransport.GameCore.Models {
 
         private void InitElevator(LoadingRampsManager loadingRampsManager) {
             _loadingRampsManager = loadingRampsManager;
-            StartWaiting();
+            if (!IsFull()) {
+                StartWaiting();
+            } else {
+                StartDistributingCargoDownwards();
+            }
         }
 
         protected override void StartWaiting() {

@@ -35,7 +35,11 @@ namespace IdleTransport.GameCore.Models {
         private void InitLoader(TruckData truckData) {
             _truckData = truckData;
             _truckData.OnSwitchedToWaitingState += TryToLoadTruck;
-            StartWaiting();
+            if (!IsFull()) {
+                StartWaiting();
+            } else {
+                StartTransporting();
+            }
         }
 
         protected override void StartWaiting() {
