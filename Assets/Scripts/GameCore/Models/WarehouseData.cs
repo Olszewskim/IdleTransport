@@ -85,8 +85,8 @@ namespace IdleTransport.GameCore.Models {
 
         protected override BigInteger GetTotalProduction(int level) {
             var workCycleValueAtLevel = GetUpgradeValue<double>(UpgradeType.WorkCycleTime, level);
-            var capacityValueAtLevel = GetUpgradeValue<BigInteger>(UpgradeType.Capacity, level);
-            return capacityValueAtLevel.MultipleByDouble(1 / workCycleValueAtLevel);
+            var cargoPerCycleValueAtLevel = GetUpgradeValue<BigInteger>(UpgradeType.CargoPerCycle, level);
+            return cargoPerCycleValueAtLevel.MultipleByDouble(1 / workCycleValueAtLevel);
         }
     }
 }
