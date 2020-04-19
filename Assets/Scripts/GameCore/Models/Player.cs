@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using IdleTransport.GameCore.Currencies;
+using IdleTransport.JSON;
 using IdleTransport.Managers;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;

@@ -1,4 +1,5 @@
-﻿using IdleTransport.Utilities;
+﻿using IdleTransport.JSON;
+using IdleTransport.Utilities;
 using UnityEngine;
 
 namespace IdleTransport.GameCore.Currencies {
