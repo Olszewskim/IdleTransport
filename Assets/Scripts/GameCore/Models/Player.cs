@@ -9,19 +9,13 @@ using static IdleTransport.Utilities.Enums;
 namespace IdleTransport.GameCore.Models {
     public class Player {
         [ShowInInspector] public Dictionary<CurrencyType, Currency> CurrenciesDictionary { get; }
+        [ShowInInspector] public FactoryData FactoryData { get; }
 
-        [ShowInInspector] public WarehouseData WarehouseData { get; }
-        [ShowInInspector] public TrolleyData TrolleyData { get; }
-        [ShowInInspector] public ElevatorData ElevatorData { get; }
-        [ShowInInspector] public LoadingRampsManager LoadingRampsManager { get; }
 
         public Player() {
             CurrenciesDictionary = new Dictionary<CurrencyType, Currency>();
             InitCurrencyDictionary();
-            LoadingRampsManager = new LoadingRampsManager();
-            WarehouseData = new WarehouseData();
-            ElevatorData = new ElevatorData(LoadingRampsManager, UnitType.Elevator);
-            TrolleyData = new TrolleyData(WarehouseData, ElevatorData);
+            FactoryData = new FactoryData();
         }
 
         public Player(PlayerJSON playerJson) {

@@ -15,7 +15,7 @@ namespace IdleTransport.GameCore.Views {
         private Vector3 _lastDestinationPosition;
 
         protected override void Init() {
-            unitData = PlayerManager.Instance.Player.ElevatorData;
+            unitData = PlayerManager.Instance.Player.FactoryData.ElevatorData;
             _elevatorData = (ElevatorData) unitData;
             _elevatorData.OnElevatorMove += MoveElevator;
             _startPosition = _destinationPosition = _lastDestinationPosition = transform.position;

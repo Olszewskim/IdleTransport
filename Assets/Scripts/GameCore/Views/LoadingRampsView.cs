@@ -19,7 +19,7 @@ namespace IdleTransport.GameCore.Views
         }
 
         private void InitView() {
-            var loadingRampsData = PlayerManager.Instance.Player.LoadingRampsManager.LoadingRampDataList;
+            var loadingRampsData = PlayerManager.Instance.Player.FactoryData.LoadingRampsManager.LoadingRampDataList;
             for (int i = 0; i < loadingRampsData.Count; i++) {
                 if (i >= _loadingRampViewsList.Count) {
                     _loadingRampViewsList.Add(Instantiate(_loadingRampViewPrefab, transform));
