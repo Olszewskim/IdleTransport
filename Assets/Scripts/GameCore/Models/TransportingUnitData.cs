@@ -1,5 +1,6 @@
 ﻿using System;
 using IdleTransport.GameCore.Upgrades;
+using IdleTransport.JSON;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
@@ -19,6 +20,10 @@ namespace IdleTransport.GameCore.Models {
 
         protected TransportingUnitData(UnitType unitType, UnitUpgrade unitUpgrade)
             : base(unitType, unitUpgrade) {
+        }
+
+        protected TransportingUnitData(UnitType unitType, UnitUpgrade unitUpgrade, UnitDataJSON unitDataJson)
+        : base(unitType, unitUpgrade, unitDataJson) {
         }
 
         public override void UpdateUnit(float deltaTime) {

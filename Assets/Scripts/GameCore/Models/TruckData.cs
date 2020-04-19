@@ -2,6 +2,7 @@
 using IdleTransport.ExtensionsMethods;
 using IdleTransport.GameCore.Stats;
 using IdleTransport.GameCore.Upgrades;
+using IdleTransport.JSON;
 using IdleTransport.Managers;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
@@ -24,6 +25,10 @@ namespace IdleTransport.GameCore.Models {
 
         public TruckData()
             : base(UnitType.Truck, new TruckUpgrade()) {
+        }
+
+        public TruckData(UnitDataJSON truckDataJson)
+            : base(UnitType.Truck, new TruckUpgrade(), truckDataJson) {
         }
 
         protected override void StartWaiting() {

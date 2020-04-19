@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using IdleTransport.GameCore.Stats;
 using IdleTransport.GameCore.Upgrades;
+using IdleTransport.JSON;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
@@ -37,6 +38,12 @@ namespace IdleTransport.GameCore.Models {
             UnitType = unitType;
             UnitUpgrade = unitUpgrade;
             UnitUpgrade.OnUpgradeLevelUp += RefreshStatsAfterUpgrade;
+        }
+
+        protected UnitData(UnitType unitType, UnitUpgrade unitUpgrade, UnitDataJSON unitDataJson) : this(unitType,
+            unitUpgrade) {
+            CurrentCargoAmount = new BigInteger(unitDataJson.currentCargoAmount);
+            UnitUpgrade.SetLevel(unitDataJson.upgradeLevel);
         }
 
         protected virtual void StartWaiting() {

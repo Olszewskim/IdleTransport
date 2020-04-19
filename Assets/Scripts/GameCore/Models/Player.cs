@@ -4,22 +4,39 @@ using IdleTransport.GameCore.Currencies;
 using IdleTransport.JSON;
 using IdleTransport.Managers;
 using IdleTransport.Utilities;
+using Newtonsoft.Json;
 using Sirenix.OdinInspector;
+using UnityEngine;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
     public class Player {
         [ShowInInspector] public Dictionary<CurrencyType, Currency> CurrenciesDictionary { get; }
         [ShowInInspector] public FactoryData FactoryData { get; }
-
+        public DateTime QuitDate { get; private set; }
 
         public Player() {
             CurrenciesDictionary = new Dictionary<CurrencyType, Currency>();
             InitCurrencyDictionary();
             FactoryData = new FactoryData();
+            SetupEvents();
         }
 
         public Player(PlayerJSON playerJson) {
+            CurrenciesDictionary = new Dictionary<CurrencyType, Currency>();
+            foreach (var currency in playerJson.currenciesDictionary) {
+                CurrenciesDictionary.Add(currency.Key, CurrencyFactory.CreateCurrencyInstance(currency.Value));
+            }
+
+            FactoryData = new FactoryData(playerJson.factoryDataJSON);
+            QuitDate = playerJson.quitDate;
+            SetupEvents();
+        }
+
+        private void SetupEvents() {
+            foreach (var currency in CurrenciesDictionary) {
+                currency.Value.OnCurrencyAmountChanged += _ => Save();
+            }
         }
 
         #region Currencies
@@ -52,6 +69,14 @@ namespace IdleTransport.GameCore.Models {
         }
 
         #endregion
+
+        public void Save() {
+            QuitDate = DateTime.UtcNow;
+            var playerJSON = new PlayerJSON(this);
+            var save = JsonConvert.SerializeObject(playerJSON,
+                new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
+            ZPlayerPrefs.SetString(Constants.SAVE_PLAYER_KEY, save);
+        }
 
 #if UNITY_EDITOR
         [OnInspectorGUI]

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using IdleTransport.GameCore.Models;
+using IdleTransport.JSON;
 using Sirenix.OdinInspector;
 
 namespace IdleTransport.Managers {
@@ -10,6 +11,13 @@ namespace IdleTransport.Managers {
         public LoadingRampsManager() {
             LoadingRampDataList = new List<LoadingRampData>
                 {new LoadingRampData()};
+        }
+
+        public LoadingRampsManager(LoadingRampsManagerJSON loadingRampsManagerJson) {
+            LoadingRampDataList = new List<LoadingRampData>();
+            for (int i = 0; i < loadingRampsManagerJson.loadingRampDataJSONList.Count; i++) {
+                LoadingRampDataList.Add(new LoadingRampData(loadingRampsManagerJson.loadingRampDataJSONList[i]));
+            }
         }
 
         public LoadingRampData GetNextLoadingRampData(int currentRampIndex) {

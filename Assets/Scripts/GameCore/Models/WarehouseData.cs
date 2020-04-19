@@ -2,6 +2,7 @@
 using IdleTransport.ExtensionsMethods;
 using IdleTransport.GameCore.Stats;
 using IdleTransport.GameCore.Upgrades;
+using IdleTransport.JSON;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
@@ -25,6 +26,10 @@ namespace IdleTransport.GameCore.Models {
 
         public WarehouseData()
             : base(UnitType.Warehouse, new WarehouseUpgrade()) {
+            StartWorking();
+        }
+
+        public WarehouseData(UnitDataJSON warehouseDataJson) : base(UnitType.Warehouse, new WarehouseUpgrade(), warehouseDataJson) {
             StartWorking();
         }
 

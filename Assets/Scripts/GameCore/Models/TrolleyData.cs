@@ -2,14 +2,15 @@
 using IdleTransport.ExtensionsMethods;
 using IdleTransport.GameCore.Stats;
 using IdleTransport.GameCore.Upgrades;
+using IdleTransport.JSON;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
 namespace IdleTransport.GameCore.Models {
     public class TrolleyData : TransportingUnitData {
-        private readonly WarehouseData _warehouseData;
-        private readonly ElevatorData _elevatorData;
+        private WarehouseData _warehouseData;
+        private ElevatorData _elevatorData;
 
         [ShowInInspector] private TrolleyWorkingState _currentWorkingState;
 
@@ -25,6 +26,15 @@ namespace IdleTransport.GameCore.Models {
 
         public TrolleyData(WarehouseData warehouseData, ElevatorData elevatorData)
             : base(UnitType.Trolley, new TrolleyUpgrade()) {
+            InitTrolley(warehouseData, elevatorData);
+        }
+
+        public TrolleyData(WarehouseData warehouseData, ElevatorData elevatorData, UnitDataJSON unitDataJson)
+            : base(UnitType.Trolley, new TrolleyUpgrade(),unitDataJson) {
+            InitTrolley(warehouseData, elevatorData);
+        }
+
+        private void InitTrolley(WarehouseData warehouseData, ElevatorData elevatorData) {
             _warehouseData = warehouseData;
             _elevatorData = elevatorData;
             _elevatorData.OnSwitchedToWaitingState += TryToLoadElevator;

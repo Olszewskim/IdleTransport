@@ -1,5 +1,6 @@
 ﻿using System;
 using IdleTransport.GameCore.Upgrades;
+using IdleTransport.JSON;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
 
@@ -15,6 +16,10 @@ namespace IdleTransport.GameCore.Models {
 
         protected WorkingUnitData(UnitType unitType, UnitUpgrade unitUpgrade)
             : base(unitType, unitUpgrade) {
+        }
+
+        protected WorkingUnitData(UnitType unitType, UnitUpgrade unitUpgrade, UnitDataJSON unitDataJson)
+            : base(unitType, unitUpgrade, unitDataJson) {
         }
 
         protected void StartWorking() {

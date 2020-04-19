@@ -40,7 +40,7 @@ namespace IdleTransport.Managers {
         public void LoadSavedPlayer() {
             _player = null;
             if (ZPlayerPrefs.HasKey(Constants.SAVE_PLAYER_KEY)) {
-                var playerJSON = JsonConvert.DeserializeObject<PlayerJSON>(
+                 var playerJSON = JsonConvert.DeserializeObject<PlayerJSON>(
                     ZPlayerPrefs.GetString(Constants.SAVE_PLAYER_KEY),
                     new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
                 _player = new Player(playerJSON);
@@ -52,7 +52,7 @@ namespace IdleTransport.Managers {
         }
 
         private void SetupEvents() {
-            //TODO: Load player's events
+            TimeWatcher.OnAppGoPause += SavePlayerData;
         }
 
         #region Currency handling
@@ -69,11 +69,16 @@ namespace IdleTransport.Managers {
             return _player?.SpendCurrency(currencyType, amount) ?? false;
         }
 
-        public bool HasPlayerSufficientCurrency(Enums.CurrencyType currencyType, BigInteger amount) {
+        public bool HasPlayerSufficientCurrency(CurrencyType currencyType, BigInteger amount) {
             var currency = _player.GetCurrencyType(currencyType);
             return currency.HasEnoughCurrency(amount);
         }
 
         #endregion Currency handling
+
+        public void SavePlayerData() {
+            _player?.Save();
+        }
+
     }
 }

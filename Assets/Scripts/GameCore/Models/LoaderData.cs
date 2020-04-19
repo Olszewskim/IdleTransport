@@ -2,6 +2,7 @@
 using IdleTransport.ExtensionsMethods;
 using IdleTransport.GameCore.Stats;
 using IdleTransport.GameCore.Upgrades;
+using IdleTransport.JSON;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
 using static IdleTransport.Utilities.Enums;
@@ -23,6 +24,15 @@ namespace IdleTransport.GameCore.Models {
 
         public LoaderData(TruckData truckData)
             : base(UnitType.Loader, new LoaderUpgrade()) {
+            InitLoader(truckData);
+        }
+
+        public LoaderData(TruckData truckData, UnitDataJSON loaderDataJson)
+            : base(UnitType.Loader, new LoaderUpgrade(), loaderDataJson) {
+            InitLoader(truckData);
+        }
+
+        private void InitLoader(TruckData truckData) {
             _truckData = truckData;
             _truckData.OnSwitchedToWaitingState += TryToLoadTruck;
             StartWaiting();

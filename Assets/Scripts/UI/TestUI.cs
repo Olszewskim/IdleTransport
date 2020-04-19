@@ -28,7 +28,7 @@ namespace IdleTransport.UI {
         }
 
         public void DeleteSave() {
-            PlayerPrefs.DeleteKey(Constants.SAVE_PLAYER_KEY);
+            ZPlayerPrefs.DeleteKey(Constants.SAVE_PLAYER_KEY);
             PlayerManager.Instance.LoadSavedPlayer();
             ChangeVisibilityStatus();
             SceneManager.LoadSceneAsync(Scenes.Main);
