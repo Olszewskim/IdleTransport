@@ -23,12 +23,12 @@ namespace IdleTransport.GameCore.Models {
             }
         }
 
-        public TruckData()
-            : base(UnitType.Truck, new TruckUpgrade()) {
+        public TruckData(TruckUpgradeData truckUpgradeData)
+            : base(UnitType.Truck, new TruckUpgrade(truckUpgradeData)) {
         }
 
-        public TruckData(UnitDataJSON truckDataJson)
-            : base(UnitType.Truck, new TruckUpgrade(), truckDataJson) {
+        public TruckData(TruckUpgradeData truckUpgradeData, UnitDataJSON truckDataJson)
+            : base(UnitType.Truck, new TruckUpgrade(truckUpgradeData), truckDataJson) {
             if (!IsFull()) {
                 StartWaiting();
             } else {

@@ -24,13 +24,15 @@ namespace IdleTransport.GameCore.Models {
             }
         }
 
-        public TrolleyData(WarehouseData warehouseData, ElevatorData elevatorData)
-            : base(UnitType.Trolley, new TrolleyUpgrade()) {
+        public TrolleyData(TrolleyUpgradeData trolleyUpgradeData, WarehouseData warehouseData,
+            ElevatorData elevatorData)
+            : base(UnitType.Trolley, new TrolleyUpgrade(trolleyUpgradeData)) {
             InitTrolley(warehouseData, elevatorData);
         }
 
-        public TrolleyData(WarehouseData warehouseData, ElevatorData elevatorData, UnitDataJSON unitDataJson)
-            : base(UnitType.Trolley, new TrolleyUpgrade(),unitDataJson) {
+        public TrolleyData(TrolleyUpgradeData trolleyUpgradeData, WarehouseData warehouseData,
+            ElevatorData elevatorData, UnitDataJSON unitDataJson)
+            : base(UnitType.Trolley, new TrolleyUpgrade(trolleyUpgradeData),unitDataJson) {
             InitTrolley(warehouseData, elevatorData);
         }
 

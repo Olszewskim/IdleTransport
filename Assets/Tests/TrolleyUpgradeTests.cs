@@ -1,9 +1,17 @@
-﻿using IdleTransport.GameCore.Upgrades;
+﻿using IdleTransport.Databases;
+using IdleTransport.GameCore.Upgrades;
+using IdleTransport.ScriptableObjectData;
 using IdleTransport.Utilities;
 using NUnit.Framework;
 
 namespace Tests {
     public class TrolleyUpgradeTests {
+        private UnitBaseParameters _unitBaseParameters;
+
+        [OneTimeSetUp]
+        public void BeforeTests() {
+            _unitBaseParameters = GameResourcesDatabase.GetUnitBaseParameters();
+        }
 
         [TestCase(1, 4.0)]
         [TestCase(2, 3.95)]
@@ -13,8 +21,8 @@ namespace Tests {
         [TestCase(50, 1.55)]
         [TestCase(100, -0.95)]
         public void Trolley_WorkCycleTime_Upgrade_Value_Is_Correct(int upgradeLevel, double expectedUpgradeValue) {
-            var upgrade = new TrolleyUpgrade();
-            var upgradeValue = (double)upgrade.WorkCycleTime.GetUpgradeValue(upgradeLevel);
+            var upgrade = new TrolleyUpgrade(_unitBaseParameters.trolleyUpgradeData);
+            var upgradeValue = (double) upgrade.WorkCycleTime.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(expectedUpgradeValue, upgradeValue, delta: 0.001f);
         }
 
@@ -26,8 +34,8 @@ namespace Tests {
         [TestCase(50, 0.55)]
         [TestCase(100, -1.95)]
         public void Trolley_MovementSpeed_Upgrade_Value_Is_Correct(int upgradeLevel, double expectedUpgradeValue) {
-            var upgrade = new TrolleyUpgrade();
-            var upgradeValue = (double)upgrade.MovementSpeed.GetUpgradeValue(upgradeLevel);
+            var upgrade = new TrolleyUpgrade(_unitBaseParameters.trolleyUpgradeData);
+            var upgradeValue = (double) upgrade.MovementSpeed.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(expectedUpgradeValue, upgradeValue, delta: 0.001f);
         }
 
@@ -39,8 +47,8 @@ namespace Tests {
         [TestCase(50, "8925502")]
         [TestCase(100, "4444267362580")]
         public void Trolley_Capacity_Upgrade_Value_Is_Correct(int upgradeLevel, string expectedUpgradeValue) {
-            var upgrade = new TrolleyUpgrade();
-            var upgradeValue = (BigInteger)upgrade.Capacity.GetUpgradeValue(upgradeLevel);
+            var upgrade = new TrolleyUpgrade(_unitBaseParameters.trolleyUpgradeData);
+            var upgradeValue = (BigInteger) upgrade.Capacity.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeValue.Replace(" ", string.Empty)), upgradeValue);
         }
 
@@ -51,10 +59,9 @@ namespace Tests {
         [TestCase(200, "5")]
         [TestCase(400, "6")]
         public void Trolley_NumberOfUnits_Upgrade_Value_Is_Correct(int upgradeLevel, string expectedUpgradeValue) {
-            var upgrade = new TrolleyUpgrade();
-            var upgradeValue = (BigInteger)upgrade.NumberOfUnits.GetUpgradeValue(upgradeLevel);
+            var upgrade = new TrolleyUpgrade(_unitBaseParameters.trolleyUpgradeData);
+            var upgradeValue = (BigInteger) upgrade.NumberOfUnits.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeValue.Replace(" ", string.Empty)), upgradeValue);
         }
-
     }
 }

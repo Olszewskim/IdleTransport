@@ -1,4 +1,3 @@
-using IdleTransport.Databases;
 using UnityEngine;
 using static IdleTransport.Utilities.Enums;
 
@@ -7,10 +6,9 @@ namespace IdleTransport.GameCore.Upgrades {
         public MovementSpeedUpgradeData MovementSpeed { get; }
         public CapacityUpgradeData Capacity { get; }
 
-        public ElevatorUpgrade() : base(GameResourcesDatabase.GetUnitBaseParameters().elevatorUpgradeCost) {
-            var unitBaseParameters = GameResourcesDatabase.GetUnitBaseParameters();
-            MovementSpeed = unitBaseParameters.elevatorMovementSpeed;
-            Capacity = unitBaseParameters.elevatorCapacity;
+        public ElevatorUpgrade(ElevatorUpgradeData elevatorUpgradeData) : base(elevatorUpgradeData.upgradeCost) {
+            MovementSpeed = elevatorUpgradeData.movementSpeed;
+            Capacity = elevatorUpgradeData.capacity;
         }
 
         protected override UpgradeData GetUpgradeData(UpgradeType upgradeType) {

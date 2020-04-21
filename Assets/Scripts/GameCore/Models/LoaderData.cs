@@ -22,13 +22,13 @@ namespace IdleTransport.GameCore.Models {
             }
         }
 
-        public LoaderData(TruckData truckData)
-            : base(UnitType.Loader, new LoaderUpgrade()) {
+        public LoaderData(LoaderUpgradeData loaderUpgradeData, TruckData truckData)
+            : base(UnitType.Loader, new LoaderUpgrade(loaderUpgradeData)) {
             InitLoader(truckData);
         }
 
-        public LoaderData(TruckData truckData, UnitDataJSON loaderDataJson)
-            : base(UnitType.Loader, new LoaderUpgrade(), loaderDataJson) {
+        public LoaderData(LoaderUpgradeData loaderUpgradeData, TruckData truckData, UnitDataJSON loaderDataJson)
+            : base(UnitType.Loader, new LoaderUpgrade(loaderUpgradeData), loaderDataJson) {
             InitLoader(truckData);
         }
 

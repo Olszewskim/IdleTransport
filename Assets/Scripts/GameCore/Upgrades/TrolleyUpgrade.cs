@@ -1,4 +1,3 @@
-using IdleTransport.Databases;
 using UnityEngine;
 using static IdleTransport.Utilities.Enums;
 
@@ -9,12 +8,11 @@ namespace IdleTransport.GameCore.Upgrades {
         public MovementSpeedUpgradeData MovementSpeed { get; }
         public CapacityUpgradeData Capacity { get; }
 
-        public TrolleyUpgrade() : base(GameResourcesDatabase.GetUnitBaseParameters().trolleyUpgradeCost) {
-            var unitBaseParameters = GameResourcesDatabase.GetUnitBaseParameters();
-            WorkCycleTime = unitBaseParameters.trolleyWorkCycleTime;
-            NumberOfUnits = unitBaseParameters.trolleyNumberOfUnits;
-            MovementSpeed = unitBaseParameters.trolleyMovementSpeed;
-            Capacity = unitBaseParameters.trolleyCapacity;
+        public TrolleyUpgrade(TrolleyUpgradeData trolleyUpgradeData) : base(trolleyUpgradeData.upgradeCost) {
+            WorkCycleTime = trolleyUpgradeData.workCycleTime;
+            NumberOfUnits = trolleyUpgradeData.numberOfUnits;
+            MovementSpeed = trolleyUpgradeData.movementSpeed;
+            Capacity = trolleyUpgradeData.capacity;
         }
 
         protected override UpgradeData GetUpgradeData(UpgradeType upgradeType) {

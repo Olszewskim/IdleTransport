@@ -24,13 +24,13 @@ namespace IdleTransport.GameCore.Models {
             }
         }
 
-        public WarehouseData()
-            : base(UnitType.Warehouse, new WarehouseUpgrade()) {
+        public WarehouseData(WarehouseUpgradeData warehouseUpgradeData)
+            : base(UnitType.Warehouse, new WarehouseUpgrade(warehouseUpgradeData)) {
             InitWarehouse();
         }
 
-        public WarehouseData(UnitDataJSON warehouseDataJson) : base(UnitType.Warehouse, new WarehouseUpgrade(),
-            warehouseDataJson) {
+        public WarehouseData(WarehouseUpgradeData warehouseUpgradeData, UnitDataJSON warehouseDataJson) : base(
+            UnitType.Warehouse, new WarehouseUpgrade(warehouseUpgradeData),warehouseDataJson) {
             InitWarehouse();
         }
 

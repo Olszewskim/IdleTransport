@@ -1,9 +1,18 @@
-﻿using IdleTransport.GameCore.Upgrades;
+﻿using IdleTransport.Databases;
+using IdleTransport.GameCore.Upgrades;
+using IdleTransport.ScriptableObjectData;
 using IdleTransport.Utilities;
 using NUnit.Framework;
 
 namespace Tests {
     public class TruckUpgradeTests {
+        private UnitBaseParameters _unitBaseParameters;
+
+        [OneTimeSetUp]
+        public void BeforeTests() {
+            _unitBaseParameters = GameResourcesDatabase.GetUnitBaseParameters();
+        }
+
         [TestCase(1, 7.0)]
         [TestCase(2, 6.95)]
         [TestCase(5, 6.8)]
@@ -12,8 +21,8 @@ namespace Tests {
         [TestCase(50, 4.55)]
         [TestCase(100, 2.05)]
         public void Truck_WorkCycleTime_Upgrade_Value_Is_Correct(int upgradeLevel, double expectedUpgradeValue) {
-            var upgrade = new TruckUpgrade();
-            var upgradeValue = (double)upgrade.WorkCycleTime.GetUpgradeValue(upgradeLevel);
+            var upgrade = new TruckUpgrade(_unitBaseParameters.truckUpgradeData);
+            var upgradeValue = (double) upgrade.WorkCycleTime.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(expectedUpgradeValue, upgradeValue, delta: 0.001f);
         }
 
@@ -25,8 +34,8 @@ namespace Tests {
         [TestCase(50, "11083837")]
         [TestCase(100, "5518965775142")]
         public void Truck_Capacity_Upgrade_Value_Is_Correct(int upgradeLevel, string expectedUpgradeValue) {
-            var upgrade = new TruckUpgrade();
-            var upgradeValue = (BigInteger)upgrade.Capacity.GetUpgradeValue(upgradeLevel);
+            var upgrade = new TruckUpgrade(_unitBaseParameters.truckUpgradeData);
+            var upgradeValue = (BigInteger) upgrade.Capacity.GetUpgradeValue(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeValue.Replace(" ", string.Empty)), upgradeValue);
         }
     }

@@ -1,9 +1,18 @@
-﻿using IdleTransport.GameCore.Upgrades;
+﻿using IdleTransport.Databases;
+using IdleTransport.GameCore.Upgrades;
+using IdleTransport.ScriptableObjectData;
 using IdleTransport.Utilities;
 using NUnit.Framework;
 
 namespace Tests {
     public class UnitUpgradesCostTests {
+        private UnitBaseParameters _unitBaseParameters;
+
+        [OneTimeSetUp]
+        public void BeforeTests() {
+            _unitBaseParameters = GameResourcesDatabase.GetUnitBaseParameters();
+        }
+
         [TestCase(1, "0")]
         [TestCase(2, "10")]
         [TestCase(5, "13")]
@@ -12,7 +21,7 @@ namespace Tests {
         [TestCase(50, "8671")]
         [TestCase(100, "14481724")]
         public void Warehouse_Upgrade_Level_Up_Cost_Is_Correct(int upgradeLevel, string expectedUpgradeCost) {
-            var upgrade = new WarehouseUpgrade();
+            var upgrade = new WarehouseUpgrade(_unitBaseParameters.warehouseUpgradeData);
             var upgradeCost = upgrade.GetUpgradeCost(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeCost.Replace(" ", string.Empty)), upgradeCost);
         }
@@ -25,7 +34,7 @@ namespace Tests {
         [TestCase(50, "1506038")]
         [TestCase(100, "13705588286")]
         public void Trolley_Upgrade_Level_Up_Cost_Is_Correct(int upgradeLevel, string expectedUpgradeCost) {
-            var upgrade = new TrolleyUpgrade();
+            var upgrade = new TrolleyUpgrade(_unitBaseParameters.trolleyUpgradeData);
             var upgradeCost = upgrade.GetUpgradeCost(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeCost.Replace(" ", string.Empty)), upgradeCost);
         }
@@ -38,7 +47,7 @@ namespace Tests {
         [TestCase(50, "1506038")]
         [TestCase(100, "13705588286")]
         public void Elevator_Upgrade_Level_Up_Cost_Is_Correct(int upgradeLevel, string expectedUpgradeCost) {
-            var upgrade = new ElevatorUpgrade();
+            var upgrade = new ElevatorUpgrade(_unitBaseParameters.elevatorUpgradeData);
             var upgradeCost = upgrade.GetUpgradeCost(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeCost.Replace(" ", string.Empty)), upgradeCost);
         }
@@ -51,7 +60,7 @@ namespace Tests {
         [TestCase(50, "1506038")]
         [TestCase(100, "13705588286")]
         public void Loader_Upgrade_Level_Up_Cost_Is_Correct(int upgradeLevel, string expectedUpgradeCost) {
-            var upgrade = new LoaderUpgrade();
+            var upgrade = new LoaderUpgrade(_unitBaseParameters.loaderUpgradeData);
             var upgradeCost = upgrade.GetUpgradeCost(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeCost.Replace(" ", string.Empty)), upgradeCost);
         }
@@ -64,7 +73,7 @@ namespace Tests {
         [TestCase(50, "1887348")]
         [TestCase(100, "17175674984")]
         public void Truck_Upgrade_Level_Up_Cost_Is_Correct(int upgradeLevel, string expectedUpgradeCost) {
-            var upgrade = new TruckUpgrade();
+            var upgrade = new TruckUpgrade(_unitBaseParameters.truckUpgradeData);
             var upgradeCost = upgrade.GetUpgradeCost(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeCost.Replace(" ", string.Empty)), upgradeCost);
         }

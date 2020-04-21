@@ -25,13 +25,14 @@ namespace IdleTransport.GameCore.Models {
         private double _currentTravelingTime;
         private double _currentTraveledDistanceProgress => _currentTravelingTime / TravelSpeedPerFloor;
 
-        public ElevatorData(LoadingRampsManager loadingRampsManager)
-            : base(UnitType.Elevator, new ElevatorUpgrade()) {
+        public ElevatorData(ElevatorUpgradeData elevatorUpgradeData, LoadingRampsManager loadingRampsManager)
+            : base(UnitType.Elevator, new ElevatorUpgrade(elevatorUpgradeData)) {
             InitElevator(loadingRampsManager);
         }
 
-        public ElevatorData(LoadingRampsManager loadingRampsManager, UnitDataJSON elevatorDataJSON)
-            : base(UnitType.Elevator, new ElevatorUpgrade(), elevatorDataJSON) {
+        public ElevatorData(ElevatorUpgradeData elevatorUpgradeData, LoadingRampsManager loadingRampsManager,
+            UnitDataJSON elevatorDataJSON)
+            : base(UnitType.Elevator, new ElevatorUpgrade(elevatorUpgradeData), elevatorDataJSON) {
             InitElevator(loadingRampsManager);
         }
 
@@ -60,7 +61,7 @@ namespace IdleTransport.GameCore.Models {
             }
         }
 
-        public void LoadCargo(BigInteger cargo, out BigInteger loadedCargo) {
+        public override void LoadCargo(BigInteger cargo, out BigInteger loadedCargo) {
             base.LoadCargo(cargo, out loadedCargo);
             StartDistributingCargoDownwards();
         }

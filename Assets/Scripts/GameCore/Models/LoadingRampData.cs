@@ -1,4 +1,5 @@
 ﻿using IdleTransport.JSON;
+using IdleTransport.ScriptableObjectData;
 using Sirenix.OdinInspector;
 
 namespace IdleTransport.GameCore.Models {
@@ -6,14 +7,14 @@ namespace IdleTransport.GameCore.Models {
         [ShowInInspector] public LoaderData LoaderData { get; }
         [ShowInInspector] public TruckData TruckData { get; }
 
-        public LoadingRampData() {
-            TruckData = new TruckData();
-            LoaderData = new LoaderData(TruckData);
+        public LoadingRampData(UnitBaseParameters unitBaseParameters) {
+            TruckData = new TruckData(unitBaseParameters.truckUpgradeData);
+            LoaderData = new LoaderData(unitBaseParameters.loaderUpgradeData, TruckData);
         }
 
-        public LoadingRampData(LoadingRampDataJSON loadingRampDataJson) {
-            TruckData = new TruckData(loadingRampDataJson.truckDataJSON);
-            LoaderData = new LoaderData(TruckData, loadingRampDataJson.loaderDataJSON);
+        public LoadingRampData(UnitBaseParameters unitBaseParameters, LoadingRampDataJSON loadingRampDataJson) {
+            TruckData = new TruckData(unitBaseParameters.truckUpgradeData, loadingRampDataJson.truckDataJSON);
+            LoaderData = new LoaderData(unitBaseParameters.loaderUpgradeData, TruckData, loadingRampDataJson.loaderDataJSON);
         }
     }
 }

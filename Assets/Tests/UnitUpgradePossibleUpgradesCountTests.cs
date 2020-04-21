@@ -1,10 +1,18 @@
-﻿using IdleTransport.GameCore.Upgrades;
+﻿using IdleTransport.Databases;
+using IdleTransport.GameCore.Upgrades;
+using IdleTransport.ScriptableObjectData;
 using IdleTransport.Utilities;
 using NUnit.Framework;
-using UnityEngine;
 
 namespace Tests {
     public class UnitUpgradePossibleUpgradesCountTests {
+
+        private UnitBaseParameters _unitBaseParameters;
+
+        [OneTimeSetUp]
+        public void BeforeTests() {
+            _unitBaseParameters = GameResourcesDatabase.GetUnitBaseParameters();
+        }
         [TestCase("0", 1)]
         [TestCase("1 000", 21)]
         [TestCase("1 000 000", 67)]
@@ -17,7 +25,7 @@ namespace Tests {
         [TestCase("1 000 000 000 000 000 000 000 000 000", 393)]
         [TestCase("1 000 000 000 000 000 000 000 000 000 000", 439)]
         public void Warehouse_Possible_Upgrades_Count_Is_Correct(string currencyAmountString, int possibleUpgrades) {
-            var upgrade = new WarehouseUpgrade();
+            var upgrade = new WarehouseUpgrade(_unitBaseParameters.warehouseUpgradeData);
             var currencyAmount = new BigInteger(currencyAmountString.Replace(" ", string.Empty));
             var upgradesCount = upgrade.GetPossibleUpgradesCount(currencyAmount);
             Assert.AreEqual(possibleUpgrades, upgradesCount);
