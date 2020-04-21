@@ -4,8 +4,7 @@ using IdleTransport.Managers;
 using IdleTransport.Utilities;
 using UnityEngine;
 
-namespace IdleTransport.UI
-{
+namespace IdleTransport.UI {
     public class ButtonWithCurrencyCost : ButtonWithText {
         [SerializeField] private CurrencyViewData _currencyViewData;
         [SerializeField] private string _currencyCostString;
@@ -19,6 +18,7 @@ namespace IdleTransport.UI
             if (_currencyCostString.IsNullOrEmpty()) {
                 _currencyCostString = "0";
             }
+
             _currencyCost = new BigInteger(_currencyCostString);
             Init();
         }
@@ -38,19 +38,21 @@ namespace IdleTransport.UI
             if (_currency != null) {
                 _currency.OnCurrencyAmountChanged -= RefreshButtonState;
             }
+
             _currency = PlayerManager.Instance.Player?.GetCurrencyType(_currencyViewData.CurrencyType);
             if (_currency != null) {
                 _currency.OnCurrencyAmountChanged += RefreshButtonState;
             }
         }
 
-        public void SetNewCurrencyCost(BigInteger currencyCost) {
+        public virtual void SetNewCurrencyCost(BigInteger currencyCost) {
             _currencyCost = currencyCost;
             _currencyViewData.SetCurrencyValue(currencyCost);
             if (_currency != null) {
                 RefreshButtonState(_currency.CurrencyAmount);
             }
         }
+
         private void RefreshButtonState(BigInteger currencyAmount) {
             _hasEnoughCurrencyToTakeAction = currencyAmount >= _currencyCost;
             SetInteractivity();
@@ -62,11 +64,16 @@ namespace IdleTransport.UI
                 SpendCurrency(currencyCost);
                 return true;
             }
+
             return false;
         }
 
-        private void SetInteractivity() {
-            RefreshButtonState(_hasEnoughCurrencyToTakeAction);
+        protected void SetInteractivity() {
+            RefreshButtonState(ShouldBeInteractive());
+        }
+
+        protected virtual bool ShouldBeInteractive() {
+            return _hasEnoughCurrencyToTakeAction;
         }
 
         private void SpendCurrency(BigInteger currencyCost) {
