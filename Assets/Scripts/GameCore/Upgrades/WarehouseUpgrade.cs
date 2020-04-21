@@ -7,7 +7,8 @@ namespace IdleTransport.GameCore.Upgrades {
         public CargoPerCycleUpgradeData CargoPerCycle { get; }
         public CapacityUpgradeData Capacity { get; }
 
-        public WarehouseUpgrade(WarehouseUpgradeData warehouseUpgradeData) : base(warehouseUpgradeData.upgradeCost) {
+        public WarehouseUpgrade(WarehouseUpgradeData warehouseUpgradeData) : base(warehouseUpgradeData.upgradeCost,
+            warehouseUpgradeData.maxUpgradeLevel) {
             WorkCycleTime = warehouseUpgradeData.workCycleTime;
             CargoPerCycle = warehouseUpgradeData.cargoPerCycle;
             Capacity = warehouseUpgradeData.capacity;

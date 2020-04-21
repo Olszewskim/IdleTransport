@@ -6,7 +6,8 @@ namespace IdleTransport.GameCore.Upgrades {
         public WorkCycleTimeUpgradeData WorkCycleTime { get; }
         public CapacityUpgradeData Capacity { get; }
 
-        public TruckUpgrade(TruckUpgradeData truckUpgradeData) : base(truckUpgradeData.upgradeCost) {
+        public TruckUpgrade(TruckUpgradeData truckUpgradeData) : base(truckUpgradeData.upgradeCost,
+            truckUpgradeData.maxUpgradeLevel) {
             WorkCycleTime = truckUpgradeData.workCycleTime;
             Capacity = truckUpgradeData.capacity;
         }

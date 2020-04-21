@@ -8,7 +8,8 @@ namespace IdleTransport.GameCore.Upgrades {
         public MovementSpeedUpgradeData MovementSpeed { get; }
         public CapacityUpgradeData Capacity { get; }
 
-        public TrolleyUpgrade(TrolleyUpgradeData trolleyUpgradeData) : base(trolleyUpgradeData.upgradeCost) {
+        public TrolleyUpgrade(TrolleyUpgradeData trolleyUpgradeData) : base(trolleyUpgradeData.upgradeCost,
+            trolleyUpgradeData.maxUpgradeLevel) {
             WorkCycleTime = trolleyUpgradeData.workCycleTime;
             NumberOfUnits = trolleyUpgradeData.numberOfUnits;
             MovementSpeed = trolleyUpgradeData.movementSpeed;

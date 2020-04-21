@@ -7,7 +7,7 @@ namespace IdleTransport.GameCore.Upgrades {
     public class UnitUpgradeData {
         protected const int SPACE = 25;
 
-        public int maxLevel;
+        public int maxUpgradeLevel;
         [InlineProperty] public UpgradeCost upgradeCost;
         [InlineProperty] [Space(SPACE)][PropertyOrder(5)] public CapacityUpgradeData capacity;
     }

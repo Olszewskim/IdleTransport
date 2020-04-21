@@ -11,13 +11,17 @@ namespace IdleTransport.GameCore.Upgrades {
         public event Action OnUpgradeLevelUp;
 
         [ShowInInspector] public int UpgradeLevel { get; private set; }
+        public bool IsMaxedOut => UpgradeLevel >= _maxUpgradeLevel;
 
+        private int _maxUpgradeLevel;
         private UpgradeCost _upgradeCost;
+
         private readonly Dictionary<int, BigInteger> _upgradeCostMap = new Dictionary<int, BigInteger>();
 
-        public UnitUpgrade(UpgradeCost upgradeCost) {
+        public UnitUpgrade(UpgradeCost upgradeCost, int maxUpgradeLevel) {
             UpgradeLevel = 1;
             _upgradeCost = upgradeCost;
+            _maxUpgradeLevel = maxUpgradeLevel;
         }
 
         public void SetLevel(int level) {
@@ -41,6 +45,10 @@ namespace IdleTransport.GameCore.Upgrades {
                 return _upgradeCostMap[upgradeLevel];
             }
 
+            if (upgradeLevel >= _maxUpgradeLevel) {
+                return 1;
+            }
+
             if (upgradeLevel < 2) {
                 return 0;
             }
@@ -55,8 +63,9 @@ namespace IdleTransport.GameCore.Upgrades {
         public int GetPossibleUpgradesCount(BigInteger currencyAmount) {
             var upgradesCount = 1;
             var totalCost = new BigInteger(0);
-            while (currencyAmount >= totalCost) {
-                var currentLevel = UpgradeLevel + upgradesCount;
+            var currentLevel = UpgradeLevel;
+            while (currencyAmount >= totalCost && currentLevel <= _maxUpgradeLevel) {
+                currentLevel = UpgradeLevel + upgradesCount;
                 var upgradeCost = GetUpgradeCost(currentLevel);
                 totalCost += upgradeCost;
                 TryAddCostToDictionary(currentLevel, upgradeCost);
@@ -73,7 +82,7 @@ namespace IdleTransport.GameCore.Upgrades {
         }
 
         public void IncreaseUpgradeLevel(int levelsToAdd) {
-            UpgradeLevel += levelsToAdd;
+            UpgradeLevel = Mathf.Min(UpgradeLevel + levelsToAdd, _maxUpgradeLevel);
             OnUpgradeLevelUp?.Invoke();
         }
 

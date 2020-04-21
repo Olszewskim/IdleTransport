@@ -6,7 +6,8 @@ namespace IdleTransport.GameCore.Upgrades {
         public MovementSpeedUpgradeData MovementSpeed { get; }
         public CapacityUpgradeData Capacity { get; }
 
-        public ElevatorUpgrade(ElevatorUpgradeData elevatorUpgradeData) : base(elevatorUpgradeData.upgradeCost) {
+        public ElevatorUpgrade(ElevatorUpgradeData elevatorUpgradeData) : base(elevatorUpgradeData.upgradeCost,
+            elevatorUpgradeData.maxUpgradeLevel) {
             MovementSpeed = elevatorUpgradeData.movementSpeed;
             Capacity = elevatorUpgradeData.capacity;
         }
