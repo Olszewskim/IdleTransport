@@ -26,13 +26,13 @@ namespace IdleTransport.GameCore.Models {
         private double _currentTraveledDistanceProgress => _currentTravelingTime / TravelSpeedPerFloor;
 
         public ElevatorData(ElevatorUpgradeData elevatorUpgradeData, LoadingRampsManager loadingRampsManager)
-            : base(UnitType.Elevator, new ElevatorUpgrade(elevatorUpgradeData)) {
+            : base(UnitType.Elevator, new ElevatorUpgrade(elevatorUpgradeData, loadingRampsManager)) {
             InitElevator(loadingRampsManager);
         }
 
         public ElevatorData(ElevatorUpgradeData elevatorUpgradeData, LoadingRampsManager loadingRampsManager,
             UnitDataJSON elevatorDataJSON)
-            : base(UnitType.Elevator, new ElevatorUpgrade(elevatorUpgradeData), elevatorDataJSON) {
+            : base(UnitType.Elevator, new ElevatorUpgrade(elevatorUpgradeData, loadingRampsManager), elevatorDataJSON) {
             InitElevator(loadingRampsManager);
         }
 
@@ -150,7 +150,7 @@ namespace IdleTransport.GameCore.Models {
         public override List<StatInfo> GetUnitStats(int levelsToUpgrade) {
             var levelAfterUpgrade = UnitUpgrade.UpgradeLevel + levelsToUpgrade;
             return new List<StatInfo> {
-                new StatInfo(StatType.ElevatorTotalTransportationPerSecond, GetTotalProductionDesc(),
+                new StatInfo(StatType.ElevatorTotalTransportationPerSecond, UnitUpgrade.GetTotalProductionDesc(),
                     GetTotalProductionAfterUpgradeBonus(levelAfterUpgrade)),
 
                 new StatInfo(StatType.ElevatorMovementSpeed, GetUpgradeValueDesc(UpgradeType.MovementSpeed),
@@ -159,13 +159,6 @@ namespace IdleTransport.GameCore.Models {
                 new StatInfo(StatType.ElevatorCapacity, GetUpgradeValueDesc(UpgradeType.Capacity),
                     UnitUpgrade.GetAfterUpgradeBonus(UpgradeType.Capacity, levelAfterUpgrade))
             };
-        }
-
-        protected override BigInteger GetTotalProduction(int level) {
-            var capacityValueAtLevel = GetUpgradeValue<BigInteger>(UpgradeType.Capacity, level);
-            var movementSpeedAtLevel = GetUpgradeValue<double>(UpgradeType.MovementSpeed, level);
-            var movementTime = movementSpeedAtLevel * _loadingRampsManager.LoadingRampsCount;
-            return capacityValueAtLevel.MultipleByDouble(1 / movementTime);
         }
     }
 }

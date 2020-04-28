@@ -1,5 +1,6 @@
 ﻿using IdleTransport.Databases;
 using IdleTransport.GameCore.Upgrades;
+using IdleTransport.Managers;
 using IdleTransport.ScriptableObjectData;
 using IdleTransport.Utilities;
 using NUnit.Framework;
@@ -47,7 +48,8 @@ namespace Tests {
         [TestCase(50, "1506038")]
         [TestCase(100, "13705588286")]
         public void Elevator_Upgrade_Level_Up_Cost_Is_Correct(int upgradeLevel, string expectedUpgradeCost) {
-            var upgrade = new ElevatorUpgrade(_unitBaseParameters.elevatorUpgradeData);
+            var loadingRampsManager = new LoadingRampsManager(_unitBaseParameters);
+            var upgrade = new ElevatorUpgrade(_unitBaseParameters.elevatorUpgradeData, loadingRampsManager);
             var upgradeCost = upgrade.GetUpgradeCost(upgradeLevel);
             Assert.AreEqual(new BigInteger(expectedUpgradeCost.Replace(" ", string.Empty)), upgradeCost);
         }

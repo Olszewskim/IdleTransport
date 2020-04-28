@@ -105,7 +105,7 @@ namespace IdleTransport.GameCore.Models {
         public override List<StatInfo> GetUnitStats(int levelsToUpgrade) {
             var levelAfterUpgrade = UnitUpgrade.UpgradeLevel + levelsToUpgrade;
             return new List<StatInfo> {
-                new StatInfo(StatType.TruckTotalTransportationPerSecond, GetTotalProductionDesc(),
+                new StatInfo(StatType.TruckTotalTransportationPerSecond, UnitUpgrade.GetTotalProductionDesc(),
                     GetTotalProductionAfterUpgradeBonus(levelAfterUpgrade)),
 
                 new StatInfo(StatType.TruckSellSpeed, GetUpgradeValueDesc(UpgradeType.WorkCycleTime),
@@ -114,13 +114,6 @@ namespace IdleTransport.GameCore.Models {
                 new StatInfo(StatType.TruckCapacity, GetUpgradeValueDesc(UpgradeType.Capacity),
                     GetAfterUpgradeBonus(UpgradeType.Capacity, levelAfterUpgrade))
             };
-        }
-
-        protected override BigInteger GetTotalProduction(int level) {
-            var workCycleValueAtLevel = GetUpgradeValue<double>(UpgradeType.WorkCycleTime, level);
-            var capacityValueAtLevel = GetUpgradeValue<BigInteger>(UpgradeType.Capacity, level);
-            var movementTime = workCycleValueAtLevel + 2 * WalkingSpeed;
-            return capacityValueAtLevel.MultipleByDouble(1 / movementTime);
         }
     }
 }

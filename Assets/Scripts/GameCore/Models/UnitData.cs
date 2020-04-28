@@ -79,18 +79,8 @@ namespace IdleTransport.GameCore.Models {
 
         public abstract List<StatInfo> GetUnitStats(int levelsToUpgrade);
 
-        protected abstract BigInteger GetTotalProduction(int level);
-
-        private BigInteger GetTotalProduction() {
-            return GetTotalProduction(UnitUpgrade.UpgradeLevel);
-        }
-
-        protected string GetTotalProductionDesc() {
-            return $"{Sprites.goldSprite} {GetTotalProduction().FormatHugeNumber()}/s";
-        }
-
         protected string GetTotalProductionAfterUpgradeBonus(int afterUpgradeLevel) {
-            var difference = GetTotalProduction(afterUpgradeLevel) - GetTotalProduction();
+            var difference = UnitUpgrade.GetTotalProduction(afterUpgradeLevel) - UnitUpgrade.GetTotalProduction();
             return $"+{Sprites.goldSprite} {difference.FormatHugeNumber()}";
         }
 

@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using IdleTransport.ExtensionsMethods;
+using IdleTransport.Utilities;
 using UnityEngine;
 using static IdleTransport.Utilities.Enums;
 
@@ -26,6 +29,20 @@ namespace IdleTransport.GameCore.Upgrades {
                     Debug.LogError("Warehouse doesn't have upgrade " + upgradeType);
                     return null;
             }
+        }
+
+        public override List<UpgradeType> GetUpgradesTypes() {
+            return new List<UpgradeType> {
+                UpgradeType.WorkCycleTime,
+                UpgradeType.CargoPerCycle,
+                UpgradeType.Capacity
+            };
+        }
+
+        public override BigInteger GetTotalProduction(int level) {
+            var workCycleValueAtLevel = (double)WorkCycleTime.GetUpgradeValue(level);
+            var cargoPerCycleValueAtLevel = (BigInteger)CargoPerCycle.GetUpgradeValue(level);
+            return cargoPerCycleValueAtLevel.MultipleByDouble(1 / workCycleValueAtLevel);
         }
     }
 }

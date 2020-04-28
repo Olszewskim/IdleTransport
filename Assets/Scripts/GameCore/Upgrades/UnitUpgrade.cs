@@ -11,9 +11,9 @@ namespace IdleTransport.GameCore.Upgrades {
         public event Action OnUpgradeLevelUp;
 
         [ShowInInspector] public int UpgradeLevel { get; private set; }
-        public bool IsMaxedOut => UpgradeLevel >= _maxUpgradeLevel;
+        public bool IsMaxedOut => UpgradeLevel >= MaxUpgradeLevel;
 
-        private int _maxUpgradeLevel;
+        public int MaxUpgradeLevel { get; }
         private UpgradeCost _upgradeCost;
 
         private readonly Dictionary<int, BigInteger> _upgradeCostMap = new Dictionary<int, BigInteger>();
@@ -21,7 +21,7 @@ namespace IdleTransport.GameCore.Upgrades {
         public UnitUpgrade(UpgradeCost upgradeCost, int maxUpgradeLevel) {
             UpgradeLevel = 1;
             _upgradeCost = upgradeCost;
-            _maxUpgradeLevel = maxUpgradeLevel;
+            MaxUpgradeLevel = maxUpgradeLevel;
         }
 
         public void SetLevel(int level) {
@@ -45,7 +45,7 @@ namespace IdleTransport.GameCore.Upgrades {
                 return _upgradeCostMap[upgradeLevel];
             }
 
-            if (upgradeLevel >= _maxUpgradeLevel) {
+            if (upgradeLevel >= MaxUpgradeLevel) {
                 return 1;
             }
 
@@ -64,7 +64,7 @@ namespace IdleTransport.GameCore.Upgrades {
             var upgradesCount = 1;
             var totalCost = new BigInteger(0);
             var currentLevel = UpgradeLevel;
-            while (currencyAmount >= totalCost && currentLevel <= _maxUpgradeLevel) {
+            while (currencyAmount >= totalCost && currentLevel <= MaxUpgradeLevel) {
                 currentLevel = UpgradeLevel + upgradesCount;
                 var upgradeCost = GetUpgradeCost(currentLevel);
                 totalCost += upgradeCost;
@@ -82,7 +82,7 @@ namespace IdleTransport.GameCore.Upgrades {
         }
 
         public void IncreaseUpgradeLevel(int levelsToAdd) {
-            UpgradeLevel = Mathf.Min(UpgradeLevel + levelsToAdd, _maxUpgradeLevel);
+            UpgradeLevel = Mathf.Min(UpgradeLevel + levelsToAdd, MaxUpgradeLevel);
             OnUpgradeLevelUp?.Invoke();
         }
 
@@ -98,6 +98,18 @@ namespace IdleTransport.GameCore.Upgrades {
 
         public string GetAfterUpgradeBonus(UpgradeType upgradeType, int afterUpgradeLevel) {
             return GetUpgradeData(upgradeType)?.GetAfterUpgradeBonus(UpgradeLevel, afterUpgradeLevel);
+        }
+
+        public abstract List<UpgradeType> GetUpgradesTypes();
+
+        public abstract BigInteger GetTotalProduction(int level);
+
+        public BigInteger GetTotalProduction() {
+            return GetTotalProduction(UpgradeLevel);
+        }
+
+        public string GetTotalProductionDesc() {
+            return $"{Sprites.goldSprite} {GetTotalProduction().FormatHugeNumber()}/s";
         }
     }
 }
