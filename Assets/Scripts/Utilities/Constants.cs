@@ -30,5 +30,12 @@ namespace IdleTransport.Utilities {
         };
 
         #endregion
+
+        #region Colors
+
+        public static Color GREEN = Color.green;
+        public static Color WHITE = Color.white;
+
+        #endregion
     }
 }
