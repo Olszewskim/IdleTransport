@@ -5,6 +5,7 @@ using IdleTransport.GameCore.Upgrades;
 using IdleTransport.Managers;
 using IdleTransport.Utilities;
 using Sirenix.OdinInspector;
+using TMPro;
 using static IdleTransport.Utilities.Enums;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,12 +16,16 @@ namespace IdleTransport.StatsTest {
         [SerializeField] private RowUI _headerRowUI;
         [SerializeField] private RowUI _rowUIPrefab;
         [SerializeField] private ScrollRect _scrollRect;
+        [SerializeField] private TMP_InputField _numberOfFloorsInputField;
 
         private List<RowUI> _rowUIs = new List<RowUI>();
         private UnitType _currentUnitType;
+        private int _numberOfFloors = 1;
 
         private void Awake() {
             _rowUIPrefab.SetActive(false);
+            _numberOfFloorsInputField.onEndEdit.AddListener(SetNumberOfFloors);
+            _numberOfFloorsInputField.text = _numberOfFloors.ToString();
             InitButtons();
             RefreshView();
             ColorButtons();
@@ -77,7 +82,7 @@ namespace IdleTransport.StatsTest {
                 case UnitType.Trolley:
                     return new TrolleyUpgrade(unitBaseParameters.trolleyUpgradeData);
                 case UnitType.Elevator:
-                    var loadingRampsManager = new LoadingRampsManager(unitBaseParameters);
+                    var loadingRampsManager = new LoadingRampsManager(unitBaseParameters, _numberOfFloors);
                     return new ElevatorUpgrade(unitBaseParameters.elevatorUpgradeData, loadingRampsManager);
                 case UnitType.Loader:
                     return new LoaderUpgrade(unitBaseParameters.loaderUpgradeData);
@@ -86,6 +91,17 @@ namespace IdleTransport.StatsTest {
                 default:
                     return null;
             }
+        }
+
+        private void SetNumberOfFloors(string text) {
+            var number = int.Parse(text);
+            if (number < 1) {
+                number = 1;
+                _numberOfFloorsInputField.text = number.ToString();
+            }
+
+            _numberOfFloors = number;
+            RefreshView();
         }
     }
 }

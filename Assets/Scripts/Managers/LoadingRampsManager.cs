@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using IdleTransport.GameCore.Models;
 using IdleTransport.JSON;
 using IdleTransport.ScriptableObjectData;
@@ -9,16 +11,16 @@ namespace IdleTransport.Managers {
         [ShowInInspector] public List<LoadingRampData> LoadingRampDataList { get; }
         public int LoadingRampsCount => LoadingRampDataList.Count;
 
-        public LoadingRampsManager(UnitBaseParameters unitBaseParameters) {
-            LoadingRampDataList = new List<LoadingRampData>
-                {new LoadingRampData(unitBaseParameters)};
+        public LoadingRampsManager(UnitBaseParameters unitBaseParameters, int numberOfFloors = 1) {
+            LoadingRampDataList = Enumerable.Repeat(new LoadingRampData(unitBaseParameters), numberOfFloors).ToList();
         }
 
         public LoadingRampsManager(UnitBaseParameters unitBaseParameters,
             LoadingRampsManagerJSON loadingRampsManagerJson) {
             LoadingRampDataList = new List<LoadingRampData>();
             for (int i = 0; i < loadingRampsManagerJson.loadingRampDataJSONList.Count; i++) {
-                LoadingRampDataList.Add(new LoadingRampData(unitBaseParameters, loadingRampsManagerJson.loadingRampDataJSONList[i]));
+                LoadingRampDataList.Add(new LoadingRampData(unitBaseParameters,
+                    loadingRampsManagerJson.loadingRampDataJSONList[i]));
             }
         }
 
