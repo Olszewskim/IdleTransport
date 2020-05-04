@@ -132,6 +132,7 @@ namespace IdleTransport.Utilities.DynamicScrollList
 		public void ChangeList(IList<T> infoList, int startIndex = -1, bool resetContentPosition = false)
         {
             if (startIndex == -1)
+
                 startIndex = GetHighest().CurrentIndex;
 
             ScrollRect.StopMovement();

@@ -79,7 +79,7 @@ namespace IdleTransport.Utilities.DynamicScrollList.Pooling
 
         private T CreateObject(Transform parent = null, Vector3? position = null)
         {
-            var obj = GameObject.Instantiate(referenceObject, position ?? mStartPos, Quaternion.identity, parent ?? mParent).AddComponent<T>();
+            var obj = GameObject.Instantiate(referenceObject, position ?? mStartPos, Quaternion.identity, parent ?? mParent).GetComponent<T>();
             obj.transform.localPosition = position ?? mStartPos;
             obj.name = obj.objectName + Count;
 

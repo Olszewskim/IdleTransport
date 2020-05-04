@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace IdleTransport.Utilities.DynamicScrollList.Pooling
 {
-	public abstract class PoolingObject : MonoBehaviour, IPooling
+	public abstract class PoolingObject : SerializedMonoBehaviour, IPooling
     {
 		public virtual string objectName{ get { return ""; } }
 		public bool isUsing { get; set; }

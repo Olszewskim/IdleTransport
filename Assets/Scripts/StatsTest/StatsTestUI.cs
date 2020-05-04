@@ -4,6 +4,7 @@ using IdleTransport.ExtensionsMethods;
 using IdleTransport.GameCore.Upgrades;
 using IdleTransport.Managers;
 using IdleTransport.Utilities;
+using IdleTransport.Utilities.DynamicScrollList;
 using Sirenix.OdinInspector;
 using TMPro;
 using static IdleTransport.Utilities.Enums;
@@ -15,12 +16,14 @@ namespace IdleTransport.StatsTest {
         [SerializeField] private Dictionary<UnitType, Button> _unitTypeButtons;
         [SerializeField] private RowUI _headerRowUI;
         [SerializeField] private RowUI _rowUIPrefab;
-        [SerializeField] private ScrollRect _scrollRect;
+        [SerializeField] private DynamicScrollRect _scrollRect;
         [SerializeField] private TMP_InputField _numberOfFloorsInputField;
 
-        private List<RowUI> _rowUIs = new List<RowUI>();
+        private readonly List<RowUIData> upgradesData = new List<RowUIData>();
+        private DynamicScroll<RowUIData, RowUI> _dynamicScroll = new DynamicScroll<RowUIData, RowUI>();
         private UnitType _currentUnitType;
         private int _numberOfFloors = 1;
+        private bool _isInited;
 
         private void Awake() {
             _rowUIPrefab.SetActive(false);
@@ -52,25 +55,22 @@ namespace IdleTransport.StatsTest {
         }
 
         private void RefreshView() {
-            TurnOffRows();
+            upgradesData.Clear();
             var upgrade = GetUnitUpgrade();
             var upgradeTypes = upgrade.GetUpgradesTypes();
             _headerRowUI.DisableUnusedCols(upgradeTypes);
-            for (int i = 0; i < 100; i++) {
-                if (i <= _rowUIs.Count) {
-                    _rowUIs.Add(Instantiate(_rowUIPrefab, _rowUIPrefab.transform.parent));
-                }
-
-                _rowUIs[i].ShowRow(upgrade, upgradeTypes);
+            for (int i = 0; i < upgrade.MaxUpgradeLevel; i++) {
+                upgradesData.Add(new RowUIData(upgrade, upgradeTypes));
                 upgrade.IncreaseUpgradeLevel(1);
             }
 
-            _scrollRect.verticalNormalizedPosition = 1;
-        }
-
-        private void TurnOffRows() {
-            for (int i = 0; i < _rowUIs.Count; i++) {
-                _rowUIs[i].SetActive(false);
+            if (!_isInited) {
+                _dynamicScroll.Initiate(_scrollRect, upgradesData, 0, _rowUIPrefab.gameObject);
+                _isInited = true;
+            } else {
+                _dynamicScroll.ChangeList(upgradesData);
+                _dynamicScroll.MoveToIndex(0,0,0);
+                _dynamicScroll.RefreshPosition();
             }
         }
 
